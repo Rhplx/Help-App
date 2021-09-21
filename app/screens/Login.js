@@ -1,9 +1,15 @@
+// Native imports
 import React from "react";
-import { Text } from "react-native";
-import Layout from "./Layout";
 import { Link } from "@react-navigation/native";
+import AppLoading from "expo-app-loading";
+
+// Third Party Imports
 import { Formik } from "formik";
 import * as yup from "yup";
+
+// Styled Components
+import { Text } from "react-native";
+import Layout from "./Layout";
 import {
   Container,
   Logo,
@@ -17,13 +23,14 @@ import {
   Paragraph,
   TermsWrapper,
   TermsText,
-} from "../styles/LoginStyles";
-import AppLoading from "expo-app-loading";
+} from "../styles/screens/LoginStyles";
+
+// Assets and fonts
 import LogoImage from "../assets/logo.png";
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function App() {
+export default function Login() {
   const loginValidationSchema = yup.object().shape({
     email: yup
       .string()
