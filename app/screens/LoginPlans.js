@@ -3,13 +3,10 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 
 // Styled Components
-import { Text } from "react-native";
 import Layout from "./Layout";
 import Header from "../components/Header";
 import {
   PlansWrapper,
-  PlansTitle,
-  PlansSubtitle,
   PlansBox,
   PlansBoxTitleWrapper,
   PlansBoxTitle,
@@ -18,6 +15,7 @@ import {
   PlansBoxTitleWrapperTwo,
   PlansBoxSubtitleWrapperTwo,
 } from "../styles/screens/LoginPlanStyles";
+import { GeneralTitle, GeneralSubtitle } from "../styles/GeneralStyles";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -37,11 +35,11 @@ export default function LoginPlan() {
       <Layout>
         <Header />
         <PlansWrapper>
-          <PlansTitle>Selecciona una opción</PlansTitle>
-          <PlansSubtitle>
+          <GeneralTitle>Selecciona una opción</GeneralTitle>
+          <GeneralSubtitle>
             Selecciona una opción para tu registro. Aprovecha el perido de
             prueba gratuito para ofrecer tus servicios.
-          </PlansSubtitle>
+          </GeneralSubtitle>
           <PlansBox>
             <PlansBoxTitleWrapper pink>
               <PlansBoxTitle>Ofrecer mis servicios</PlansBoxTitle>

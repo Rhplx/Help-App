@@ -29,16 +29,6 @@ export const FormWrapper = styled.View`
   margin: 20px 0;
   width: 100%;
 `;
-export const Input = styled.TextInput`
-  background-color: white;
-  font-family: "Roboto_400Regular";
-  font-size: 18px;
-  line-height: 22px;
-  border-radius: 10px;
-  width: 100%;
-  padding: 15px 20px;
-  margin: 10px 0;
-`;
 export const ButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;

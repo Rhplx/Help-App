@@ -16,7 +16,6 @@ import {
   Title,
   Subtitle,
   FormWrapper,
-  Input,
   Button,
   ButtonText,
   ButtonWrapper,
@@ -24,6 +23,7 @@ import {
   TermsWrapper,
   TermsText,
 } from "../styles/screens/LoginStyles";
+import { GeneralInput } from "../styles/GeneralStyles";
 
 // Assets and fonts
 import LogoImage from "../assets/logo.png";
@@ -74,13 +74,11 @@ export default function Login() {
             }) => (
               <>
                 <FormWrapper>
-                  <Input
+                  <GeneralInput
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     placeholder="Correo"
                     name="email"
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
                     value={values.email}
                     keyboardType="email-address"
                   />
@@ -89,7 +87,7 @@ export default function Login() {
                       {errors.email}
                     </Text>
                   )}
-                  <Input
+                  <GeneralInput
                     name="password"
                     placeholder="Contraseña"
                     onChangeText={handleChange("password")}

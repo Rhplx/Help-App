@@ -6,21 +6,6 @@ export const PlansWrapper = styled.View`
   align-items: center;
   padding: 0 30px;
 `;
-export const PlansTitle = styled.Text`
-  color: #245751;
-  font-family: "HindMadurai_700Bold";
-  font-size: 30px;
-  line-height: 34px;
-`;
-export const PlansSubtitle = styled.Text`
-  color: #ef0e73;
-  font-family: "Roboto_400Regular";
-  font-size: 18px;
-  line-height: 21px;
-  margin-top: 10px;
-  text-align: center;
-  margin-bottom: 20px;
-`;
 export const PlansBox = styled.Pressable`
   border-radius: 12px;
   width: 100%;
