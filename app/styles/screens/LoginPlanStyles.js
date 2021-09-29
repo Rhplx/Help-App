@@ -47,7 +47,6 @@ export const PlansBoxTitle = styled.Text`
   font-size: 18px;
   line-height: 21px;
   text-align: center;
-  color: white;
   text-transform: uppercase;
 `;
 export const PlansBoxSubtitle = styled.Text`

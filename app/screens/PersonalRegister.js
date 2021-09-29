@@ -173,9 +173,9 @@ export default function CompanyRegister() {
       <Layout>
         <Header />
         <GeneralWrapper>
-          <GeneralTitle>Registro para empresas</GeneralTitle>
+          <GeneralTitle>Registro para usuarios</GeneralTitle>
           <GeneralSubtitle>
-            Registra tu empresa para ofrecer servicios
+            Registrate para ofrecer y solicitar servicios
           </GeneralSubtitle>
           <FormWrapper>
             <Formik
@@ -198,7 +198,6 @@ export default function CompanyRegister() {
               }) => (
                 <>
                   <GeneralInput placeholder="Nombre completo" />
-                  <GeneralInput placeholder="Puesto" />
                   <GeneralInput
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
@@ -266,13 +265,6 @@ export default function CompanyRegister() {
                       {errors.password}
                     </Text>
                   )}
-                  <GeneralSubtitle marginTop>
-                    Ingresa los datos de la empresa
-                  </GeneralSubtitle>
-                  <GeneralInput placeholder="Nombre comercial de la empresa" />
-                  <GeneralInput placeholder="Razón social" />
-                  <GeneralInput placeholder="RFC" maxLength={13} />
-                  <GeneralInput placeholder="Calle y numero" />
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={statePlaceholder}
@@ -370,7 +362,7 @@ export default function CompanyRegister() {
                   </GeneralImagePicker>
                   <GeneralImagePicker>
                     <GeneralImagePickerText
-                      title="Carga logotipo"
+                      title="Carga selfie"
                       onPress={pickImage}
                       color="white"
                     />
@@ -378,7 +370,7 @@ export default function CompanyRegister() {
                   <GeneralInput
                     multiline={true}
                     numberOfLines={10}
-                    placeholder="Presentación de la empresa"
+                    placeholder="Tu presentación"
                   />
                   <FreeAdviceText bold>¡TRES MESES GRATIS!</FreeAdviceText>
                   <FreeAdviceText>
