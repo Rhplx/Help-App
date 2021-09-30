@@ -6,6 +6,10 @@ import Register from "./app/screens/Register";
 import LoginPlan from "./app/screens/LoginPlans";
 import CompanyRegister from "./app/screens/CompanyRegister";
 import PersonalRegister from "./app/screens/PersonalRegister";
+import UserRegister from "./app/screens/UserRegister";
+import RegisterConfirmation from "./app/screens/RegisterConfirmation";
+import LimitedAccount from "./app/screens/LimitedAccount";
+import ChatWith from "./app/screens/ChatWith";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="PersonalRegister"
+        initialRouteName="ChatWith"
         screenOptions={{
           headerShown: false,
         }}
@@ -23,6 +27,13 @@ export default function App() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="CompanyRegister" component={CompanyRegister} />
         <Stack.Screen name="PersonalRegister" component={PersonalRegister} />
+        <Stack.Screen name="UserRegister" component={UserRegister} />
+        <Stack.Screen name="LimitedAccount" component={LimitedAccount} />
+        <Stack.Screen name="ChatWith" component={ChatWith} />
+        <Stack.Screen
+          name="RegisterConfirmation"
+          component={RegisterConfirmation}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

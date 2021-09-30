@@ -14,7 +14,6 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Text, Platform, View } from "react-native";
 import Layout from "./Layout";
 import Header from "../components/Header";
-import PaypalPlan from "../components/PaypalPlan";
 
 import {
   GeneralWrapper,
@@ -37,7 +36,7 @@ import {
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function PersonalRegister() {
+export default function UserRegister() {
   const [image, setImage] = useState(null);
 
   const registerValidationSchema = yup.object().shape({
@@ -173,10 +172,8 @@ export default function PersonalRegister() {
       <Layout>
         <Header />
         <GeneralWrapper>
-          <GeneralTitle>Registro para usuarios</GeneralTitle>
-          <GeneralSubtitle>
-            Registrate para ofrecer y solicitar servicios
-          </GeneralSubtitle>
+          <GeneralTitle>Registro de usuarios</GeneralTitle>
+          <GeneralSubtitle>Registrate para buscar servicios</GeneralSubtitle>
           <FormWrapper>
             <Formik
               validationSchema={registerValidationSchema}
@@ -299,60 +296,6 @@ export default function PersonalRegister() {
                       { label: "Hockey", value: "hockey" },
                     ]}
                   />
-                  <GeneralSubtitle marginTop>
-                    Selecciona hasta tres servicios que deseas ofrecer
-                  </GeneralSubtitle>
-                  <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    placeholder={servicePlaceholder}
-                    style={{
-                      ...greenSelectStyles,
-                      iconContainer: {
-                        top: 5,
-                        right: 12,
-                        resizeMode: "contain",
-                      },
-                    }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    placeholder={servicePlaceholder}
-                    style={{
-                      ...greenSelectStyles,
-                      iconContainer: {
-                        top: 5,
-                        right: 12,
-                        resizeMode: "contain",
-                      },
-                    }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
-                  />
-                  <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
-                    placeholder={servicePlaceholder}
-                    style={{
-                      ...greenSelectStyles,
-                      iconContainer: {
-                        top: 5,
-                        right: 12,
-                        resizeMode: "contain",
-                      },
-                    }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
-                  />
                   <GeneralImagePicker>
                     <GeneralImagePickerText
                       title="Carga identificación"
@@ -367,19 +310,6 @@ export default function PersonalRegister() {
                       color="white"
                     />
                   </GeneralImagePicker>
-                  <GeneralInput
-                    multiline={true}
-                    numberOfLines={10}
-                    placeholder="Tu presentación"
-                  />
-                  <FreeAdviceText bold>¡TRES MESES GRATIS!</FreeAdviceText>
-                  <FreeAdviceText>
-                    Selecciona una opción de pago para después de finalizada tu
-                    prueba gratuita de 3 meses, hoy no se te cobrara nada ni es
-                    necesario dar de alta tus datos de pago, podrás proceder al
-                    pago cuando acabe el periodo gratuito de tres meses.
-                  </FreeAdviceText>
-                  <PaypalPlan />
                   <TermsRow>
                     <TermsRowText>
                       Acepto los terminos y condiciones del servicio
