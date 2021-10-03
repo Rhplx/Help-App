@@ -1,6 +1,5 @@
 // Native imports
 import React from "react";
-import { Link } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 
 // Third Party Imports
@@ -17,6 +16,7 @@ import {
   Subtitle,
   FormWrapper,
   Button,
+  ButtonLink,
   ButtonText,
   ButtonWrapper,
   Paragraph,
@@ -103,9 +103,9 @@ export default function Login() {
                 </FormWrapper>
                 <ButtonWrapper>
                   <Button>
-                    <Link to={{ screen: "Register" }}>
+                    <ButtonLink to={{ screen: "Register" }}>
                       <ButtonText>Registrate</ButtonText>
-                    </Link>
+                    </ButtonLink>
                   </Button>
                   <Button pink onPress={handleSubmit}>
                     <ButtonText>Entrar</ButtonText>
