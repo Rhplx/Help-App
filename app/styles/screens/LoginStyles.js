@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Link } from "@react-navigation/native";
 
 export const Container = styled.View`
   flex: 1;
@@ -8,8 +9,8 @@ export const Container = styled.View`
 `;
 export const Logo = styled.Image`
   width: 70%;
-  max-width: 200px;
-  max-height: 100px;
+  max-width: 260px;
+  max-height: 150px;
   margin: 20px auto 0;
   resize-mode: contain;
 `;
@@ -39,6 +40,10 @@ export const Button = styled.Pressable`
   width: 48%;
   padding: 13px 20px;
   border-radius: 10px;
+`;
+export const ButtonLink = styled(Link)`
+  width: 100%;
+  text-align: center;
 `;
 export const ButtonText = styled.Text`
   font-family: "Roboto_700Bold";

@@ -10,6 +10,13 @@ export const HeaderLogo = styled.Image`
   margin: 15px auto 5px;
   resize-mode: contain;
 `;
+
+export const HeaderSpace = styled.View`
+  background-color: transparent;
+  height: 75px;
+  width: 45px;
+`;
+
 export const BackButton = styled.Pressable`
   background-color: #65c8d1;
   height: 75px;
