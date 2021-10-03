@@ -12,6 +12,7 @@ import LimitedAccount from "./app/screens/LimitedAccount";
 import ChatWith from "./app/screens/ChatWith";
 import Categories from "./app/screens/categories/Categories";
 import SubCategories from "./app/screens/categories/SubCategories";
+import ProposeService from "./app/screens/categories/ProposeService";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
         />
         <Stack.Screen name="Categories" component={Categories} />
         <Stack.Screen name="SubCategories" component={SubCategories} />
+        <Stack.Screen name="ProposeService" component={ProposeService} />
       </Stack.Navigator>
     </NavigationContainer>
   );

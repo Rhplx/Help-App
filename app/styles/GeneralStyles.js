@@ -24,6 +24,7 @@ export const GeneralSubtitle = styled.Text`
   margin-top: ${(props) => (props.marginTop ? "30px" : "10px")};
 `;
 export const FormWrapper = styled.View`
+  width: 100%;
   padding: 20px 0;
 `;
 export const GeneralInput = styled.TextInput`
