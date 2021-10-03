@@ -29,7 +29,7 @@ import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import CheftIcon from "../../assets/chef.png";
 import HelperIcon from "../../assets/ayudante.png";
 
-export default function Categories() {
+export default function Categories({ navigation }) {
 
   const MockDataservices = [
     {
@@ -72,6 +72,13 @@ export default function Categories() {
     Roboto_700Bold,
   });
 
+  const handleChooseCategory = (subCategory) => () => {
+    navigation.navigate("SubCategories", {
+      id: 0,
+      text: subCategory.text
+    });
+  }
+
   const handleChangeCity = () => {
     console.log("Change city");
   };
@@ -92,7 +99,7 @@ export default function Categories() {
             keyExtractor={item => item.text}
             numColumns={2}
             renderItem={({ item }) => 
-              <CategoriesCard to={{ screen: "SubCategories" }}>
+              <CategoriesCard onPress={handleChooseCategory(item)}>
                 <CategoriesCardContent>
                   <CategoriesCardImage source={item.src} />
                   <CategoriesCardText>{item.text}</CategoriesCardText>
