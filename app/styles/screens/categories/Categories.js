@@ -30,7 +30,7 @@ export const CategoriesList = styled.FlatList`
   margin-bottom: 10px;
 `;
 
-export const CategoriesCard = styled(Link)`
+export const CategoriesCard = styled.Pressable`
   flex: 1;
   max-width: 50%;
   margin-bottom: 25px;
