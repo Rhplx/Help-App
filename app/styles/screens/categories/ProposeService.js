@@ -2,15 +2,10 @@ import styled from "styled-components/native";
 import { Link } from "@react-navigation/native";
 
 export const ProposeContainer = styled.View`
-  width: 100%;
-  height: 93%;
-  padding: 30px 16px 0;
+  flex: 1;
+  padding: 20px 16px 0;
   align-items: center;
   justify-content: space-between;
-`;
-export const ProposeContent = styled.View`
-  width: 100%;
-  align-items: center;
 `;
 
 export const ProposeButton = styled.Pressable`

@@ -1,12 +1,12 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
 
 // Styled Components
 import Layout from "../Layout";
 import UserButton from "../../components/UserButton";
 import Header from "../../components/Header";
+import Terms from "../../components/Terms";
 import {
   CategoriesPeopleContainer,
   CategoriesPeopleCard,
@@ -19,10 +19,9 @@ import {
   CatPeopleListCardImage,
   CatPeopleListCardContent,
   CatPeopleListCardText,
-  CategoriesPeopleTerms,
   CatPeopleListCardButton,
-  CategoriesPeopleContent,
 } from "../../styles/screens/categories/CategoriesPeople";
+import { GeneralWrapper } from "../../styles/GeneralStyles";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold, HindMadurai_600SemiBold } from "@expo-google-fonts/hind-madurai";
@@ -93,7 +92,6 @@ export default function CategoriesPeople({ route, navigation }) {
           <UserButton />
         </Header>
         <CategoriesPeopleContainer>
-          <CategoriesPeopleContent>
             <CategoriesPeopleCard>
               <CategoriesPeopleCardImage source={HelperIcon} />
               <CategoriesPeopleCardContent>
@@ -109,17 +107,14 @@ export default function CategoriesPeople({ route, navigation }) {
                   <CatPeopleListCardImage source={item.src} />
                   <CatPeopleListCardContent>
                     <CatPeopleListCardText>{item.text}</CatPeopleListCardText>
-                    <CatPeopleListCardButton onPress={handleGoToPeople}>
+                    <CatPeopleListCardButton onPress={handleGoToPeople(item)}>
                       <CatPeopleListCardText white>Enviar Mensaje</CatPeopleListCardText>
                     </CatPeopleListCardButton>
                   </CatPeopleListCardContent>
                 </CatPeopleListCard>
               }
             />
-          </CategoriesPeopleContent>
-          <CategoriesPeopleTerms to={{ screen: "Terms"}}>
-            <Text>Aviso de Privacidad - Email</Text>
-          </CategoriesPeopleTerms>
+          <Terms />
         </CategoriesPeopleContainer>
       </Layout>
     );
