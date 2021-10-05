@@ -1,7 +1,6 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
 
 // Styled Components
 import Layout from "../Layout";
@@ -18,10 +17,10 @@ import {
   CategoriesCardText,
   CategoriesButton,
   CategoriesButtonLink,
-  CategoriesTerms,
   CategoriesActions,
   CategoriesButtonText,
 } from "../../styles/screens/categories/Categories";
+import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -115,9 +114,7 @@ export default function Categories({ navigation }) {
               <CategoriesButtonText>Cambiar Ciudad</CategoriesButtonText>
             </CategoriesButton>
           </CategoriesActions>
-          <CategoriesTerms>
-            <Text>Aviso de Privacidad - Email</Text>
-          </CategoriesTerms>
+          <Terms />
         </CategoriesContainer>
       </Layout>
     );
