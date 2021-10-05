@@ -3,6 +3,11 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { Text } from "react-native";
 
+// External Imports
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearAsyncStorage } from "../../common/syncStorage";
+import { checkSession, getBaseApi } from "../../common/functions";
+
 // Styled Components
 import Layout from "../Layout";
 import UserButton from "../../components/UserButton";
@@ -24,38 +29,50 @@ import {
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import HelperIcon from "../../assets/ayudante1.png";
 
 export default function SubCategories({ route, navigation }) {
+  const [subcategories, setSubcategories] = React.useState([]);
+  const { text, id, icon } = route.params;
 
-  const { text } = route.params;
+  React.useEffect(() => {
+    navigation.addListener("focus", () => {
+      checkSession(navigation);
+      getSubcategories();
+    });
+    navigation.addListener("blur", () => unmount());
+  }, []);
 
-  const MockDataServices = [
-    {
-      text: "Ayudantes personales"
-    },
-    {
-      text: "Personal de salud y belleza a domicilio"
-    },
-    {
-      text: "Ayudantes personales 1"
-    },
-    {
-      text: "Personal de salud y belleza a domicilio 1"
-    },
-    {
-      text: "Ayudantes personales 2"
-    },
-    {
-      text: "Personal de salud y belleza a domicilio 2"
-    },
-    {
-      text: "Ayudantes personales 3"
-    },
-    {
-      text: "Personal de salud y belleza a domicilio 3"
-    }
-  ];
+  const unmount = function () {
+    setSubcategories([]);
+  };
+
+  const getSubcategories = async () => {
+    sessionId = await AsyncStorage.getItem("sessionId");
+    fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + sessionId
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result) {
+          setSubcategories(response.data);
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          }
+          else {
+            Alert.alert("Ooops :(", response.error, [
+              {
+                text: "Ok",
+              },
+            ]);
+          }
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
@@ -80,18 +97,18 @@ export default function SubCategories({ route, navigation }) {
         </Header>
         <SubCategoriesContainer>
           <SubCatCard>
-            <SubCatCardImage source={HelperIcon} />
+            <SubCatCardImage source={icon} />
             <SubCatCardContent>
               <SubCategoriesTitle>{text}</SubCategoriesTitle>
               <SubCategoriesText>Selecciona el servicio que necesitas</SubCategoriesText>
             </SubCatCardContent>
           </SubCatCard>
           <SubCategoriesList
-            data={MockDataServices}
-            keyExtractor={item => item.text}
+            data={subcategories}
+            keyExtractor={item => item.name}
             renderItem={({ item }) =>
               <SubCategoriesListLink onPress={handleChoosePeople(item)}>
-                <SubCategoriesListText>{item.text}</SubCategoriesListText>
+                <SubCategoriesListText>{item.name}</SubCategoriesListText>
               </SubCategoriesListLink>
             }
           />

@@ -12,13 +12,14 @@ import {
 import Logo from "../assets/logo.png";
 import BackIcon from "../assets/back-icon.png";
 import SignoutIcon from "../assets/signout.png";
+import { clearAsyncStorage } from "../common/syncStorage";
 
 export default function Header({ children, signout }) {
   const navigation = useNavigation();
 
   const handlePress = () => {
     if (signout) {
-      console.log("Signout");
+      clearAsyncStorage(navigation)
     } else {
       navigation.goBack();
     }
