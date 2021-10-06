@@ -13,6 +13,7 @@ import Categories from "./app/screens/categories/Categories";
 import SubCategories from "./app/screens/categories/SubCategories";
 import ProposeService from "./app/screens/categories/ProposeService";
 import CategoriesPeople from "./app/screens/categories/CategoriesPeople";
+import People from "./app/screens/poeple/People";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function App() {
         <Stack.Screen name="SubCategories" component={SubCategories} />
         <Stack.Screen name="ProposeService" component={ProposeService} />
         <Stack.Screen name="CategoriesPeople" component={CategoriesPeople} />
+        <Stack.Screen name="People" component={People} />
       </Stack.Navigator>
     </NavigationContainer>
   );

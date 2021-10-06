@@ -2,15 +2,10 @@ import styled, { css } from "styled-components/native";
 import { Link } from "@react-navigation/native";
 
 export const CategoriesPeopleContainer = styled.View`
-  width: 100%;
-  height: 95%;
+  flex: 1;
+  padding: 20px 0 0;
   align-items: center;
   justify-content: space-between;
-`;
-
-export const CategoriesPeopleContent = styled.View`
-  width: 100%;
-  align-items: center;
 `;
 
 export const CategoriesPeopleCard = styled.View`
@@ -52,8 +47,8 @@ export const CategoriesPeopleText = styled.Text`
 
 export const CategoriesPeopleList = styled.FlatList`
   width: 100%;
-  max-height: 74%;
   padding: 15px 16px;
+  margin-bottom: 10px;
 `;
 
 export const CatPeopleListCard = styled.View`

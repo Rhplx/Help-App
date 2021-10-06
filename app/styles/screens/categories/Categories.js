@@ -2,8 +2,10 @@ import styled from "styled-components/native";
 import { Link } from "@react-navigation/native";
 
 export const CategoriesContainer = styled.View`
-  width: 100%;
+  flex: 1;
+  padding: 20px 0 0;
   align-items: center;
+  justify-content: center;
 `;
 
 export const CategoriesTitle = styled.Text`
@@ -69,6 +71,7 @@ const button = `
 
 export const CategoriesActions = styled.View`
   width: 100%;
+  margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
@@ -88,14 +91,5 @@ export const CategoriesButtonText = styled.Text`
   font-family: "Roboto_700Bold";
   font-size: 18px;
   line-height: 21px;
-  text-align: center;
-`;
-
-export const CategoriesTerms = styled(Link)`
-  margin: 20px 0;
-  font-family: "Roboto_700Bold";
-  color: #245751;
-  font-size: 16px;
-  line-height: 19px;
   text-align: center;
 `;

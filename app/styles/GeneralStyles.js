@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
+import { Link } from "@react-navigation/native";
 
 export const GeneralWrapper = styled.ScrollView`
   flex: 1;
   padding: 30px 15px;
-  background: rgba(101, 200, 209, 0.5);
+  background: rgba(224, 244, 246, 1);
   text-align: center;
 `;
 export const GeneralTitle = styled.Text`
@@ -22,6 +23,20 @@ export const GeneralSubtitle = styled.Text`
   text-align: center;
   margin-bottom: ${(props) => (props.marginTop ? "10px" : "20px")};
   margin-top: ${(props) => (props.marginTop ? "30px" : "10px")};
+`;
+export const GeneralTermsLink = styled(Link)`
+  width: 100%;
+  height: 25px;
+  margin: 10px 0;
+  align-items: center;
+  text-align: center;
+`;
+export const GeneralTermsText = styled.Text`
+  font-family: "Roboto_400Regular";
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #245751;
 `;
 export const FormWrapper = styled.View`
   width: 100%;

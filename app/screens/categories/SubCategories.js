@@ -22,9 +22,9 @@ import {
   SubCategoriesList,
   SubCategoriesListLink,
   SubCategoriesListText,
-  SubCategoriesTerms,
   SubCategoriesLink,
 } from "../../styles/screens/categories/SubCategories";
+import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -111,9 +111,7 @@ export default function SubCategories({ route, navigation }) {
           <SubCategoriesLink to={{ screen: "ProposeService" }}>
             <Text>(+) Proponer Servicio</Text>
           </SubCategoriesLink>
-          <SubCategoriesTerms>
-            <Text>Aviso de Privacidad - Email</Text>
-          </SubCategoriesTerms>
+          <Terms />
         </SubCategoriesContainer>
       </Layout>
     );

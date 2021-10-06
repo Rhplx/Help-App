@@ -30,7 +30,9 @@ export default function Header({ children, signout }) {
       <BackButton onPress={handlePress}>
         <BackImage source={signout ? SignoutIcon : BackIcon} />
       </BackButton>
-      <HeaderLogo source={Logo} />
+      <HeaderLogo source={Logo} style={[{
+        transform: [{ translateX: -60 }]
+      }]} />
       {children ? children : (
         <HeaderSpace />
       )}

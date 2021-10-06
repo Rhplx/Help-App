@@ -1,7 +1,6 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
 
 // External Imports
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,6 +11,7 @@ import { checkSession, getBaseApi } from "../../common/functions";
 import Layout from "../Layout";
 import UserButton from "../../components/UserButton";
 import Header from "../../components/Header";
+import Terms from "../../components/Terms";
 import {
   CategoriesPeopleContainer,
   CategoriesPeopleCard,
@@ -24,10 +24,9 @@ import {
   CatPeopleListCardImage,
   CatPeopleListCardContent,
   CatPeopleListCardText,
-  CategoriesPeopleTerms,
   CatPeopleListCardButton,
-  CategoriesPeopleContent,
 } from "../../styles/screens/categories/CategoriesPeople";
+import { GeneralWrapper } from "../../styles/GeneralStyles";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold, HindMadurai_600SemiBold } from "@expo-google-fonts/hind-madurai";
@@ -102,33 +101,29 @@ export default function CategoriesPeople({ route, navigation }) {
           <UserButton />
         </Header>
         <CategoriesPeopleContainer>
-          <CategoriesPeopleContent>
-            <CategoriesPeopleCard>
-              <CategoriesPeopleCardImage source={icon} />
-              <CategoriesPeopleCardContent>
-                <CategoriesPeopleTitle>{text}</CategoriesPeopleTitle>
-                <CategoriesPeopleText>Selecciona alguna persona</CategoriesPeopleText>
-              </CategoriesPeopleCardContent>
-            </CategoriesPeopleCard>
-            <CategoriesPeopleList
-              data={providers}
-              keyExtractor={item => item.name}
-              renderItem={({ item }) =>
-                <CatPeopleListCard>
-                  <CatPeopleListCardImage source={item.profileImage ? item.profileImage : People1Icon} />
-                  <CatPeopleListCardContent>
-                    <CatPeopleListCardText>{item.name}</CatPeopleListCardText>
-                    <CatPeopleListCardButton onPress={() => handleGoToPeople(item)} >
-                      <CatPeopleListCardText white>Enviar Mensaje</CatPeopleListCardText>
-                    </CatPeopleListCardButton>
-                  </CatPeopleListCardContent>
-                </CatPeopleListCard>
-              }
-            />
-          </CategoriesPeopleContent>
-          <CategoriesPeopleTerms to={{ screen: "Terms" }}>
-            <Text>Aviso de Privacidad - Email</Text>
-          </CategoriesPeopleTerms>
+          <CategoriesPeopleCard>
+            <CategoriesPeopleCardImage source={icon} />
+            <CategoriesPeopleCardContent>
+              <CategoriesPeopleTitle>{text}</CategoriesPeopleTitle>
+              <CategoriesPeopleText>Selecciona alguna persona</CategoriesPeopleText>
+            </CategoriesPeopleCardContent>
+          </CategoriesPeopleCard>
+          <CategoriesPeopleList
+            data={providers}
+            keyExtractor={item => item.name}
+            renderItem={({ item }) =>
+              <CatPeopleListCard>
+                <CatPeopleListCardImage source={item.profileImage ? item.profileImage : People1Icon} />
+                <CatPeopleListCardContent>
+                  <CatPeopleListCardText>{item.name}</CatPeopleListCardText>
+                  <CatPeopleListCardButton onPress={() => handleGoToPeople(item)} >
+                    <CatPeopleListCardText white>Enviar Mensaje</CatPeopleListCardText>
+                  </CatPeopleListCardButton>
+                </CatPeopleListCardContent>
+              </CatPeopleListCard>
+            }
+          />
+          <Terms />
         </CategoriesPeopleContainer>
       </Layout>
     );

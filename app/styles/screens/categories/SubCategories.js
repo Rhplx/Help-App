@@ -2,8 +2,10 @@ import styled from "styled-components/native";
 import { Link } from "@react-navigation/native";
 
 export const SubCategoriesContainer = styled.View`
-  width: 100%;
+  flex: 1;
+  padding: 20px 0 0;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const SubCatCard = styled.View`
@@ -53,8 +55,8 @@ export const SubCategoriesList = styled.FlatList`
 export const SubCategoriesListLink = styled.Pressable`
   width: 100%;
   max-width: 300px;
-  margin: 0 auto 15px;
-  padding: 7px 14px;
+  margin: 0 auto 20px;
+  padding: 14px;
   background-color: #39B4BB;
   border-radius: 10px;
   align-items: center;
@@ -71,8 +73,8 @@ export const SubCategoriesListText = styled.Text`
 export const SubCategoriesLink = styled(Link)`
   width: 100%;
   max-width: 300px;
-  margin: 0 auto 30px;
-  padding: 7px 14px;
+  margin: 0 auto 10px;
+  padding: 14px;
   background-color: #39B4BB;
   font-family: "Roboto_700Bold";
   color: #FFFFFF;
@@ -80,13 +82,4 @@ export const SubCategoriesLink = styled(Link)`
   line-height: 21px;
   text-align: center;
   border-radius: 10px;
-`;
-
-export const SubCategoriesTerms = styled(Link)`
-  margin-bottom: 20px;
-  font-family: "Roboto_700Bold";
-  color: #245751;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
 `;

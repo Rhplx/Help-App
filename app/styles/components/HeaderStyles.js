@@ -1,14 +1,19 @@
 import styled from "styled-components/native";
 
 export const HeaderContainer = styled.View`
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
 `;
 export const HeaderLogo = styled.Image`
-  max-width: 120px;
-  max-height: 70px;
+  position: absolute;
+  max-width: 150px;
+  max-height: 80px;
   margin: 15px auto 5px;
   resize-mode: contain;
+  bottom: -25px;
+  left: 50%;
+  z-index: 1;
 `;
 
 export const HeaderSpace = styled.View`
