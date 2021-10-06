@@ -21,7 +21,7 @@ import { GeneralTitle, GeneralSubtitle } from "../styles/GeneralStyles";
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function LoginPlan() {
+export default function LoginPlan({ navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
@@ -40,7 +40,7 @@ export default function LoginPlan() {
             Selecciona una opción para tu registro. Aprovecha el perido de
             prueba gratuito para ofrecer tus servicios.
           </GeneralSubtitle>
-          <PlansBox>
+          <PlansBox onPress={() => navigation.navigate("PersonalRegister")}>
             <PlansBoxTitleWrapper pink>
               <PlansBoxTitle>Ofrecer mis servicios</PlansBoxTitle>
             </PlansBoxTitleWrapper>
@@ -50,7 +50,7 @@ export default function LoginPlan() {
               </PlansBoxSubtitle>
             </PlansBoxSubtitleWrapper>
           </PlansBox>
-          <PlansBox>
+          <PlansBox onPress={() => navigation.navigate("CompanyRegister")}>
             <PlansBoxTitleWrapper>
               <PlansBoxTitle>Registrar una empresa</PlansBoxTitle>
             </PlansBoxTitleWrapper>
@@ -60,7 +60,7 @@ export default function LoginPlan() {
               </PlansBoxSubtitle>
             </PlansBoxSubtitleWrapper>
           </PlansBox>
-          <PlansBox>
+          <PlansBox onPress={() => navigation.navigate("UserRegister")}>
             <PlansBoxTitleWrapperTwo>
               <PlansBoxTitle>Buscar servicios</PlansBoxTitle>
             </PlansBoxTitleWrapperTwo>

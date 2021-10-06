@@ -1,13 +1,14 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Third Party Imports
 import { Formik } from "formik";
 import * as yup from "yup";
 
 // Styled Components
-import { Text } from "react-native";
+import { Text, Alert } from "react-native";
 import Layout from "./Layout";
 import {
   Container,
@@ -29,8 +30,9 @@ import { GeneralInput } from "../styles/GeneralStyles";
 import LogoImage from "../assets/logo.png";
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import { getBaseApi } from "../common/functions";
 
-export default function Login() {
+export default function Login(props) {
   const loginValidationSchema = yup.object().shape({
     email: yup
       .string()
@@ -42,8 +44,46 @@ export default function Login() {
         8,
         ({ min }) => `La contraseña debe tener al menos ${min} caracteres`
       )
+      .max(16, ({ max }) => `La contraseña debe tener al menos ${max} caracteres`)
       .required("Contraseña requerida"),
   });
+  React.useEffect(() => {
+    props.navigation.addListener("focus", () => {
+      checkSession();
+    });
+  }, []);
+
+  const checkSession = async () => {
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    if (sessionId) {
+      props.navigation.navigate("Categories");
+    }
+  }
+
+  const getLogin = (data) => {
+    fetch(getBaseApi() + "/get/Login?user=" + data.email + "&password=" + encodeURIComponent(data.password), {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result) {
+          Object.keys(response.data).map((item) => {
+            if (response.data[item]) {
+              AsyncStorage.setItem(item, response.data[item]);
+            }
+          });
+          props.navigation.navigate("Categories");
+        } else {
+          Alert.alert("Ooops :(", response.error, [
+            {
+              text: "Ok",
+            },
+          ]);
+        }
+      })
+      .catch(error => console.log('error', error));
+  }
+
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
@@ -62,7 +102,7 @@ export default function Login() {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={getLogin}
           >
             {({
               handleChange,
@@ -103,7 +143,7 @@ export default function Login() {
                 </FormWrapper>
                 <ButtonWrapper>
                   <Button>
-                    <ButtonLink to={{ screen: "Register" }}>
+                    <ButtonLink to={{ screen: "LoginPlans" }}>
                       <ButtonText>Registrate</ButtonText>
                     </ButtonLink>
                   </Button>

@@ -1,7 +1,7 @@
 // Native imports
-import React, { useState, useEffect } from "react";
+import React from "react";
 import AppLoading from "expo-app-loading";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 
 // Third Party Imports
 import { Formik } from "formik";
@@ -9,6 +9,7 @@ import * as yup from "yup";
 import RNPickerSelect from "react-native-picker-select";
 import * as ImagePicker from "expo-image-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { getBaseApi, getCities } from "../common/functions";
 
 // Styled Components
 import { Text, Platform, View } from "react-native";
@@ -37,29 +38,37 @@ import {
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function PersonalRegister() {
-  const [image, setImage] = useState(null);
+export default function PersonalRegister({ navigation }) {
+  const [profileImage, setProfileImage] = React.useState(undefined);
+  const [idCard, setIdCard] = React.useState(undefined);
+  const [subservicesCat, setSubservicesCat] = React.useState([]);
+  const [subservices, setSubservices] = React.useState([0, 0, 0]);
 
   const registerValidationSchema = yup.object().shape({
+    name: yup.string().required("Nombre requerido"),
     email: yup
       .string()
       .email("Ingresa un correo valido")
       .required("Correo requerido"),
     password: yup
       .string()
-      .min(
-        8,
-        ({ min }) => `La contraseña debe tener al menos ${min} caracteres`
-      )
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$#]){8,16}/, "Contraseña debe ser de 8 a 16 caracteres, 1 especial @#$")
       .required("Contraseña requerida"),
-    phone: yup
+    confirmPassword: yup
+      .string()
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$#]){8,16}/, "Confirmacion Contraseña debe ser de 8 a 16 caracteres, 1 especial @#$")
+      .required("Contraseña requerida"),
+    number: yup
       .number()
       .typeError("Solo numeros")
       .required("Telefono y WhatsApp requerido"),
-    whatsApp: yup
+    whatsapp: yup
       .number()
       .typeError("Solo numeros")
       .required("WhatsApp requerido"),
+    state: yup.string().required("Estado requerido"),
+    city: yup.string().required("Ciudad requerida"),
+    details: yup.string().required("Descripcion requerida"),
   });
   const whiteSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -121,19 +130,19 @@ export default function PersonalRegister() {
   });
   const statePlaceholder = {
     label: "Estado",
-    value: null,
+    value: "",
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: null,
+    value: "",
   };
   const servicePlaceholder = {
     label: "Selecciona servicio",
-    value: null,
+    value: "",
     color: "#ffffff",
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
         const { status } =
@@ -145,18 +154,136 @@ export default function PersonalRegister() {
     })();
   }, []);
 
-  const pickImage = async () => {
+  React.useEffect(() => {
+    navigation.addListener("focus", () => {
+      getSubCategories();
+    });
+  }, []);
+
+  const getSubCategories = () => {
+    fetch(getBaseApi() + '/manage/Catalogues?catalogues=["subservices"]', {
+      method: "GET"
+    }).then(res => res.json())
+      .then(response => {
+        if (response.result) {
+          setSubservicesCat(response.data.subservices);
+        } else {
+          Alert.alert("Ooops :(", response.error);
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+  const mimetype = (name) => {
+    let allow = {
+      png: "image/png",
+      pdf: "application/json",
+      jpeg: "image/jpeg",
+      jpg: "image/jpg",
+    };
+    let extention = name.split(".")[1];
+    if (allow[extention] !== undefined) {
+      return allow[extention];
+    } else {
+      return undefined;
+    }
+  };
+
+  const pickImage = async (type) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 4],
       quality: 1,
     });
-
-    console.log(result);
-
+    let localUri = result.uri;
+    let filename = localUri.split('/').pop();
+    let fileType = mimetype(filename);
+    if (fileType === undefined) {
+      alert("Extension no permitida");
+      return null;
+    }
     if (!result.cancelled) {
-      setImage(result.uri);
+      switch (type) {
+        case "image":
+          setProfileImage({ uri: localUri, name: filename, type: fileType });
+          break;
+        case "idCard":
+          setIdCard({ uri: localUri, name: filename, type: fileType });
+          break;
+        default:
+          Alert.alert("Ooops :(", "Hubo un error");
+      }
+    }
+  };
+
+  const handleValueChange = (value, index) => {
+    let values = subservices;
+    values[index] = value;
+    setSubservices(values);
+  };
+
+  const insertProvider = (data) => {
+    if (data["password"] === data["confirmPassword"]) {
+      data["type"] = "provider";
+      data["services"] = subservices.map((item) => { return item !== "" && item });
+      fetch(getBaseApi() + "/manage/User", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+        .then(response => {
+          if (response.result) {
+            if (profileImage !== undefined) {
+              let formDat = new FormData();
+              formDat.append("action", "image");
+              formDat.append("user", response.data.id);
+              formDat.append("file", profileImage);
+              fetch(getBaseApi() + "/manage/User", {
+                method: "PUT",
+                body: formDat,
+                headers: {
+                  'content-type': 'multipart/form-data',
+                },
+              }).then(res => res.json())
+                .then(response => {
+                  if (!response.result) {
+                    Alert.alert("Ooops :(", response.error);
+                  }
+                })
+                .catch(error => console.log("error", error));
+            }
+            if (idCard !== undefined) {
+              let formDat = new FormData();
+              formDat.append("action", "idCard");
+              formDat.append("user", response.data.id);
+              formDat.append("file", idCard);
+              fetch(getBaseApi() + "/manage/User", {
+                method: "PUT",
+                body: formDat,
+                headers: {
+                  'content-type': 'multipart/form-data',
+                },
+              }).then(res => res.json())
+                .then(response => {
+                  if (!response.result) {
+                    Alert.alert("Ooops :(", response.error);
+                  }
+                })
+                .catch(error => console.log("error", error));
+            }
+            Alert.alert("Exito", "has sido registrado exitosamente, por favor inicia sesión");
+            navigation.navigate("Login")
+          } else {
+            Alert.alert("Ooops :(", response.error);
+          }
+        })
+        .catch(error => console.log("error", error));
+    }
+    else {
+      Alert.alert("Oops :(", "Las contraseñas no coinciden, vuelva a intentar")
     }
   };
 
@@ -181,12 +308,17 @@ export default function PersonalRegister() {
             <Formik
               validationSchema={registerValidationSchema}
               initialValues={{
+                name: "",
                 email: "",
                 password: "",
-                phone: "",
-                whatsApp: "",
+                confirmPassword: "",
+                number: "",
+                whatsapp: "",
+                state: "",
+                city: "",
+                details: "",
               }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={insertProvider}
             >
               {({
                 handleChange,
@@ -197,14 +329,23 @@ export default function PersonalRegister() {
                 isValid,
               }) => (
                 <>
-                  <GeneralInput placeholder="Nombre completo" />
+                  <GeneralInput
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    placeholder="Nombre completo"
+                    name="name"
+                    value={values.name}
+                  />
+                  {errors.name && (
+                    <Text style={{ fontSize: 10, color: "red" }}>
+                      {errors.name}
+                    </Text>
+                  )}
                   <GeneralInput
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     placeholder="Correo"
                     name="email"
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
                     value={values.email}
                     keyboardType="email-address"
                   />
@@ -216,28 +357,28 @@ export default function PersonalRegister() {
                   <DoubleInputWrapper>
                     <GeneralInput
                       double
-                      onChangeText={handleChange("whatsApp")}
-                      onBlur={handleBlur("whatsApp")}
+                      onChangeText={handleChange("whatsapp")}
+                      onBlur={handleBlur("whatsapp")}
                       placeholder="WhatsApp"
-                      name="whatsApp"
-                      value={values.whatsApp}
+                      name="whatsapp"
+                      value={values.whatsapp}
                       keyboardType="number-pad"
                       maxLength={10}
                     />
                     <GeneralInput
                       double
-                      onChangeText={handleChange("phone")}
-                      onBlur={handleBlur("phone")}
+                      onChangeText={handleChange("number")}
+                      onBlur={handleBlur("number")}
                       placeholder="Phone"
-                      name="phone"
-                      value={values.phone}
+                      name="number"
+                      value={values.number}
                       keyboardType="number-pad"
                       maxLength={10}
                     />
                   </DoubleInputWrapper>
-                  {errors.phone && (
+                  {(errors.number || errors.whatsapp) && (
                     <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.phone}
+                      {errors.number ? errors.number : errors.whatsapp}
                     </Text>
                   )}
                   <DoubleInputWrapper>
@@ -252,21 +393,21 @@ export default function PersonalRegister() {
                     />
                     <GeneralInput
                       double
-                      name="password"
+                      name="confirmPassword"
                       placeholder="Repetir Contraseña"
-                      onChangeText={handleChange("password")}
-                      onBlur={handleBlur("password")}
-                      value={values.password}
+                      onChangeText={handleChange("confirmPassword")}
+                      onBlur={handleBlur("confirmPassword")}
+                      value={values.confirmPassword}
                       secureTextEntry
                     />
                   </DoubleInputWrapper>
-                  {errors.password && (
+                  {(errors.password || errors.confirmPassword) && (
                     <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.password}
+                      {errors.password ? errors.password : errors.confirmPassword}
                     </Text>
                   )}
                   <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={handleChange("state")}
                     placeholder={statePlaceholder}
                     style={{
                       ...whiteSelectStyles,
@@ -277,13 +418,143 @@ export default function PersonalRegister() {
                       },
                     }}
                     items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
+                      {
+                        "value": "Zacatecas",
+                        "label": "Zacatecas"
+                      },
+                      {
+                        "value": "Aguascalientes",
+                        "label": "Aguascalientes"
+                      },
+                      {
+                        "value": "Tamaulipas",
+                        "label": "Tamaulipas"
+                      },
+                      {
+                        "value": "Jalisco",
+                        "label": "Jalisco"
+                      },
+                      {
+                        "value": "Nayarit",
+                        "label": "Nayarit"
+                      },
+                      {
+                        "value": "Oaxaca",
+                        "label": "Oaxaca"
+                      },
+                      {
+                        "value": "Sonora",
+                        "label": "Sonora"
+                      },
+                      {
+                        "value": "Nuevo León",
+                        "label": "Nuevo León"
+                      },
+                      {
+                        "value": "Chihuahua",
+                        "label": "Chihuahua"
+                      },
+                      {
+                        "value": "Guanajuato",
+                        "label": "Guanajuato"
+                      },
+                      {
+                        "value": "Guerrero",
+                        "label": "Guerrero"
+                      },
+                      {
+                        "value": "Hidalgo",
+                        "label": "Hidalgo"
+                      },
+                      {
+                        "value": "San Luis Potosí",
+                        "label": "San Luis Potosí"
+                      },
+                      {
+                        "value": "Sinaloa",
+                        "label": "Sinaloa"
+                      },
+                      {
+                        "value": "Colima",
+                        "label": "Colima"
+                      },
+                      {
+                        "value": "Distrito Federal",
+                        "label": "Distrito Federal"
+                      },
+                      {
+                        "value": "Baja California Sur",
+                        "label": "Baja California Sur"
+                      },
+                      {
+                        "value": "Morelos",
+                        "label": "Morelos"
+                      },
+                      {
+                        "value": "Quintana Roo",
+                        "label": "Quintana Roo"
+                      },
+                      {
+                        "value": "México",
+                        "label": "México"
+                      },
+                      {
+                        "value": "Michoacán de Ocampo",
+                        "label": "Michoacán de Ocampo"
+                      },
+                      {
+                        "value": "Puebla",
+                        "label": "Puebla"
+                      },
+                      {
+                        "value": "Tlaxcala",
+                        "label": "Tlaxcala"
+                      },
+                      {
+                        "value": "Yucatán",
+                        "label": "Yucatán"
+                      },
+                      {
+                        "value": "Baja California",
+                        "label": "Baja California"
+                      },
+                      {
+                        "value": "Tabasco",
+                        "label": "Tabasco"
+                      },
+                      {
+                        "value": "Durango",
+                        "label": "Durango"
+                      },
+                      {
+                        "value": "Coahuila de Zaragoza",
+                        "label": "Coahuila de Zaragoza"
+                      },
+                      {
+                        "value": "Chiapas",
+                        "label": "Chiapas"
+                      },
+                      {
+                        "value": "Querétaro",
+                        "label": "Querétaro"
+                      },
+                      {
+                        "value": "Veracruz de Ignacio de la Llave",
+                        "label": "Veracruz de Ignacio de la Llave"
+                      },
+                      {
+                        "value": "Campeche",
+                        "label": "Campeche"
+                      }
                     ]}
                   />
+                  {errors.state && (
+                    <Text style={{ fontSize: 10, color: "red" }}>
+                      {errors.state}
+                    </Text>
+                  )}
                   <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={handleChange("city")}
                     placeholder={cityPlaceholder}
                     style={{
                       ...whiteSelectStyles,
@@ -293,17 +564,18 @@ export default function PersonalRegister() {
                         resizeMode: "contain",
                       },
                     }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
+                    items={getCities(values.state)}
                   />
+                  {errors.city && (
+                    <Text style={{ fontSize: 10, color: "red" }}>
+                      {errors.city}
+                    </Text>
+                  )}
                   <GeneralSubtitle marginTop>
                     Selecciona hasta tres servicios que deseas ofrecer
                   </GeneralSubtitle>
                   <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => handleValueChange(value, 0)}
                     placeholder={servicePlaceholder}
                     style={{
                       ...greenSelectStyles,
@@ -313,14 +585,10 @@ export default function PersonalRegister() {
                         resizeMode: "contain",
                       },
                     }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
+                    items={subservicesCat}
                   />
                   <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => handleValueChange(value, 1)}
                     placeholder={servicePlaceholder}
                     style={{
                       ...greenSelectStyles,
@@ -330,14 +598,10 @@ export default function PersonalRegister() {
                         resizeMode: "contain",
                       },
                     }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
+                    items={subservicesCat}
                   />
                   <RNPickerSelect
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => handleValueChange(value, 2)}
                     placeholder={servicePlaceholder}
                     style={{
                       ...greenSelectStyles,
@@ -347,31 +611,43 @@ export default function PersonalRegister() {
                         resizeMode: "contain",
                       },
                     }}
-                    items={[
-                      { label: "Football", value: "football" },
-                      { label: "Baseball", value: "baseball" },
-                      { label: "Hockey", value: "hockey" },
-                    ]}
+                    items={subservicesCat}
                   />
                   <GeneralImagePicker>
                     <GeneralImagePickerText
                       title="Carga identificación"
-                      onPress={pickImage}
-                      color="white"
+                      onPress={() => pickImage("idCard")}
+                      color="gray"
                     />
                   </GeneralImagePicker>
                   <GeneralImagePicker>
                     <GeneralImagePickerText
                       title="Carga selfie"
-                      onPress={pickImage}
-                      color="white"
+                      onPress={() => pickImage("image")}
+                      color="gray"
                     />
                   </GeneralImagePicker>
                   <GeneralInput
+                    onChangeText={handleChange("details")}
+                    onBlur={handleBlur("details")}
+                    value={values.details}
+                    style={{
+                      ...whiteSelectStyles,
+                      iconContainer: {
+                        top: 5,
+                        right: 12,
+                        resizeMode: "contain",
+                      },
+                    }}
                     multiline={true}
                     numberOfLines={10}
                     placeholder="Tu presentación"
                   />
+                  {errors.details && (
+                    <Text style={{ fontSize: 10, color: "red" }}>
+                      {errors.details}
+                    </Text>
+                  )}
                   <FreeAdviceText bold>¡TRES MESES GRATIS!</FreeAdviceText>
                   <FreeAdviceText>
                     Selecciona una opción de pago para después de finalizada tu
@@ -379,7 +655,7 @@ export default function PersonalRegister() {
                     necesario dar de alta tus datos de pago, podrás proceder al
                     pago cuando acabe el periodo gratuito de tres meses.
                   </FreeAdviceText>
-                  <PaypalPlan />
+                  {/* <PaypalPlan /> */}
                   <TermsRow>
                     <TermsRowText>
                       Acepto los terminos y condiciones del servicio
@@ -394,7 +670,7 @@ export default function PersonalRegister() {
                       />
                     </TermsRowCheckbox>
                   </TermsRow>
-                  <RegisterButton>
+                  <RegisterButton onPress={handleSubmit}>
                     <RegisterButtonText>Registrarse</RegisterButtonText>
                   </RegisterButton>
                 </>

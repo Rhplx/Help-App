@@ -4,10 +4,11 @@ import { UserButtonContainer, UserButtonImage } from "../styles/components/UserB
 
 import UserIcon from "../assets/user.png";
 
-export default function UserButton() {
+export default function UserButton({ navigation }) {
 
   const handlePress = () => {
     console.log("Press user");
+    // navigation.navigate("user")
   };
 
   return (
