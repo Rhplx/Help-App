@@ -83,7 +83,7 @@ export default function Categories({ navigation }) {
     navigation.navigate("SubCategories", {
       id: subCategory.id,
       text: subCategory.name,
-      icon: HelperIcon //item.icon
+      icon: subCategory.icon
     });
   };
 
@@ -109,7 +109,7 @@ export default function Categories({ navigation }) {
             renderItem={({ item }) =>
               <CategoriesCard onPress={handleChooseCategory(item)}>
                 <CategoriesCardContent>
-                  <CategoriesCardImage source={item.icon} />
+                  <CategoriesCardImage source={{ uri: item.icon }} />
                   <CategoriesCardText>{item.name}</CategoriesCardText>
                 </CategoriesCardContent>
               </CategoriesCard>

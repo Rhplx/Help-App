@@ -319,6 +319,7 @@ export default function PersonalRegister({ navigation }) {
                     onValueChange={handleChange("state")}
                     placeholder={statePlaceholder}
                     value={values.state}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -462,6 +463,7 @@ export default function PersonalRegister({ navigation }) {
                     onValueChange={handleChange("city")}
                     placeholder={cityPlaceholder}
                     value={values.city}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -476,14 +478,14 @@ export default function PersonalRegister({ navigation }) {
                     <GeneralImagePickerText
                       title="Carga identificación"
                       onPress={() => pickImage("idCard")}
-                      color="red"
+                      color="grey"
                     />
                   </GeneralImagePicker>
                   <GeneralImagePicker>
                     <GeneralImagePickerText
                       title="Carga selfie"
                       onPress={() => pickImage("image")}
-                      color="red"
+                      color="grey"
                     />
                   </GeneralImagePicker>
                   <RegisterButton onPress={handleSubmit}>

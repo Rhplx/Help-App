@@ -409,6 +409,7 @@ export default function PersonalRegister({ navigation }) {
                   <RNPickerSelect
                     onValueChange={handleChange("state")}
                     placeholder={statePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -556,6 +557,7 @@ export default function PersonalRegister({ navigation }) {
                   <RNPickerSelect
                     onValueChange={handleChange("city")}
                     placeholder={cityPlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -577,6 +579,7 @@ export default function PersonalRegister({ navigation }) {
                   <RNPickerSelect
                     onValueChange={(value) => handleValueChange(value, 0)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
@@ -590,6 +593,7 @@ export default function PersonalRegister({ navigation }) {
                   <RNPickerSelect
                     onValueChange={(value) => handleValueChange(value, 1)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
@@ -603,6 +607,7 @@ export default function PersonalRegister({ navigation }) {
                   <RNPickerSelect
                     onValueChange={(value) => handleValueChange(value, 2)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {

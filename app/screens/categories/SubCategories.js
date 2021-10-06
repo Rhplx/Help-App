@@ -93,7 +93,7 @@ export default function SubCategories({ route, navigation }) {
         </Header>
         <SubCategoriesContainer>
           <SubCatCard>
-            <SubCatCardImage source={icon} />
+            <SubCatCardImage source={{ uri: icon }} />
             <SubCatCardContent>
               <SubCategoriesTitle>{text}</SubCategoriesTitle>
               <SubCategoriesText>Selecciona el servicio que necesitas</SubCategoriesText>
