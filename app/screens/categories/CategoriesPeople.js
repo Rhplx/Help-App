@@ -102,7 +102,7 @@ export default function CategoriesPeople({ route, navigation }) {
         </Header>
         <CategoriesPeopleContainer>
           <CategoriesPeopleCard>
-            <CategoriesPeopleCardImage source={icon} />
+            <CategoriesPeopleCardImage source={{ uri: icon }} />
             <CategoriesPeopleCardContent>
               <CategoriesPeopleTitle>{text}</CategoriesPeopleTitle>
               <CategoriesPeopleText>Selecciona alguna persona</CategoriesPeopleText>
@@ -113,7 +113,7 @@ export default function CategoriesPeople({ route, navigation }) {
             keyExtractor={item => item.name}
             renderItem={({ item }) =>
               <CatPeopleListCard>
-                <CatPeopleListCardImage source={item.profileImage ? item.profileImage : People1Icon} />
+                <CatPeopleListCardImage source={item.profileImage ? { uri: item.profileImage } : People1Icon} />
                 <CatPeopleListCardContent>
                   <CatPeopleListCardText>{item.name}</CatPeopleListCardText>
                   <CatPeopleListCardButton onPress={() => handleGoToPeople(item)} >

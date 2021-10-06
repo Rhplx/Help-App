@@ -11,7 +11,6 @@
     "@expo-google-fonts/hind-madurai": "^0.2.0",
     "@expo-google-fonts/roboto": "^0.2.0",
     "@react-native-async-storage/async-storage": "^1.15.8",
-    "@react-native-picker/picker": "1.16.1",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "expo": "~42.0.1",
@@ -29,7 +28,8 @@
     "react-native-screens": "~3.4.0",
     "react-native-web": "~0.13.12",
     "styled-components": "^5.3.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "@react-native-picker/picker": "1.16.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

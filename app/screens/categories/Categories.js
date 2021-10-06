@@ -3,6 +3,11 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { Text, StyleSheet } from "react-native";
 
+// Third Party Imports
+import { checkSession, getBaseApi } from "../../common/functions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearAsyncStorage } from "../../common/syncStorage";
+import RNPickerSelect from "react-native-picker-select";
 
 // Styled Components
 import Layout from "../Layout";
@@ -19,52 +24,15 @@ import {
   CategoriesCardText,
   CategoriesButton,
   CategoriesButtonLink,
-  CategoriesTerms,
   CategoriesActions,
   CategoriesButtonText,
 } from "../../styles/screens/categories/Categories";
+import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import HelperIcon from "../../assets/ayudante.png";
-
-// External Imports
-import { checkSession, getBaseApi } from "../../common/functions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { clearAsyncStorage } from "../../common/syncStorage";
-import RNPickerSelect from "react-native-picker-select";
-
-const greenSelectStyles = StyleSheet.create({
-  inputIOS: {
-    backgroundColor: "#39B4BB",
-    color: "white",
-    fontSize: 18,
-    paddingVertical: 4,
-    paddingHorizontal: 18,
-    borderWidth: 0.5,
-    borderColor: "#39B4BB",
-    borderRadius: 10,
-    minHeight: 50,
-    marginTop: 10,
-    paddingRight: 30, // to ensure the text is never behind the icon
-    textAlign: "center",
-  },
-  inputAndroid: {
-    backgroundColor: "#39B4BB",
-    color: "white",
-    fontSize: 18,
-    paddingVertical: 4,
-    paddingHorizontal: 18,
-    borderWidth: 0.5,
-    borderColor: "#39B4BB",
-    borderRadius: 10,
-    minHeight: 50,
-    marginTop: 10,
-    paddingRight: 30, // to ensure the text is never behind the icon
-    textAlign: "center",
-  },
-});
 
 export default function Categories({ navigation }) {
 
@@ -115,9 +83,9 @@ export default function Categories({ navigation }) {
     navigation.navigate("SubCategories", {
       id: subCategory.id,
       text: subCategory.name,
-      icon: HelperIcon //item.icon
+      icon: subCategory.icon
     });
-  }
+  };
 
   const handleChangeCity = (value) => {
     AsyncStorage.setItem("city", value);
@@ -141,8 +109,7 @@ export default function Categories({ navigation }) {
             renderItem={({ item }) =>
               <CategoriesCard onPress={handleChooseCategory(item)}>
                 <CategoriesCardContent>
-                  {/* <CategoriesCardImage source={item.icon} /> */}
-                  <CategoriesCardImage source={HelperIcon} />
+                  <CategoriesCardImage source={{ uri: item.icon }} />
                   <CategoriesCardText>{item.name}</CategoriesCardText>
                 </CategoriesCardContent>
               </CategoriesCard>
@@ -158,14 +125,8 @@ export default function Categories({ navigation }) {
                 label: "Cambiar Ciudad",
                 value: "ALL",
               }}
-              style={{
-                ...greenSelectStyles,
-                iconContainer: {
-                  top: 5,
-                  right: 12,
-                  resizeMode: "contain",
-                },
-              }}
+              useNativeAndroidPickerStyle={false}
+              style={greenSelectStyles}
               items={[
                 {
                   "label": "Aguascalientes",
@@ -486,11 +447,30 @@ export default function Categories({ navigation }) {
               ]}
             />
           </CategoriesActions>
-          <CategoriesTerms>
-            <Text>Aviso de Privacidad - Email</Text>
-          </CategoriesTerms>
+          <Terms />
         </CategoriesContainer>
       </Layout>
     );
   }
 }
+
+const greenSelectStyles = StyleSheet.create({
+  inputIOS: {
+    backgroundColor: "#39B4BB",
+    color: "#FFFFFF",
+    fontSize: 18,
+    padding: 8,
+    borderRadius: 10,
+    textAlign: "center",
+  },
+  inputAndroid: {
+    width: "100%",
+    padding: 8,
+    backgroundColor: "#39B4BB",
+    color: "#FFFFFF",
+    fontSize: 18,
+    lineHeight: 21,
+    borderRadius: 10,
+    textAlign: "center",
+  },
+});
