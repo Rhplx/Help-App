@@ -143,7 +143,7 @@ export default function Login(props) {
                 </FormWrapper>
                 <ButtonWrapper>
                   <Button>
-                    <ButtonLink to={{ screen: "Register" }}>
+                    <ButtonLink to={{ screen: "LoginPlans" }}>
                       <ButtonText>Registrate</ButtonText>
                     </ButtonLink>
                   </Button>

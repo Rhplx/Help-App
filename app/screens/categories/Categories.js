@@ -75,15 +75,10 @@ export default function Categories({ navigation }) {
       checkSession();
       getCategories();
     });
-    navigation.addListener("blur", () => unmount());
   }, []);
 
-  const unmount = function () {
-    setCategories([]);
-  };
-
   const getCategories = async () => {
-    sessionId = await AsyncStorage.getItem("sessionId");
+    let sessionId = await AsyncStorage.getItem("sessionId");
     fetch(getBaseApi() + "/manage/Service", {
       method: "GET",
       headers: {
@@ -125,7 +120,7 @@ export default function Categories({ navigation }) {
   }
 
   const handleChangeCity = (value) => {
-    AsyncStorage.setItem(value);
+    AsyncStorage.setItem("city", value);
   };
 
   if (!fontsLoaded) {
@@ -161,16 +156,16 @@ export default function Categories({ navigation }) {
               onValueChange={handleChangeCity}
               placeholder={{
                 label: "Cambiar Ciudad",
-                value: null,
+                value: "ALL",
               }}
-              // style={{
-              //   ...greenSelectStyles,
-              //   iconContainer: {
-              //     top: 5,
-              //     right: 12,
-              //     resizeMode: "contain",
-              //   },
-              // }}
+              style={{
+                ...greenSelectStyles,
+                iconContainer: {
+                  top: 5,
+                  right: 12,
+                  resizeMode: "contain",
+                },
+              }}
               items={[
                 {
                   "label": "Aguascalientes",

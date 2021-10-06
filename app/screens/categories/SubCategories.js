@@ -39,15 +39,10 @@ export default function SubCategories({ route, navigation }) {
       checkSession(navigation);
       getSubcategories();
     });
-    navigation.addListener("blur", () => unmount());
   }, []);
 
-  const unmount = function () {
-    setSubcategories([]);
-  };
-
   const getSubcategories = async () => {
-    sessionId = await AsyncStorage.getItem("sessionId");
+    let sessionId = await AsyncStorage.getItem("sessionId");
     fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
       method: "GET",
       headers: {
@@ -80,10 +75,11 @@ export default function SubCategories({ route, navigation }) {
     Roboto_700Bold,
   });
 
-  const handleChoosePeople = (people) => () => {
+  const handleChoosePeople = (item) => () => {
     navigation.navigate("CategoriesPeople", {
-      id: 0,
-      text: people.text
+      id: item.id,
+      text: item.name,
+      icon: icon,
     });
   };
 
