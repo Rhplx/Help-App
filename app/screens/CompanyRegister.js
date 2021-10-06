@@ -276,6 +276,7 @@ export default function CompanyRegister() {
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={statePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -293,6 +294,7 @@ export default function CompanyRegister() {
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={cityPlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -313,6 +315,7 @@ export default function CompanyRegister() {
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
@@ -330,6 +333,7 @@ export default function CompanyRegister() {
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
@@ -347,6 +351,7 @@ export default function CompanyRegister() {
                   <RNPickerSelect
                     onValueChange={(value) => console.log(value)}
                     placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {

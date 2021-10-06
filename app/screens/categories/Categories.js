@@ -1,6 +1,11 @@
 // Native imports
-import React from "react";
+import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
+import { StyleSheet } from "react-native";
+
+// Third Party Imports
+import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
+// import { Picker } from '@react-native-picker/picker';
 
 // Styled Components
 import Layout from "../Layout";
@@ -29,6 +34,12 @@ import CheftIcon from "../../assets/chef.png";
 import HelperIcon from "../../assets/ayudante.png";
 
 export default function Categories({ navigation }) {
+  const [selectedCountry, setSelectedCountry] = useState("MX");
+
+  const placeholder = {
+    label: "Cambiar ciudad",
+    value: null
+  };
 
   const MockDataservices = [
     {
@@ -78,10 +89,6 @@ export default function Categories({ navigation }) {
     });
   }
 
-  const handleChangeCity = () => {
-    console.log("Change city");
-  };
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
@@ -110,9 +117,28 @@ export default function Categories({ navigation }) {
             <CategoriesButtonLink to={{ screen: "ProposeService" }}>
               <CategoriesButtonText>Proponer Servicio</CategoriesButtonText>
             </CategoriesButtonLink>
-            <CategoriesButton onPress={handleChangeCity}>
-              <CategoriesButtonText>Cambiar Ciudad</CategoriesButtonText>
-            </CategoriesButton>
+            {/* <Picker
+              selectedValue={selectedCountry}
+              onValueChange={(itemValue, itemIndex) =>
+                selectedCountry(itemValue)
+              }
+              style={greenSelectStyles}
+            >
+              <Picker.Item label="Cambiar ciudad" value="default" />
+              <Picker.Item label="México" value="MX" />
+              <Picker.Item label="Estados Unidos" value="USA" />
+            </Picker> */}
+            <RNPickerSelect
+              onValueChange={(value) => console.log(value)}
+              placeholder={placeholder}
+              useNativeAndroidPickerStyle={false}
+              style={greenSelectStyles}
+              items={[
+                { label: "Football", value: "football" },
+                { label: "Baseball", value: "baseball" },
+                { label: "Hockey", value: "hockey" },
+              ]}
+            />
           </CategoriesActions>
           <Terms />
         </CategoriesContainer>
@@ -120,3 +146,24 @@ export default function Categories({ navigation }) {
     );
   }
 }
+
+const greenSelectStyles = StyleSheet.create({
+  inputIOS: {
+    backgroundColor: "#39B4BB",
+    color: "#FFFFFF",
+    fontSize: 18,
+    padding: 8,
+    borderRadius: 10,
+    textAlign: "center",
+  },
+  inputAndroid: {
+    width: "100%",
+    padding: 8,
+    backgroundColor: "#39B4BB",
+    color: "#FFFFFF",
+    fontSize: 18,
+    lineHeight: 21,
+    borderRadius: 10,
+    textAlign: "center",
+  },
+});
