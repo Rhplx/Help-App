@@ -126,3 +126,7 @@ export const ProfileDataText = styled.Text`
   font-family: ${(props) => (props.bold ? "Roboto_700Bold" : "Roboto_700Bold")};
   color: ${(props) => (props.bold ? "black" : "#245751")};
 `;
+export const ProfileDataImage = styled.Image`
+  width: 120px;
+  resize-mode: contain;
+`;

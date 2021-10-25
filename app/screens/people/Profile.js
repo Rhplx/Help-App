@@ -19,7 +19,8 @@ import {
   ProfileDataButton,
   ProfileDataButtonText,
   ProfileDataTextRow,
-  ProfileDataText
+  ProfileDataText,
+  ProfileDataImage
 } from "../../styles/screens/people/Profile";
 import {
   PlansBoxTitleWrapper,
@@ -186,7 +187,18 @@ export default function Profile({ route, navigation }) {
               </ProfileDataText>
             </ProfileDataTextRow>
           </ProfileData>
-          <View style={{ height: 100 }}></View>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Identificación</ProfileDataTitle>
+              <ProfileDataButton>
+                <ProfileDataButtonText>Editar</ProfileDataButtonText>
+              </ProfileDataButton>
+            </ProfileDataHeader>
+            <ProfileDataTextRow>
+              <ProfileDataImage source={Example} />
+            </ProfileDataTextRow>
+          </ProfileData>
+          <View style={{ height: 50 }}></View>
         </ProfileContainer>
       </Layout>
     );
