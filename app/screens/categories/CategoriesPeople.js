@@ -24,15 +24,18 @@ import {
   CatPeopleListCardImage,
   CatPeopleListCardContent,
   CatPeopleListCardText,
-  CatPeopleListCardButton,
+  CatPeopleListCardButton
 } from "../../styles/screens/categories/CategoriesPeople";
 import { GeneralWrapper } from "../../styles/GeneralStyles";
 
 // Assets and fonts
-import { useFonts, HindMadurai_700Bold, HindMadurai_600SemiBold } from "@expo-google-fonts/hind-madurai";
+import {
+  useFonts,
+  HindMadurai_700Bold,
+  HindMadurai_600SemiBold
+} from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import People1Icon from "../../assets/people1.png";
-
 
 export default function CategoriesPeople({ route, navigation }) {
   const [providers, setProviders] = React.useState([]);
@@ -42,7 +45,7 @@ export default function CategoriesPeople({ route, navigation }) {
     HindMadurai_700Bold,
     HindMadurai_600SemiBold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   React.useEffect(() => {
@@ -56,32 +59,31 @@ export default function CategoriesPeople({ route, navigation }) {
     let sessionId = await AsyncStorage.getItem("sessionId");
     let city = await AsyncStorage.getItem("city");
     if (!city) {
-      city = "ALL"
+      city = "ALL";
     }
     fetch(getBaseApi() + "/manage/Provider?service=" + id + "&city=" + city, {
       method: "GET",
       headers: {
-        "Authorization": "Bearer " + sessionId
+        Authorization: "Bearer " + sessionId
       }
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         if (response.result) {
           setProviders(response.data);
         } else {
           if (response.error === "Error: Sesión Invalida") {
             clearAsyncStorage(navigation);
-          }
-          else {
+          } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
       })
-      .catch(error => console.log('error', error));
+      .catch((error) => console.log("error", error));
   };
 
   const handleGoToPeople = (item) => {
@@ -105,25 +107,34 @@ export default function CategoriesPeople({ route, navigation }) {
             <CategoriesPeopleCardImage source={{ uri: icon }} />
             <CategoriesPeopleCardContent>
               <CategoriesPeopleTitle>{text}</CategoriesPeopleTitle>
-              <CategoriesPeopleText>Selecciona alguna persona</CategoriesPeopleText>
+              <CategoriesPeopleText>
+                Selecciona alguna persona
+              </CategoriesPeopleText>
             </CategoriesPeopleCardContent>
           </CategoriesPeopleCard>
           <CategoriesPeopleList
             data={providers}
-            keyExtractor={item => item.name}
-            renderItem={({ item }) =>
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
               <CatPeopleListCard>
-                <CatPeopleListCardImage source={item.profileImage ? { uri: item.profileImage } : People1Icon} />
+                <CatPeopleListCardImage
+                  source={
+                    item.profileImage ? { uri: item.profileImage } : People1Icon
+                  }
+                />
                 <CatPeopleListCardContent>
                   <CatPeopleListCardText>{item.name}</CatPeopleListCardText>
-                  <CatPeopleListCardButton onPress={() => handleGoToPeople(item)} >
-                    <CatPeopleListCardText white>Enviar Mensaje</CatPeopleListCardText>
+                  <CatPeopleListCardButton
+                    onPress={() => handleGoToPeople(item)}
+                  >
+                    <CatPeopleListCardText white>
+                      Enviar Mensaje
+                    </CatPeopleListCardText>
                   </CatPeopleListCardButton>
                 </CatPeopleListCardContent>
               </CatPeopleListCard>
-            }
+            )}
           />
-          <Terms />
         </CategoriesPeopleContainer>
       </Layout>
     );

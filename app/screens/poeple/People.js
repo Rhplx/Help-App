@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import AppLoading from "expo-app-loading";
 import { Text } from "react-native";
 
@@ -9,8 +9,8 @@ import * as yup from "yup";
 // Styled Components & Components
 import Layout from "../Layout";
 import Header from "../../components/Header";
-import MessageButton from '../../components/MessageButton';
-import Terms from '../../components/Terms';
+import MessageButton from "../../components/MessageButton";
+import Terms from "../../components/Terms";
 import {
   PeopleSubtitle,
   PeopleHeader,
@@ -32,9 +32,13 @@ import {
   PeopleButtonText,
   PeopleActions,
   PeopleButtonIcon,
-  PeopleContainer,
-} from '../../styles/screens/people/People';
-import { GeneralInput, GeneralTitle, GeneralWrapper } from '../../styles/GeneralStyles';
+  PeopleContainer
+} from "../../styles/screens/people/People";
+import {
+  GeneralInput,
+  GeneralTitle,
+  GeneralWrapper
+} from "../../styles/GeneralStyles";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -60,9 +64,7 @@ export default function People({ route, navigation }) {
   ];
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup
-      .string()
-      .required("Mensaje requerido"),
+    message: yup.string().required("Mensaje requerido")
   });
 
   const handleMaximaze = (message) => () => {
@@ -75,20 +77,20 @@ export default function People({ route, navigation }) {
 
   const handleSendReview = () => {
     navigation.navigate("PeopleSendReview", {
-      id: 0,
+      id: 0
     });
   };
 
   const handleViewReviews = () => {
     navigation.navigate("PeopleReviews", {
-      id: 0,
+      id: 0
     });
   };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {
@@ -101,7 +103,10 @@ export default function People({ route, navigation }) {
         </Header>
         <PeopleContainer>
           <GeneralTitle>{text}</GeneralTitle>
-          <PeopleSubtitle>Envíale un mensaje para solicitar sus servicios, o enviale un mensaje  o enviarle un mensajes mediante WhatsApp</PeopleSubtitle>
+          <PeopleSubtitle>
+            Envíale un mensaje para solicitar sus servicios, o enviale un
+            mensaje o enviarle un mensajes mediante WhatsApp
+          </PeopleSubtitle>
           <PeopleHeader>
             <PeopleImageContainer>
               <PeopleImageContent>
@@ -132,7 +137,10 @@ export default function People({ route, navigation }) {
             />
           </PeopleHeader>
           <PeopleDescription>
-            Descripción breve, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada  ujos, que añada cerveza al whisky breve, kiwi, piña y fugaz jamón. Que añada  ujos, que añada cerveza al whisky breve, kiwi, piña y fugaz jamón.
+            Descripción breve, kiwi, piña y fugaz jamón. Fabio me exige, sin
+            tapujos, que añada ujos, que añada cerveza al whisky breve, kiwi,
+            piña y fugaz jamón. Que añada ujos, que añada cerveza al whisky
+            breve, kiwi, piña y fugaz jamón.
           </PeopleDescription>
           <PeopleContent>
             <Formik
@@ -146,7 +154,7 @@ export default function People({ route, navigation }) {
                 handleSubmit,
                 values,
                 errors,
-                isValid,
+                isValid
               }) => (
                 <>
                   <GeneralInput
@@ -175,9 +183,8 @@ export default function People({ route, navigation }) {
               )}
             </Formik>
           </PeopleContent>
-          <Terms />
         </PeopleContainer>
       </Layout>
-    ); 
+    );
   }
 }

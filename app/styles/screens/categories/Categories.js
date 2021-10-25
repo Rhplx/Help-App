@@ -3,6 +3,7 @@ import { Link } from "@react-navigation/native";
 
 export const CategoriesContainer = styled.View`
   flex: 1;
+  width: 100%;
   padding: 20px 0 0;
   align-items: center;
   justify-content: center;
@@ -18,7 +19,7 @@ export const CategoriesTitle = styled.Text`
 
 export const CategoriesSubtitle = styled.Text`
   margin-bottom: 15px;
-  color: #EF0E73;
+  color: #ef0e73;
   font-family: "Roboto_700Bold";
   font-size: 18px;
   line-height: 21px;
@@ -26,15 +27,19 @@ export const CategoriesSubtitle = styled.Text`
 `;
 
 export const CategoriesList = styled.FlatList`
+  flex: 1;
   width: 100%;
-  max-height: 75%;
   padding: 15px 16px;
   margin-bottom: 10px;
+`;
+export const CategoriesContent = styled.ScrollView`
+  flex: 1;
+  width: 100%;
 `;
 
 export const CategoriesCard = styled.Pressable`
   flex: 1;
-  max-width: 50%;
+  max-width: 30%;
   margin-bottom: 25px;
   align-items: center;
   text-align: center;
@@ -46,17 +51,17 @@ export const CategoriesCardContent = styled.View`
 `;
 
 export const CategoriesCardImage = styled.Image`
-  width: 145px;
-  height: 145px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
   resize-mode: contain;
 `;
 export const CategoriesCardText = styled.Text`
-  max-width: 150px;
-  padding: 0 10px;
+  max-width: 100px;
+  padding: 0;
   color: #245751;
-  font-family: "Roboto_700Bold";
-  font-size: 16px;
+  font-family: "Roboto_400Regular";
+  font-size: 14px;
   line-height: 16px;
   text-align: center;
 `;
@@ -71,10 +76,10 @@ const button = `
 
 export const CategoriesActions = styled.View`
   width: 100%;
-  margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 10px;
 `;
 
 export const CategoriesButton = styled.Pressable`
@@ -87,7 +92,7 @@ export const CategoriesButtonLink = styled(Link)`
 
 export const CategoriesButtonText = styled.Text`
   width: 100%;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: "Roboto_700Bold";
   font-size: 18px;
   line-height: 21px;

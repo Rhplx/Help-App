@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
-export const PlansWrapper = styled.View`
+export const PlansWrapper = styled.ScrollView`
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
+  /* justify-content: flex-start;
+  align-items: center; */
   padding: 0 30px;
 `;
 export const PlansBox = styled.Pressable`

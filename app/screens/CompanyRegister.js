@@ -31,7 +31,7 @@ import {
   TermsRowText,
   TermsRowCheckbox,
   RegisterButton,
-  RegisterButtonText,
+  RegisterButtonText
 } from "../styles/GeneralStyles";
 
 // Assets and fonts
@@ -52,11 +52,17 @@ export default function CompanyRegister({ navigation }) {
       .required("Correo requerido"),
     password: yup
       .string()
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$#]){8,16}/, "Contraseña debe ser de 8 a 16 caracteres, 1 especial @#$")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,16}/,
+        "La contraseña debe tener de 8 a 16 caracteres, al menos una mayuscula y un numero"
+      )
       .required("Contraseña requerida"),
     confirmPassword: yup
       .string()
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$#]){8,16}/, "Confirmacion Contraseña debe ser de 8 a 16 caracteres, 1 especial @#$")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){8,16}/,
+        "La contraseña debe tener de 8 a 16 caracteres, al menos una mayuscula y un numero"
+      )
       .required("Contraseña requerida"),
     number: yup
       .number()
@@ -66,14 +72,17 @@ export default function CompanyRegister({ navigation }) {
       .number()
       .typeError("Solo numeros")
       .required("WhatsApp requerido"),
-    RFC: yup.string().max(13, ({ max }) => `El maximo de caracteres para RFC es ${max}`).required("RFC requerido"),
+    RFC: yup
+      .string()
+      .max(13, ({ max }) => `El maximo de caracteres para RFC es ${max}`)
+      .required("RFC requerido"),
     comercialName: yup.string().required("Nombre de la empresa requerido"),
     businessName: yup.string().required("Razón social requerido"),
     street: yup.string().required("Calle y número requerido"),
     position: yup.string().required("Puesto requerido"),
     state: yup.string().required("Estado requerido"),
     city: yup.string().required("Ciudad requerida"),
-    details: yup.string().required("Descripcion requerida"),
+    details: yup.string().required("Descripcion requerida")
   });
   const whiteSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -87,7 +96,7 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
+      textAlign: "center"
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -100,8 +109,8 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   });
   const greenSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -116,7 +125,7 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
+      textAlign: "center"
     },
     inputAndroid: {
       backgroundColor: "#39B4BB",
@@ -130,21 +139,21 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   });
   const statePlaceholder = {
     label: "Estado",
-    value: "",
+    value: ""
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: "",
+    value: ""
   };
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: "",
-    color: "#ffffff",
+    color: "#ffffff"
   };
 
   React.useEffect(() => {
@@ -168,23 +177,24 @@ export default function CompanyRegister({ navigation }) {
   const getSubCategories = () => {
     fetch(getBaseApi() + '/manage/Catalogues?catalogues=["subservices"]', {
       method: "GET"
-    }).then(res => res.json())
-      .then(response => {
+    })
+      .then((res) => res.json())
+      .then((response) => {
         if (response.result) {
           setSubservicesCat(response.data.subservices);
         } else {
           Alert.alert("Ooops :(", response.error);
         }
       })
-      .catch(error => console.log(error));
-  }
+      .catch((error) => console.log(error));
+  };
 
   const mimetype = (name) => {
     let allow = {
       png: "image/png",
       pdf: "application/json",
       jpeg: "image/jpeg",
-      jpg: "image/jpg",
+      jpg: "image/jpg"
     };
     let extention = name.split(".")[1];
     if (allow[extention] !== undefined) {
@@ -199,10 +209,10 @@ export default function CompanyRegister({ navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 4],
-      quality: 1,
+      quality: 1
     });
     let localUri = result.uri;
-    let filename = localUri.split('/').pop();
+    let filename = localUri.split("/").pop();
     let fileType = mimetype(filename);
     if (fileType === undefined) {
       alert("Extension no permitida");
@@ -226,26 +236,29 @@ export default function CompanyRegister({ navigation }) {
     let values = subservices;
     values[index] = value;
     setSubservices(values);
-  }
+  };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
   const insertCompany = (data) => {
     if (data["password"] === data["confirmPassword"]) {
       data["type"] = "company";
-      data["services"] = subservices.map((item) => { return item !== "" && item });
+      data["services"] = subservices.map((item) => {
+        return item !== "" && item;
+      });
       console.log(data);
       fetch(getBaseApi() + "/manage/User", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "content-type": "application/json"
         },
         body: JSON.stringify(data)
-      }).then(res => res.json())
-        .then(response => {
+      })
+        .then((res) => res.json())
+        .then((response) => {
           if (response.result) {
             if (profileImage !== undefined) {
               let formDat = new FormData();
@@ -256,15 +269,16 @@ export default function CompanyRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  'content-type': 'multipart/form-data',
-                },
-              }).then(res => res.json())
-                .then(response => {
+                  "content-type": "multipart/form-data"
+                }
+              })
+                .then((res) => res.json())
+                .then((response) => {
                   if (!response.result) {
                     Alert.alert("Ooops :(", response.error);
                   }
                 })
-                .catch(error => console.log("error", error));
+                .catch((error) => console.log("error", error));
             }
             if (idCard !== undefined) {
               let formDat = new FormData();
@@ -275,26 +289,29 @@ export default function CompanyRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  'content-type': 'multipart/form-data',
-                },
-              }).then(res => res.json())
-                .then(response => {
+                  "content-type": "multipart/form-data"
+                }
+              })
+                .then((res) => res.json())
+                .then((response) => {
                   if (!response.result) {
                     Alert.alert("Ooops :(", response.error);
                   }
                 })
-                .catch(error => console.log("error", error));
+                .catch((error) => console.log("error", error));
             }
-            Alert.alert("Exito", "has sido registrado exitosamente, por favor inicia sesión");
-            navigation.navigate("Login")
+            Alert.alert(
+              "Exito",
+              "has sido registrado exitosamente, por favor inicia sesión"
+            );
+            navigation.navigate("Login");
           } else {
             Alert.alert("Ooops :(", response.error);
           }
         })
-        .catch(error => console.log("error", error));
-    }
-    else {
-      Alert.alert("Oops :(", "Las contraseñas no coinciden, vuelva a intentar")
+        .catch((error) => console.log("error", error));
+    } else {
+      Alert.alert("Oops :(", "Las contraseñas no coinciden, vuelva a intentar");
     }
   };
 
@@ -326,7 +343,7 @@ export default function CompanyRegister({ navigation }) {
                 street: "",
                 state: "",
                 city: "",
-                details: "",
+                details: ""
               }}
               onSubmit={insertCompany}
             >
@@ -336,7 +353,7 @@ export default function CompanyRegister({ navigation }) {
                 handleSubmit,
                 values,
                 errors,
-                isValid,
+                isValid
               }) => (
                 <>
                   <GeneralInput
@@ -425,7 +442,9 @@ export default function CompanyRegister({ navigation }) {
                   </DoubleInputWrapper>
                   {(errors.password || errors.confirmPassword) && (
                     <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.password ? errors.password : errors.confirmPassword}
+                      {errors.password
+                        ? errors.password
+                        : errors.confirmPassword}
                     </Text>
                   )}
                   <GeneralSubtitle marginTop>
@@ -488,137 +507,137 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={[
                       {
-                        "value": "Zacatecas",
-                        "label": "Zacatecas"
+                        value: "Zacatecas",
+                        label: "Zacatecas"
                       },
                       {
-                        "value": "Aguascalientes",
-                        "label": "Aguascalientes"
+                        value: "Aguascalientes",
+                        label: "Aguascalientes"
                       },
                       {
-                        "value": "Tamaulipas",
-                        "label": "Tamaulipas"
+                        value: "Tamaulipas",
+                        label: "Tamaulipas"
                       },
                       {
-                        "value": "Jalisco",
-                        "label": "Jalisco"
+                        value: "Jalisco",
+                        label: "Jalisco"
                       },
                       {
-                        "value": "Nayarit",
-                        "label": "Nayarit"
+                        value: "Nayarit",
+                        label: "Nayarit"
                       },
                       {
-                        "value": "Oaxaca",
-                        "label": "Oaxaca"
+                        value: "Oaxaca",
+                        label: "Oaxaca"
                       },
                       {
-                        "value": "Sonora",
-                        "label": "Sonora"
+                        value: "Sonora",
+                        label: "Sonora"
                       },
                       {
-                        "value": "Nuevo León",
-                        "label": "Nuevo León"
+                        value: "Nuevo León",
+                        label: "Nuevo León"
                       },
                       {
-                        "value": "Chihuahua",
-                        "label": "Chihuahua"
+                        value: "Chihuahua",
+                        label: "Chihuahua"
                       },
                       {
-                        "value": "Guanajuato",
-                        "label": "Guanajuato"
+                        value: "Guanajuato",
+                        label: "Guanajuato"
                       },
                       {
-                        "value": "Guerrero",
-                        "label": "Guerrero"
+                        value: "Guerrero",
+                        label: "Guerrero"
                       },
                       {
-                        "value": "Hidalgo",
-                        "label": "Hidalgo"
+                        value: "Hidalgo",
+                        label: "Hidalgo"
                       },
                       {
-                        "value": "San Luis Potosí",
-                        "label": "San Luis Potosí"
+                        value: "San Luis Potosí",
+                        label: "San Luis Potosí"
                       },
                       {
-                        "value": "Sinaloa",
-                        "label": "Sinaloa"
+                        value: "Sinaloa",
+                        label: "Sinaloa"
                       },
                       {
-                        "value": "Colima",
-                        "label": "Colima"
+                        value: "Colima",
+                        label: "Colima"
                       },
                       {
-                        "value": "Distrito Federal",
-                        "label": "Distrito Federal"
+                        value: "Distrito Federal",
+                        label: "Distrito Federal"
                       },
                       {
-                        "value": "Baja California Sur",
-                        "label": "Baja California Sur"
+                        value: "Baja California Sur",
+                        label: "Baja California Sur"
                       },
                       {
-                        "value": "Morelos",
-                        "label": "Morelos"
+                        value: "Morelos",
+                        label: "Morelos"
                       },
                       {
-                        "value": "Quintana Roo",
-                        "label": "Quintana Roo"
+                        value: "Quintana Roo",
+                        label: "Quintana Roo"
                       },
                       {
-                        "value": "México",
-                        "label": "México"
+                        value: "México",
+                        label: "México"
                       },
                       {
-                        "value": "Michoacán de Ocampo",
-                        "label": "Michoacán de Ocampo"
+                        value: "Michoacán de Ocampo",
+                        label: "Michoacán de Ocampo"
                       },
                       {
-                        "value": "Puebla",
-                        "label": "Puebla"
+                        value: "Puebla",
+                        label: "Puebla"
                       },
                       {
-                        "value": "Tlaxcala",
-                        "label": "Tlaxcala"
+                        value: "Tlaxcala",
+                        label: "Tlaxcala"
                       },
                       {
-                        "value": "Yucatán",
-                        "label": "Yucatán"
+                        value: "Yucatán",
+                        label: "Yucatán"
                       },
                       {
-                        "value": "Baja California",
-                        "label": "Baja California"
+                        value: "Baja California",
+                        label: "Baja California"
                       },
                       {
-                        "value": "Tabasco",
-                        "label": "Tabasco"
+                        value: "Tabasco",
+                        label: "Tabasco"
                       },
                       {
-                        "value": "Durango",
-                        "label": "Durango"
+                        value: "Durango",
+                        label: "Durango"
                       },
                       {
-                        "value": "Coahuila de Zaragoza",
-                        "label": "Coahuila de Zaragoza"
+                        value: "Coahuila de Zaragoza",
+                        label: "Coahuila de Zaragoza"
                       },
                       {
-                        "value": "Chiapas",
-                        "label": "Chiapas"
+                        value: "Chiapas",
+                        label: "Chiapas"
                       },
                       {
-                        "value": "Querétaro",
-                        "label": "Querétaro"
+                        value: "Querétaro",
+                        label: "Querétaro"
                       },
                       {
-                        "value": "Veracruz de Ignacio de la Llave",
-                        "label": "Veracruz de Ignacio de la Llave"
+                        value: "Veracruz de Ignacio de la Llave",
+                        label: "Veracruz de Ignacio de la Llave"
                       },
                       {
-                        "value": "Campeche",
-                        "label": "Campeche"
+                        value: "Campeche",
+                        label: "Campeche"
                       }
                     ]}
                   />
@@ -636,8 +655,8 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={getCities(values.state)}
                   />
@@ -658,8 +677,8 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={subservicesCat}
                   />
@@ -672,8 +691,8 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={subservicesCat}
                   />
@@ -686,8 +705,8 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={subservicesCat}
                   />
@@ -714,8 +733,8 @@ export default function CompanyRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     multiline={true}
                     numberOfLines={10}

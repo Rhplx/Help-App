@@ -28,18 +28,17 @@ export const SubCatCardContent = styled.View`
 `;
 
 export const SubCategoriesTitle = styled.Text`
-  max-height: 80px;
   margin-bottom: 5px;
   color: #245751;
   font-family: "HindMadurai_700Bold";
-  font-size: 34px;
-  line-height: 34px;
+  font-size: 24px;
+  line-height: 30px;
   justify-content: flex-start;
 `;
 
 export const SubCategoriesText = styled.Text`
   padding-right: 16px;
-  color: #EF0E73;
+  color: #ef0e73;
   font-family: "Roboto_700Bold";
   font-size: 18px;
   line-height: 21px;
@@ -57,14 +56,14 @@ export const SubCategoriesListLink = styled.Pressable`
   max-width: 300px;
   margin: 0 auto 20px;
   padding: 14px;
-  background-color: #39B4BB;
+  background-color: #39b4bb;
   border-radius: 10px;
   align-items: center;
 `;
 
 export const SubCategoriesListText = styled.Text`
   font-family: "Roboto_700Bold";
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 18px;
   line-height: 21px;
   text-align: center;
@@ -75,9 +74,9 @@ export const SubCategoriesLink = styled(Link)`
   max-width: 300px;
   margin: 0 auto 10px;
   padding: 14px;
-  background-color: #39B4BB;
+  background-color: #39b4bb;
   font-family: "Roboto_700Bold";
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 18px;
   line-height: 21px;
   text-align: center;

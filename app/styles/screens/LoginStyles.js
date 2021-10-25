@@ -1,10 +1,10 @@
 import styled from "styled-components/native";
 import { Link } from "@react-navigation/native";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
-  justify-content: flex-start;
-  align-items: center;
+  /* justify-content: flex-start;
+  align-items: center; */
   padding: 0 30px;
 `;
 export const Logo = styled.Image`
@@ -19,12 +19,14 @@ export const Title = styled.Text`
   font-family: "HindMadurai_700Bold";
   font-size: 46px;
   line-height: 64px;
+  text-align: center;
 `;
 export const Subtitle = styled.Text`
   color: #245751;
   font-family: "Roboto_400Regular";
   font-size: 20px;
   line-height: 25px;
+  text-align: center;
 `;
 export const FormWrapper = styled.View`
   margin: 20px 0;
@@ -65,6 +67,7 @@ export const TermsWrapper = styled.Text`
   flex-direction: row;
   justify-content: center;
   margin-top: 25px;
+  text-align: center;
 `;
 export const TermsText = styled.Text`
   font-size: 12px;

@@ -13,9 +13,10 @@ import {
   PlansBoxSubtitleWrapper,
   PlansBoxSubtitle,
   PlansBoxTitleWrapperTwo,
-  PlansBoxSubtitleWrapperTwo,
+  PlansBoxSubtitleWrapperTwo
 } from "../styles/screens/LoginPlanStyles";
 import { GeneralTitle, GeneralSubtitle } from "../styles/GeneralStyles";
+import { View } from "react-native";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -25,7 +26,7 @@ export default function LoginPlan({ navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {
@@ -35,6 +36,7 @@ export default function LoginPlan({ navigation }) {
       <Layout>
         <Header />
         <PlansWrapper>
+          <View style={{ height: 50 }} />
           <GeneralTitle>Selecciona una opción</GeneralTitle>
           <GeneralSubtitle>
             Selecciona una opción para tu registro. Aprovecha el perido de
@@ -71,6 +73,7 @@ export default function LoginPlan({ navigation }) {
               </PlansBoxSubtitle>
             </PlansBoxSubtitleWrapperTwo>
           </PlansBox>
+          <View style={{ height: 50 }} />
         </PlansWrapper>
       </Layout>
     );

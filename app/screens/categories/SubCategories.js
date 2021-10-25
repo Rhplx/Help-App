@@ -22,7 +22,7 @@ import {
   SubCategoriesList,
   SubCategoriesListLink,
   SubCategoriesListText,
-  SubCategoriesLink,
+  SubCategoriesLink
 } from "../../styles/screens/categories/SubCategories";
 import Terms from "../../components/Terms";
 
@@ -46,40 +46,39 @@ export default function SubCategories({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
       method: "GET",
       headers: {
-        "Authorization": "Bearer " + sessionId
+        Authorization: "Bearer " + sessionId
       }
     })
-      .then(res => res.json())
-      .then(response => {
+      .then((res) => res.json())
+      .then((response) => {
         if (response.result) {
           setSubcategories(response.data);
         } else {
           if (response.error === "Error: Sesión Invalida") {
             clearAsyncStorage(navigation);
-          }
-          else {
+          } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
       })
-      .catch(error => console.log('error', error));
+      .catch((error) => console.log("error", error));
   };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   const handleChoosePeople = (item) => () => {
     navigation.navigate("CategoriesPeople", {
       id: item.id,
       text: item.name,
-      icon: icon,
+      icon: icon
     });
   };
 
@@ -96,22 +95,23 @@ export default function SubCategories({ route, navigation }) {
             <SubCatCardImage source={{ uri: icon }} />
             <SubCatCardContent>
               <SubCategoriesTitle>{text}</SubCategoriesTitle>
-              <SubCategoriesText>Selecciona el servicio que necesitas</SubCategoriesText>
             </SubCatCardContent>
           </SubCatCard>
+          <SubCategoriesText>
+            Selecciona el servicio que necesitas
+          </SubCategoriesText>
           <SubCategoriesList
             data={subcategories}
-            keyExtractor={item => item.name}
-            renderItem={({ item }) =>
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
               <SubCategoriesListLink onPress={handleChoosePeople(item)}>
                 <SubCategoriesListText>{item.name}</SubCategoriesListText>
               </SubCategoriesListLink>
-            }
+            )}
           />
-          <SubCategoriesLink to={{ screen: "ProposeService" }}>
+          {/* <SubCategoriesLink to={{ screen: "ProposeService" }}>
             <Text>(+) Proponer Servicio</Text>
-          </SubCategoriesLink>
-          <Terms />
+          </SubCategoriesLink> */}
         </SubCategoriesContainer>
       </Layout>
     );

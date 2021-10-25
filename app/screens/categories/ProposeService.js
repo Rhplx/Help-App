@@ -15,33 +15,31 @@ import {
   ProposeButton,
   ProposeButtonText,
   ProposeContainer,
-  ProposeContent,
+  ProposeContent
 } from "../../styles/screens/categories/ProposeService";
 import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import { FormWrapper, GeneralInput, GeneralSubtitle, GeneralTitle } from "../../styles/GeneralStyles";
+import {
+  FormWrapper,
+  GeneralInput,
+  GeneralSubtitle,
+  GeneralTitle
+} from "../../styles/GeneralStyles";
 
 export default function ProposeService() {
-
   const proposeValidationSchema = yup.object().shape({
-    profesion: yup
-      .string()
-      .required("Profesión requerida"),
-    description: yup
-      .string()
-      .required("Descripción requerida"),
-    comments: yup
-      .string()
-      .required("Comentarios requerida"),
+    profesion: yup.string().required("Profesión requerida"),
+    description: yup.string().required("Descripción requerida"),
+    comments: yup.string().required("Comentarios requerida")
   });
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {
@@ -66,7 +64,7 @@ export default function ProposeService() {
               handleSubmit,
               values,
               errors,
-              isValid,
+              isValid
             }) => (
               <>
                 <FormWrapper>
@@ -117,7 +115,6 @@ export default function ProposeService() {
               </>
             )}
           </Formik>
-          <Terms />
         </ProposeContainer>
       </Layout>
     );
