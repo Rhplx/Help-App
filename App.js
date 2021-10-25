@@ -13,7 +13,8 @@ import Categories from "./app/screens/categories/Categories";
 import SubCategories from "./app/screens/categories/SubCategories";
 import ProposeService from "./app/screens/categories/ProposeService";
 import CategoriesPeople from "./app/screens/categories/CategoriesPeople";
-import People from "./app/screens/poeple/People";
+import People from "./app/screens/people/People";
+import Profile from "./app/screens/people/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,9 +22,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Profile"
         screenOptions={{
-          headerShown: false,
+          headerShown: false
         }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -42,6 +43,7 @@ export default function App() {
         <Stack.Screen name="ProposeService" component={ProposeService} />
         <Stack.Screen name="CategoriesPeople" component={CategoriesPeople} />
         <Stack.Screen name="People" component={People} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
