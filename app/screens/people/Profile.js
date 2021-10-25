@@ -1,92 +1,53 @@
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
-
-// Third Party Imports
-import { Formik } from "formik";
-import * as yup from "yup";
+import { Text, View } from "react-native";
 
 // Styled Components & Components
 import Layout from "../Layout";
 import Header from "../../components/Header";
-import MessageButton from "../../components/MessageButton";
-import Terms from "../../components/Terms";
 import {
-  PeopleSubtitle,
-  PeopleHeader,
-  PeopleImageContainer,
-  PeopleImageContent,
-  PeopleImage,
-  PeopleFavorite,
-  PeopleFavoriteIcon,
-  PeopleReviewsContainer,
-  PeopleReviews,
-  PeopleReviewsText,
-  PeopleReviewsStars,
-  PeopleReviewsStar,
-  PeopleServices,
-  PeopleService,
-  PeopleDescription,
-  PeopleContent,
-  PeopleButton,
-  PeopleButtonText,
-  PeopleActions,
-  PeopleButtonIcon,
-  PeopleContainer
-} from "../../styles/screens/people/People";
+  ProfileContainer,
+  ProfileHeader,
+  ProfileHeaderImage,
+  ProfileHeaderTitle,
+  ProfileInfo,
+  ProfilePlansBox,
+  ProfilePlan,
+  ProfileData,
+  ProfileDataHeader,
+  ProfileDataTitle,
+  ProfileDataButton,
+  ProfileDataButtonText,
+  ProfileDataTextRow,
+  ProfileDataText
+} from "../../styles/screens/people/Profile";
 import {
-  GeneralInput,
-  GeneralTitle,
-  GeneralWrapper
-} from "../../styles/GeneralStyles";
-
+  PlansBoxTitleWrapper,
+  PlansBoxTitle,
+  PlansBoxSubtitleWrapper,
+  PlansBoxSubtitle,
+  PlansBoxTitleWrapperTwo,
+  PlansBoxSubtitleWrapperTwo
+} from "../../styles/screens/LoginPlanStyles";
+import {
+  PaypalGeneral,
+  PayPalRow,
+  PaypalTitleWrapper,
+  PaypalTitle,
+  PaypalLogo,
+  PaypalLogoWrapper,
+  PaypalAnual,
+  PaypalAnualTitle,
+  PaypalCheckboxWrapper
+} from "../../styles/components/PaypalPlanStyles";
+import { GeneralSubtitle } from "../../styles/GeneralStyles";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import PeopleIMG from "../../assets/people.png";
-import FavoriteIcon from "../../assets/favorite.png";
-import StarIcon from "../../assets/start.png";
-import MaximizeIcon from "../../assets/iconMaximize.png";
+import Example from "../../assets/people.png";
+import PaypalImage from "../../assets/paypal-logo.png";
 
 export default function Profile({ route, navigation }) {
-  const { text } = route.params;
-
-  const peopleServices = [
-    {
-      text: "SERVICIO QUE OFRECE SEGUNDA LÍNEA"
-    },
-    {
-      text: "SERVICIO QUE OFRECE"
-    },
-    {
-      text: "SERVICIO QUE OFRECE"
-    }
-  ];
-
-  const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido")
-  });
-
-  const handleMaximaze = (message) => () => {
-    navigation.navigate("PeopleMessage", {
-      id: 0,
-      text,
-      message
-    });
-  };
-
-  const handleSendReview = () => {
-    navigation.navigate("PeopleSendReview", {
-      id: 0
-    });
-  };
-
-  const handleViewReviews = () => {
-    navigation.navigate("PeopleReviews", {
-      id: 0
-    });
-  };
-
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
@@ -98,92 +59,135 @@ export default function Profile({ route, navigation }) {
   } else {
     return (
       <Layout>
-        <Header>
-          <MessageButton />
-        </Header>
-        <PeopleContainer>
-          <GeneralTitle>{text}</GeneralTitle>
-          <PeopleSubtitle>
-            Envíale un mensaje para solicitar sus servicios, o enviale un
-            mensaje o enviarle un mensajes mediante WhatsApp
-          </PeopleSubtitle>
-          <PeopleHeader>
-            <PeopleImageContainer>
-              <PeopleImageContent>
-                <PeopleFavorite onPress={handleSendReview}>
-                  <PeopleFavoriteIcon source={FavoriteIcon} />
-                </PeopleFavorite>
-                <PeopleImage source={PeopleIMG} />
-                <PeopleReviewsContainer onPress={handleViewReviews}>
-                  <PeopleReviews>
-                    <PeopleReviewsText>15 Reseñas</PeopleReviewsText>
-                  </PeopleReviews>
-                  <PeopleReviewsStars>
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                  </PeopleReviewsStars>
-                </PeopleReviewsContainer>
-              </PeopleImageContent>
-            </PeopleImageContainer>
-            <PeopleServices
-              data={peopleServices}
-              keyExtractor={(item, index) => `${item.text}-${index}`}
-              renderItem={({ item }) => (
-                <PeopleService>{item.text}</PeopleService>
-              )}
-            />
-          </PeopleHeader>
-          <PeopleDescription>
-            Descripción breve, kiwi, piña y fugaz jamón. Fabio me exige, sin
-            tapujos, que añada ujos, que añada cerveza al whisky breve, kiwi,
-            piña y fugaz jamón. Que añada ujos, que añada cerveza al whisky
-            breve, kiwi, piña y fugaz jamón.
-          </PeopleDescription>
-          <PeopleContent>
-            <Formik
-              validationSchema={peopleMessageValidationSchema}
-              initialValues={{ message: "" }}
-              onSubmit={(values) => console.log(values)}
-            >
-              {({
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                values,
-                errors,
-                isValid
-              }) => (
-                <>
-                  <GeneralInput
-                    multiline
-                    numberOfLines={4}
-                    onChangeText={handleChange("message")}
-                    onBlur={handleBlur("message")}
-                    placeholder="Escribe un mensaje"
-                    name="message"
-                    value={values.message}
-                  />
-                  {errors.message && (
-                    <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.message}
-                    </Text>
-                  )}
-                  <PeopleActions>
-                    <PeopleButton icon onPress={handleMaximaze(values.message)}>
-                      <PeopleButtonIcon source={MaximizeIcon} />
-                    </PeopleButton>
-                    <PeopleButton onPress={handleSubmit}>
-                      <PeopleButtonText>Enviar mensage</PeopleButtonText>
-                    </PeopleButton>
-                  </PeopleActions>
-                </>
-              )}
-            </Formik>
-          </PeopleContent>
-        </PeopleContainer>
+        <Header />
+        <ProfileContainer>
+          <ProfileHeader>
+            <ProfileHeaderImage source={Example} />
+            <ProfileHeaderTitle>Hola</ProfileHeaderTitle>
+          </ProfileHeader>
+          <GeneralSubtitle>Tus datos, chats y reseñas</GeneralSubtitle>
+          <ProfileInfo>
+            <ProfilePlansBox>
+              <PlansBoxTitleWrapper pink>
+                <PlansBoxTitle>Mis chats</PlansBoxTitle>
+              </PlansBoxTitleWrapper>
+              <PlansBoxSubtitleWrapper wine>
+                <PlansBoxTitle>25 contactos</PlansBoxTitle>
+                <PlansBoxSubtitle yellow>5 activos</PlansBoxSubtitle>
+              </PlansBoxSubtitleWrapper>
+            </ProfilePlansBox>
+            <ProfilePlansBox>
+              <PlansBoxTitleWrapperTwo>
+                <PlansBoxTitle>Mis reseñas</PlansBoxTitle>
+              </PlansBoxTitleWrapperTwo>
+              <PlansBoxSubtitleWrapperTwo>
+                <PlansBoxTitle>15 reseñas</PlansBoxTitle>
+              </PlansBoxSubtitleWrapperTwo>
+            </ProfilePlansBox>
+          </ProfileInfo>
+          <ProfilePlan>
+            <PaypalGeneral>
+              <PayPalRow>
+                <PaypalTitleWrapper>
+                  <PaypalTitle>Seleccionar Plan</PaypalTitle>
+                </PaypalTitleWrapper>
+                <PaypalLogoWrapper>
+                  <PaypalLogo source={PaypalImage} />
+                </PaypalLogoWrapper>
+              </PayPalRow>
+              <PayPalRow>
+                <PaypalAnual>
+                  <PaypalAnualTitle bold>ANUAL - $499</PaypalAnualTitle>
+                  <PaypalAnualTitle>
+                    Siguiente pago: 5 Septiembre 2022
+                  </PaypalAnualTitle>
+                </PaypalAnual>
+                <PaypalCheckboxWrapper>
+                  <PaypalTitle>Pagar</PaypalTitle>
+                </PaypalCheckboxWrapper>
+              </PayPalRow>
+            </PaypalGeneral>
+          </ProfilePlan>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Datos de contacto</ProfileDataTitle>
+              <ProfileDataButton>
+                <ProfileDataButtonText>Editar</ProfileDataButtonText>
+              </ProfileDataButton>
+            </ProfileDataHeader>
+            <ProfileDataTextRow>
+              <ProfileDataText bold>Email: </ProfileDataText>
+              <ProfileDataText>pikachu@gmail.com</ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText bold>Tel: </ProfileDataText>
+              <ProfileDataText>00004545454</ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText bold>WhatsApp: </ProfileDataText>
+              <ProfileDataText>00004545454</ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText bold>Ciudad: </ProfileDataText>
+              <ProfileDataText>Queretaro</ProfileDataText>
+            </ProfileDataTextRow>
+          </ProfileData>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Servicios registrados</ProfileDataTitle>
+              <ProfileDataButton>
+                <ProfileDataButtonText>Editar</ProfileDataButtonText>
+              </ProfileDataButton>
+            </ProfileDataHeader>
+            <ProfileDataTextRow>
+              <ProfileDataText>* Subcategoria</ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText>
+                * Subcategoria en la que esta inscrito el dude este
+              </ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText> * hola hola hola</ProfileDataText>
+            </ProfileDataTextRow>
+          </ProfileData>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Servicios registrados</ProfileDataTitle>
+              <ProfileDataButton>
+                <ProfileDataButtonText>Editar</ProfileDataButtonText>
+              </ProfileDataButton>
+            </ProfileDataHeader>
+            <ProfileDataTextRow>
+              <ProfileDataText>* Subcategoria</ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText>
+                * Subcategoria en la que esta inscrito el dude este
+              </ProfileDataText>
+            </ProfileDataTextRow>
+            <ProfileDataTextRow>
+              <ProfileDataText> * hola hola hola</ProfileDataText>
+            </ProfileDataTextRow>
+          </ProfileData>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Presentación</ProfileDataTitle>
+              <ProfileDataButton>
+                <ProfileDataButtonText>Editar</ProfileDataButtonText>
+              </ProfileDataButton>
+            </ProfileDataHeader>
+            <ProfileDataTextRow>
+              <ProfileDataText>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                molestie libero efficitur vulputate aliquam. Etiam sit amet
+                consectetur ante, nec malesuada turpis. Nulla at massa ac leo
+                fermentum accumsan.
+              </ProfileDataText>
+            </ProfileDataTextRow>
+          </ProfileData>
+          <View style={{ height: 100 }}></View>
+        </ProfileContainer>
       </Layout>
     );
   }

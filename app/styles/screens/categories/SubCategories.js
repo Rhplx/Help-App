@@ -32,7 +32,7 @@ export const SubCategoriesTitle = styled.Text`
   color: #245751;
   font-family: "HindMadurai_700Bold";
   font-size: 24px;
-  line-height: 30px;
+  line-height: 29px;
   justify-content: flex-start;
 `;
 
