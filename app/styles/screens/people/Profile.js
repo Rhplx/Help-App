@@ -18,7 +18,7 @@ export const ProfileHeader = styled.View`
 export const ProfileHeaderImage = styled.Image`
   flex: 1;
   width: 50%;
-  /* height: 140px; */
+  height: 140px;
   resize-mode: contain;
   border-radius: 100px;
 `;
@@ -127,6 +127,7 @@ export const ProfileDataText = styled.Text`
   color: ${(props) => (props.bold ? "black" : "#245751")};
 `;
 export const ProfileDataImage = styled.Image`
-  width: 120px;
+  width: 150px;
+  height: 140px;
   resize-mode: contain;
 `;

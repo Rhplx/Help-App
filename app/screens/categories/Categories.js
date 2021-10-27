@@ -33,13 +33,12 @@ import Terms from "../../components/Terms";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import HelperIcon from "../../assets/ayudante.png";
 export default function Categories({ navigation }) {
   const [categories, setCategories] = React.useState([]);
 
   React.useEffect(() => {
     navigation.addListener("focus", () => {
-      checkSession();
+      checkSession(navigation);
       getCategories();
     });
   }, []);

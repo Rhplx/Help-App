@@ -59,7 +59,7 @@ export const DoubleInputWrapper = styled.View`
   align-items: center;
 `;
 export const GeneralImagePicker = styled.View`
-  background-color: #39b4bb;
+  background-color: ${(props) => (props.color ? props.color : "#39b4bb")};
   font-size: 18px;
   padding: 4px 18px;
   border-radius: 10px;
@@ -97,7 +97,7 @@ export const TermsRowCheckbox = styled.View`
   justify-content: center;
 `;
 export const RegisterButton = styled.Pressable`
-  background-color: #ef0e73;
+  background-color: ${(props) => (props.color ? props.color : "#ef0e73")};
   width: 100%;
   padding: 13px 20px;
   border-radius: 10px;
