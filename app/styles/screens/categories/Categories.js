@@ -39,7 +39,7 @@ export const CategoriesContent = styled.ScrollView`
 
 export const CategoriesCard = styled.Pressable`
   flex: 1;
-  max-width: 30%;
+  max-width: 33%;
   margin-bottom: 25px;
   align-items: center;
   text-align: center;

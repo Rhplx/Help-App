@@ -67,7 +67,7 @@ export default function People({ route, navigation }) {
     message: yup.string().required("Mensaje requerido")
   });
 
-  const handleMaximaze = (message) => () => {
+  const handleMaximize = (message) => () => {
     navigation.navigate("PeopleMessage", {
       id: 0,
       text,
@@ -172,7 +172,7 @@ export default function People({ route, navigation }) {
                     </Text>
                   )}
                   <PeopleActions>
-                    <PeopleButton icon onPress={handleMaximaze(values.message)}>
+                    <PeopleButton icon onPress={handleMaximize(values.message)}>
                       <PeopleButtonIcon source={MaximizeIcon} />
                     </PeopleButton>
                     <PeopleButton onPress={handleSubmit}>

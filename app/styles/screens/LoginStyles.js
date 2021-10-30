@@ -50,8 +50,8 @@ export const ButtonLink = styled(Link)`
 export const ButtonText = styled.Text`
   font-family: "Roboto_700Bold";
   color: white;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 18px;
   text-transform: uppercase;
   text-align: center;
 `;

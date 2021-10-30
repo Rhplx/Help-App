@@ -107,12 +107,11 @@ export default function CategoriesPeople({ route, navigation }) {
             <CategoriesPeopleCardImage source={{ uri: icon }} />
             <CategoriesPeopleCardContent>
               <CategoriesPeopleTitle>{text}</CategoriesPeopleTitle>
-              <CategoriesPeopleText>
-                Selecciona alguna persona
-              </CategoriesPeopleText>
             </CategoriesPeopleCardContent>
           </CategoriesPeopleCard>
+          <CategoriesPeopleText>Selecciona alguna persona</CategoriesPeopleText>
           <CategoriesPeopleList
+            nestedScrollEnabled
             data={providers}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (

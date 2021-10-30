@@ -24,7 +24,7 @@ export const SubCatCardImage = styled.Image`
 
 export const SubCatCardContent = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 export const SubCategoriesTitle = styled.Text`
@@ -34,6 +34,7 @@ export const SubCategoriesTitle = styled.Text`
   font-size: 24px;
   line-height: 29px;
   justify-content: flex-start;
+  margin-top: 8px;
 `;
 
 export const SubCategoriesText = styled.Text`
