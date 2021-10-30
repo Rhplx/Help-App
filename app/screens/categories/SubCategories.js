@@ -22,7 +22,7 @@ import {
   SubCategoriesList,
   SubCategoriesListLink,
   SubCategoriesListText,
-  SubCategoriesLink
+  SubCategoriesLink,
 } from "../../styles/screens/categories/SubCategories";
 import Terms from "../../components/Terms";
 
@@ -46,8 +46,8 @@ export default function SubCategories({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId
-      }
+        Authorization: "Bearer " + sessionId,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -59,8 +59,8 @@ export default function SubCategories({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -71,14 +71,14 @@ export default function SubCategories({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   const handleChoosePeople = (item) => () => {
     navigation.navigate("CategoriesPeople", {
       id: item.id,
       text: item.name,
-      icon: icon
+      icon: item.icon,
     });
   };
 
