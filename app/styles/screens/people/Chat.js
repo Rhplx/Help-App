@@ -18,7 +18,7 @@ export const ChatWrapper = styled.ScrollView`
 export const ChatRow = styled.View`
   flex-direction: row;
   justify-content: ${(props) => (props.left ? "flex-end" : "flex-start")};
-  margin: 7px 0;
+  margin: 0;
 `;
 export const ChatTextWrapper = styled.View`
   width: 80%;
