@@ -52,15 +52,23 @@ export const SendInput = styled.TextInput`
   line-height: 18px;
   border-radius: 10px;
   padding: 10px;
-  width: 80%;
+  width: 60%;
 `;
 export const SendButton = styled.Pressable`
   border-radius: 10px;
   background: #ef0e73;
-  width: 15%;
+  width: 35%;
   justify-content: center;
   align-items: center;
   padding: 10px 0;
+  flex-direction: row;
+`;
+export const SendText = styled.Text`
+  font-family: "Roboto_400Regular";
+  font-size: 14px;
+  line-height: 18px;
+  color: white;
+  margin-right: 10px;
 `;
 export const SendIcon = styled.Image`
   width: 17px;

@@ -48,26 +48,34 @@ export const SubCategoriesText = styled.Text`
 export const SubCategoriesList = styled.FlatList`
   width: 100%;
   max-height: 65%;
-  padding: 15px 16px;
+  padding: 15px 26px;
   margin-bottom: 10px;
+  margin-top: 30px;
 `;
 
 export const SubCategoriesListLink = styled.Pressable`
   width: 100%;
-  max-width: 300px;
   margin: 0 auto 20px;
-  padding: 14px;
+  padding: 0 20px 0 0;
   background-color: #39b4bb;
   border-radius: 10px;
   align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
 `;
-
+export const SubCategoriesIcon = styled.Image`
+  width: 55px;
+  height: 55px;
+  resize-mode: contain;
+  margin-right: 15px;
+`;
 export const SubCategoriesListText = styled.Text`
   font-family: "Roboto_700Bold";
   color: #ffffff;
   font-size: 18px;
   line-height: 21px;
-  text-align: center;
+  text-align: left;
+  width: 75%;
 `;
 
 export const SubCategoriesLink = styled(Link)`

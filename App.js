@@ -25,7 +25,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Chat"
+        initialRouteName="Login"
         screenOptions={{
           headerShown: false
         }}

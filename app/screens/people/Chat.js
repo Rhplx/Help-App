@@ -16,6 +16,7 @@ import {
   SendWrapper,
   SendInput,
   SendButton,
+  SendText,
   SendIcon
 } from "../../styles/screens/people/Chat";
 // Assets and fonts
@@ -49,7 +50,7 @@ export default function PeopleReview({ route, navigation }) {
                   sapien lectus, commodo pretium bibendum eget, consequat a
                   neque.
                 </ChatText>
-                <ChatDate>10/10/20</ChatDate>
+                <ChatDate>11:20PM - 10/10/20</ChatDate>
               </ChatTextWrapper>
             </ChatRow>
             <ChatRow>
@@ -60,7 +61,7 @@ export default function PeopleReview({ route, navigation }) {
                   sapien lectus, commodo pretium bibendum eget, consequat a
                   neque.
                 </ChatText>
-                <ChatDate>10/10/20</ChatDate>
+                <ChatDate>11:20PM - 10/10/20</ChatDate>
               </ChatTextWrapper>
             </ChatRow>
           </ChatWrapper>
@@ -68,6 +69,7 @@ export default function PeopleReview({ route, navigation }) {
         <SendWrapper>
           <SendInput placeholder="Escribe tu mensaje" multilinea />
           <SendButton>
+            <SendText>Enviar</SendText>
             <SendIcon source={SendImage} />
           </SendButton>
         </SendWrapper>

@@ -23,6 +23,7 @@ import {
   SubCategoriesListLink,
   SubCategoriesListText,
   SubCategoriesLink,
+  SubCategoriesIcon
 } from "../../styles/screens/categories/SubCategories";
 import Terms from "../../components/Terms";
 
@@ -46,8 +47,8 @@ export default function SubCategories({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId,
-      },
+        Authorization: "Bearer " + sessionId
+      }
     })
       .then((res) => res.json())
       .then((response) => {
@@ -59,8 +60,8 @@ export default function SubCategories({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -71,14 +72,14 @@ export default function SubCategories({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   const handleChoosePeople = (item) => () => {
     navigation.navigate("CategoriesPeople", {
       id: item.id,
       text: item.name,
-      icon: item.icon,
+      icon: item.icon
     });
   };
 
@@ -94,17 +95,22 @@ export default function SubCategories({ route, navigation }) {
           <SubCatCard>
             <SubCatCardImage source={{ uri: icon }} />
             <SubCatCardContent>
-              <SubCategoriesTitle>{text}</SubCategoriesTitle>
+              <SubCategoriesTitle>
+                {text} texto largo texto largo texto largo texto largo texto
+                largo
+              </SubCategoriesTitle>
             </SubCatCardContent>
           </SubCatCard>
           <SubCategoriesText>
             Selecciona el servicio que necesitas
           </SubCategoriesText>
           <SubCategoriesList
+            nestedScrollEnabled
             data={subcategories}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
               <SubCategoriesListLink onPress={handleChoosePeople(item)}>
+                <SubCategoriesIcon source={{ uri: item.icon }} />
                 <SubCategoriesListText>{item.name}</SubCategoriesListText>
               </SubCategoriesListLink>
             )}
