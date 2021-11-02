@@ -19,7 +19,7 @@ export default function Header({ children, signout }) {
 
   const handlePress = () => {
     if (signout) {
-      clearAsyncStorage(navigation)
+      clearAsyncStorage(navigation);
     } else {
       navigation.goBack();
     }
@@ -30,12 +30,15 @@ export default function Header({ children, signout }) {
       <BackButton onPress={handlePress}>
         <BackImage source={signout ? SignoutIcon : BackIcon} />
       </BackButton>
-      <HeaderLogo source={Logo} style={[{
-        transform: [{ translateX: -60 }]
-      }]} />
-      {children ? children : (
-        <HeaderSpace />
-      )}
+      <HeaderLogo
+        source={Logo}
+        style={[
+          {
+            transform: [{ translateX: -60 }],
+          },
+        ]}
+      />
+      {children ? children : <HeaderSpace />}
     </HeaderContainer>
   );
 }

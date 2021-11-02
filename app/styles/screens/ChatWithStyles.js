@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const ChatGeneral = styled.View`
   margin: 30px 0;
 `;
-export const ChatWrapper = styled.View`
+export const ChatWrapper = styled.Pressable`
   border-radius: 12px;
   width: 100%;
   overflow: hidden;
@@ -22,7 +22,7 @@ export const ChatTitle = styled.Text`
   padding: 15px 10px;
 `;
 export const ChatSubtitleWrapper = styled.View`
-  background-color: #7d093d;
+  background-color: ${(props) => (props.pink ? "#7d093d" : "#245751")};
 `;
 export const ChatSubtitle = styled.Text`
   font-family: "Roboto_400Regular";

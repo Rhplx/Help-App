@@ -37,7 +37,7 @@ export const ProfileInfo = styled.View`
 `;
 export const ProfilePlansBox = styled.Pressable`
   border-radius: 12px;
-  width: 45%;
+  width: ${(props) => (props.double ? "90%" : "45%")};
   margin-bottom: 20px;
 `;
 export const PlansBoxTitleWrapper = styled.View`

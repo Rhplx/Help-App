@@ -84,7 +84,7 @@ export const PeopleReviewsText = styled.Text`
   text-transform: uppercase;
 `;
 export const PeopleReviewsStars = styled.View`
-  width: 75%;
+  width: ${(props) => props.width || "75%"};
   padding: 3px;
   background-color: #245751;
   border-bottom-right-radius: 10px;
@@ -101,7 +101,7 @@ export const PeopleReviewsStar = styled.Image`
 `;
 export const PeopleServices = styled.FlatList`
   width: 50%;
-  max-height: 160px;
+  max-height: 250px;
 `;
 export const PeopleService = styled.Text`
   width: 100%;
@@ -173,7 +173,7 @@ export const PeopleReviewRow = styled.View`
   margin: 20px 0 0;
 `;
 export const PeopleReviewStars = styled.View`
-  width: 25%;
+  width: 28%;
   background-color: #4eaba1;
   padding: 5px;
   border-bottom-right-radius: 10px;
@@ -187,8 +187,8 @@ export const PeopleReviewName = styled.View`
   padding: 5px 20px;
 `;
 export const PeopleReviewNameText = styled.Text`
-  font-size: 14px;
-  line-height: 19px;
+  font-size: 16px;
+  line-height: 24px;
   font-family: "Roboto_700Bold";
   color: white;
 `;

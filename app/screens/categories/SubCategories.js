@@ -1,7 +1,7 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
+import { Alert } from "react-native";
 
 // External Imports
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,10 +22,8 @@ import {
   SubCategoriesList,
   SubCategoriesListLink,
   SubCategoriesListText,
-  SubCategoriesLink,
-  SubCategoriesIcon
+  SubCategoriesIcon,
 } from "../../styles/screens/categories/SubCategories";
-import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -47,8 +45,8 @@ export default function SubCategories({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Subservice?service=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId
-      }
+        Authorization: "Bearer " + sessionId,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -60,8 +58,8 @@ export default function SubCategories({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -72,14 +70,14 @@ export default function SubCategories({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   const handleChoosePeople = (item) => () => {
     navigation.navigate("CategoriesPeople", {
       id: item.id,
       text: item.name,
-      icon: item.icon
+      icon: item.icon,
     });
   };
 
@@ -95,10 +93,7 @@ export default function SubCategories({ route, navigation }) {
           <SubCatCard>
             <SubCatCardImage source={{ uri: icon }} />
             <SubCatCardContent>
-              <SubCategoriesTitle>
-                {text} texto largo texto largo texto largo texto largo texto
-                largo
-              </SubCategoriesTitle>
+              <SubCategoriesTitle>{text}</SubCategoriesTitle>
             </SubCatCardContent>
           </SubCatCard>
           <SubCategoriesText>

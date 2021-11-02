@@ -1,6 +1,11 @@
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
+import { Text, Alert } from "react-native";
+
+// External Imports
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearAsyncStorage } from "../../common/syncStorage";
+import { checkSession, getBaseApi } from "../../common/functions";
 
 // Third Party Imports
 import { Formik } from "formik";
@@ -10,7 +15,6 @@ import * as yup from "yup";
 import Layout from "../Layout";
 import Header from "../../components/Header";
 import MessageButton from "../../components/MessageButton";
-import Terms from "../../components/Terms";
 import {
   PeopleSubtitle,
   PeopleHeader,
@@ -32,13 +36,9 @@ import {
   PeopleButtonText,
   PeopleActions,
   PeopleButtonIcon,
-  PeopleContainer
+  PeopleContainer,
 } from "../../styles/screens/people/People";
-import {
-  GeneralInput,
-  GeneralTitle,
-  GeneralWrapper
-} from "../../styles/GeneralStyles";
+import { GeneralInput, GeneralTitle } from "../../styles/GeneralStyles";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -49,48 +49,110 @@ import StarIcon from "../../assets/start.png";
 import MaximizeIcon from "../../assets/iconMaximize.png";
 
 export default function People({ route, navigation }) {
-  const { text } = route.params;
+  const { name, id } = route.params;
+  const [provider, setProvider] = React.useState({});
 
-  const peopleServices = [
-    {
-      text: "SERVICIO QUE OFRECE SEGUNDA LÍNEA"
-    },
-    {
-      text: "SERVICIO QUE OFRECE"
-    },
-    {
-      text: "SERVICIO QUE OFRECE"
+  React.useEffect(() => {
+    navigation.addListener("focus", () => {
+      checkSession(navigation);
+      getProviderById();
+    });
+  }, []);
+
+  const getProviderById = async () => {
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    fetch(getBaseApi() + "/manage/Provider?provider=" + id, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + sessionId,
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          setProvider(response.data);
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          } else {
+            Alert.alert("Ooops :(", response.error, [
+              {
+                text: "Ok",
+              },
+            ]);
+          }
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const renderStars = () => {
+    let stars = [];
+    if (provider.reviews) {
+      for (let i = 0; i < provider.reviews.stars; i++) {
+        stars.push(<PeopleReviewsStar source={StarIcon} key={"start" + i} />);
+      }
     }
-  ];
+    return stars;
+  };
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido")
+    message: yup.string().required("Mensaje requerido"),
   });
 
+  const insertMessage = async (values, actions) => {
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    values["userTo"] = id;
+    fetch(getBaseApi() + "/manage/Message", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + sessionId,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          Alert.alert("Éxito", "Tu mensaje ha sido enviado");
+          actions.resetForm({ message: "" });
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          } else {
+            Alert.alert("Ooops :(", response.error);
+          }
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   const handleMaximize = (message) => () => {
-    navigation.navigate("PeopleMessage", {
-      id: 0,
-      text,
-      message
+    navigation.navigate("Chat", {
+      id: id,
+      name,
+      message,
     });
   };
 
   const handleSendReview = () => {
-    navigation.navigate("PeopleSendReview", {
-      id: 0
+    navigation.navigate("LeaveReview", {
+      id: id,
+      name,
     });
   };
 
   const handleViewReviews = () => {
-    navigation.navigate("PeopleReviews", {
-      id: 0
+    navigation.navigate("PeopleReview", {
+      id: id,
+      name,
     });
   };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -102,7 +164,7 @@ export default function People({ route, navigation }) {
           <MessageButton />
         </Header>
         <PeopleContainer>
-          <GeneralTitle>{text}</GeneralTitle>
+          <GeneralTitle>{name}</GeneralTitle>
           <PeopleSubtitle>
             Envíale un mensaje para solicitar sus servicios, o enviale un
             mensaje o enviarle un mensajes mediante WhatsApp
@@ -113,49 +175,42 @@ export default function People({ route, navigation }) {
                 <PeopleFavorite onPress={handleSendReview}>
                   <PeopleFavoriteIcon source={FavoriteIcon} />
                 </PeopleFavorite>
-                <PeopleImage source={PeopleIMG} />
-                <PeopleReviewsContainer onPress={handleViewReviews}>
-                  <PeopleReviews>
-                    <PeopleReviewsText>15 Reseñas</PeopleReviewsText>
-                  </PeopleReviews>
-                  <PeopleReviewsStars>
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                    <PeopleReviewsStar source={StarIcon} />
-                  </PeopleReviewsStars>
-                </PeopleReviewsContainer>
+                <PeopleImage
+                  source={
+                    provider.profileImage
+                      ? { uri: provider.profileImage }
+                      : PeopleIMG
+                  }
+                />
+                {provider.reviews && (
+                  <PeopleReviewsContainer onPress={handleViewReviews}>
+                    <PeopleReviews>
+                      <PeopleReviewsText>
+                        {provider.reviews.quantity} Reseña
+                        {provider.reviews.quantity > 1 && "s"}
+                      </PeopleReviewsText>
+                    </PeopleReviews>
+                    <PeopleReviewsStars>{renderStars()}</PeopleReviewsStars>
+                  </PeopleReviewsContainer>
+                )}
               </PeopleImageContent>
             </PeopleImageContainer>
             <PeopleServices
-              data={peopleServices}
-              keyExtractor={(item, index) => `${item.text}-${index}`}
+              data={provider.services}
+              keyExtractor={(item, index) => `${item.name}-${index}`}
               renderItem={({ item }) => (
-                <PeopleService>{item.text}</PeopleService>
+                <PeopleService>{item.name}</PeopleService>
               )}
             />
           </PeopleHeader>
-          <PeopleDescription>
-            Descripción breve, kiwi, piña y fugaz jamón. Fabio me exige, sin
-            tapujos, que añada ujos, que añada cerveza al whisky breve, kiwi,
-            piña y fugaz jamón. Que añada ujos, que añada cerveza al whisky
-            breve, kiwi, piña y fugaz jamón.
-          </PeopleDescription>
+          <PeopleDescription>{provider.details}</PeopleDescription>
           <PeopleContent>
             <Formik
               validationSchema={peopleMessageValidationSchema}
               initialValues={{ message: "" }}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={insertMessage}
             >
-              {({
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                values,
-                errors,
-                isValid
-              }) => (
+              {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                 <>
                   <GeneralInput
                     multiline
@@ -176,7 +231,7 @@ export default function People({ route, navigation }) {
                       <PeopleButtonIcon source={MaximizeIcon} />
                     </PeopleButton>
                     <PeopleButton onPress={handleSubmit}>
-                      <PeopleButtonText>Enviar mensage</PeopleButtonText>
+                      <PeopleButtonText>Enviar mensaje</PeopleButtonText>
                     </PeopleButton>
                   </PeopleActions>
                 </>

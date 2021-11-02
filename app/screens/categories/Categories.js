@@ -1,7 +1,7 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text, StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 
 // Third Party Imports
 import { checkSession, getBaseApi } from "../../common/functions";
@@ -22,13 +22,11 @@ import {
   CategoriesCardContent,
   CategoriesCardImage,
   CategoriesCardText,
-  CategoriesButton,
   CategoriesButtonLink,
   CategoriesActions,
   CategoriesButtonText,
-  CategoriesContent
+  CategoriesContent,
 } from "../../styles/screens/categories/Categories";
-import Terms from "../../components/Terms";
 
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -48,8 +46,8 @@ export default function Categories({ navigation }) {
     fetch(getBaseApi() + "/manage/Service", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId
-      }
+        Authorization: "Bearer " + sessionId,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -61,8 +59,8 @@ export default function Categories({ navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -73,14 +71,14 @@ export default function Categories({ navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   const handleChooseCategory = (subCategory) => () => {
     navigation.navigate("SubCategories", {
       id: subCategory.id,
       text: subCategory.name,
-      icon: subCategory.icon
+      icon: subCategory.icon,
     });
   };
 
@@ -124,327 +122,327 @@ export default function Categories({ navigation }) {
                 onValueChange={handleChangeCity}
                 placeholder={{
                   label: "Cambiar Ciudad",
-                  value: "ALL"
+                  value: "ALL",
                 }}
                 useNativeAndroidPickerStyle={false}
                 style={greenSelectStyles}
                 items={[
                   {
                     label: "Aguascalientes",
-                    value: "Aguascalientes"
+                    value: "Aguascalientes",
                   },
                   {
                     label: "Ensenada",
-                    value: "Ensenada"
+                    value: "Ensenada",
                   },
                   {
                     label: "Mexicali",
-                    value: "Mexicali"
+                    value: "Mexicali",
                   },
                   {
                     label: "Tijuana",
-                    value: "Tijuana"
+                    value: "Tijuana",
                   },
                   {
                     label: "La Paz",
-                    value: "La Paz"
+                    value: "La Paz",
                   },
                   {
                     label: "Los Cabos",
-                    value: "Los Cabos"
+                    value: "Los Cabos",
                   },
                   {
                     label: "Campeche",
-                    value: "Campeche"
+                    value: "Campeche",
                   },
                   {
                     label: "Ciudad del Carmen",
-                    value: "Ciudad del Carmen"
+                    value: "Ciudad del Carmen",
                   },
                   {
                     label: "Saltillo",
-                    value: "Saltillo"
+                    value: "Saltillo",
                   },
                   {
                     label: "Monclova-Frontera",
-                    value: "Monclova-Frontera"
+                    value: "Monclova-Frontera",
                   },
                   {
                     label: "La Laguna",
-                    value: "La Laguna"
+                    value: "La Laguna",
                   },
                   {
                     label: "Piedras Negras",
-                    value: "Piedras Negras"
+                    value: "Piedras Negras",
                   },
                   {
                     label: "Tecomán",
-                    value: "Tecomán"
+                    value: "Tecomán",
                   },
                   {
                     label: "Colima-Villa de Álvarez",
-                    value: "Colima-Villa de Álvarez"
+                    value: "Colima-Villa de Álvarez",
                   },
                   {
                     label: "Manzanillo",
-                    value: "Manzanillo"
+                    value: "Manzanillo",
                   },
                   {
                     label: "Tuxtla Gutiérrez",
-                    value: "Tuxtla Gutiérrez"
+                    value: "Tuxtla Gutiérrez",
                   },
                   {
                     label: "Tapachula",
-                    value: "Tapachula"
+                    value: "Tapachula",
                   },
                   {
                     label: "Chihuahua",
-                    value: "Chihuahua"
+                    value: "Chihuahua",
                   },
                   {
                     label: "Juárez",
-                    value: "Juárez"
+                    value: "Juárez",
                   },
                   {
                     label: "Valle de México",
-                    value: "Valle de México"
+                    value: "Valle de México",
                   },
                   {
                     label: "Durango",
-                    value: "Durango"
+                    value: "Durango",
                   },
                   {
                     label: "Celaya",
-                    value: "Celaya"
+                    value: "Celaya",
                   },
                   {
                     label: "Guanajuato",
-                    value: "Guanajuato"
+                    value: "Guanajuato",
                   },
                   {
                     label: "Irapuato",
-                    value: "Irapuato"
+                    value: "Irapuato",
                   },
                   {
                     label: "León",
-                    value: "León"
+                    value: "León",
                   },
                   {
                     label: "La Piedad-Pénjamo",
-                    value: "La Piedad-Pénjamo"
+                    value: "La Piedad-Pénjamo",
                   },
                   {
                     label: "San Francisco del Rincón",
-                    value: "San Francisco del Rincón"
+                    value: "San Francisco del Rincón",
                   },
                   {
                     label: "Salamanca",
-                    value: "Salamanca"
+                    value: "Salamanca",
                   },
                   {
                     label: "Acapulco",
-                    value: "Acapulco"
+                    value: "Acapulco",
                   },
                   {
                     label: "Chilpancingo",
-                    value: "Chilpancingo"
+                    value: "Chilpancingo",
                   },
                   {
                     label: "Tula",
-                    value: "Tula"
+                    value: "Tula",
                   },
                   {
                     label: "Tulancingo",
-                    value: "Tulancingo"
+                    value: "Tulancingo",
                   },
                   {
                     label: "Pachuca",
-                    value: "Pachuca"
+                    value: "Pachuca",
                   },
                   {
                     label: "Guadalajara",
-                    value: "Guadalajara"
+                    value: "Guadalajara",
                   },
                   {
                     label: "Ocotlán",
-                    value: "Ocotlán"
+                    value: "Ocotlán",
                   },
                   {
                     label: "Puerto Vallarta",
-                    value: "Puerto Vallarta"
+                    value: "Puerto Vallarta",
                   },
                   {
                     label: "Toluca",
-                    value: "Toluca"
+                    value: "Toluca",
                   },
                   {
                     label: "Zamora-Jacona",
-                    value: "Zamora-Jacona"
+                    value: "Zamora-Jacona",
                   },
                   {
                     label: "Morelia",
-                    value: "Morelia"
+                    value: "Morelia",
                   },
                   {
                     label: "Uruapan",
-                    value: "Uruapan"
+                    value: "Uruapan",
                   },
                   {
                     label: "Cuautla",
-                    value: "Cuautla"
+                    value: "Cuautla",
                   },
                   {
                     label: "Cuernavaca",
-                    value: "Cuernavaca"
+                    value: "Cuernavaca",
                   },
                   {
                     label: "Tepic",
-                    value: "Tepic"
+                    value: "Tepic",
                   },
                   {
                     label: "Monterrey",
-                    value: "Monterrey"
+                    value: "Monterrey",
                   },
                   {
                     label: "Oaxaca",
-                    value: "Oaxaca"
+                    value: "Oaxaca",
                   },
                   {
                     label: "Tehuantepec-Salina Cruz",
-                    value: "Tehuantepec-Salina Cruz"
+                    value: "Tehuantepec-Salina Cruz",
                   },
                   {
                     label: "Puebla-Tlaxcala",
-                    value: "Puebla-Tlaxcala"
+                    value: "Puebla-Tlaxcala",
                   },
                   {
                     label: "Tehuacán",
-                    value: "Tehuacán"
+                    value: "Tehuacán",
                   },
                   {
                     label: "Querétaro",
-                    value: "Querétaro"
+                    value: "Querétaro",
                   },
                   {
                     label: "San Juan del Río",
-                    value: "San Juan del Río"
+                    value: "San Juan del Río",
                   },
                   {
                     label: "Cancún",
-                    value: "Cancún"
+                    value: "Cancún",
                   },
                   {
                     label: "Chetumal",
-                    value: "Chetumal"
+                    value: "Chetumal",
                   },
                   {
                     label: "Ciudad Valles",
-                    value: "Ciudad Valles"
+                    value: "Ciudad Valles",
                   },
                   {
                     label: "Rioverde",
-                    value: "Rioverde"
+                    value: "Rioverde",
                   },
                   {
                     label: "San Luis Potosí",
-                    value: "San Luis Potosí"
+                    value: "San Luis Potosí",
                   },
                   {
                     label: "Soledad",
-                    value: "Soledad"
+                    value: "Soledad",
                   },
                   {
                     label: "Los Mochis",
-                    value: "Los Mochis"
+                    value: "Los Mochis",
                   },
                   {
                     label: "Culiacán",
-                    value: "Culiacán"
+                    value: "Culiacán",
                   },
                   {
                     label: "Mazatlán",
-                    value: "Mazatlán"
+                    value: "Mazatlán",
                   },
                   {
                     label: "Ciudad Obregón",
-                    value: "Ciudad Obregón"
+                    value: "Ciudad Obregón",
                   },
                   {
                     label: "Guaymas",
-                    value: "Guaymas"
+                    value: "Guaymas",
                   },
                   {
                     label: "Hermosillo",
-                    value: "Hermosillo"
+                    value: "Hermosillo",
                   },
                   {
                     label: "Cárdenas",
-                    value: "Cárdenas"
+                    value: "Cárdenas",
                   },
                   {
                     label: "Villahermosa",
-                    value: "Villahermosa"
+                    value: "Villahermosa",
                   },
                   {
                     label: "Tampico-Pánuco",
-                    value: "Tampico-Pánuco"
+                    value: "Tampico-Pánuco",
                   },
                   {
                     label: "Matamoros",
-                    value: "Matamoros"
+                    value: "Matamoros",
                   },
                   {
                     label: "Nuevo Laredo",
-                    value: "Nuevo Laredo"
+                    value: "Nuevo Laredo",
                   },
                   {
                     label: "Reynosa-Río Bravo",
-                    value: "Reynosa-Río Bravo"
+                    value: "Reynosa-Río Bravo",
                   },
                   {
                     label: "Ciudad Victoria",
-                    value: "Ciudad Victoria"
+                    value: "Ciudad Victoria",
                   },
                   {
                     label: "Tlaxcala-Apizaco",
-                    value: "Tlaxcala-Apizaco"
+                    value: "Tlaxcala-Apizaco",
                   },
                   {
                     label: "Veracruz",
-                    value: "Veracruz"
+                    value: "Veracruz",
                   },
                   {
                     label: "Córdoba",
-                    value: "Córdoba"
+                    value: "Córdoba",
                   },
                   {
                     label: "Orizaba",
-                    value: "Orizaba"
+                    value: "Orizaba",
                   },
                   {
                     label: "Xalapa",
-                    value: "Xalapa"
+                    value: "Xalapa",
                   },
                   {
                     label: "Poza Rica",
-                    value: "Poza Rica"
+                    value: "Poza Rica",
                   },
                   {
                     label: "Coatzacoalcos",
-                    value: "Coatzacoalcos"
+                    value: "Coatzacoalcos",
                   },
                   {
                     label: "Minatitlán",
-                    value: "Minatitlán"
+                    value: "Minatitlán",
                   },
                   {
                     label: "Mérida",
-                    value: "Mérida"
+                    value: "Mérida",
                   },
                   {
                     label: "Zacatecas-Guadalupe",
-                    value: "Zacatecas-Guadalupe"
-                  }
+                    value: "Zacatecas-Guadalupe",
+                  },
                 ]}
               />
             </CategoriesActions>
@@ -462,7 +460,7 @@ const greenSelectStyles = StyleSheet.create({
     fontSize: 18,
     padding: 8,
     borderRadius: 10,
-    textAlign: "center"
+    textAlign: "center",
   },
   inputAndroid: {
     width: "100%",
@@ -472,6 +470,6 @@ const greenSelectStyles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 21,
     borderRadius: 10,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

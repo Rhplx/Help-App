@@ -317,6 +317,17 @@ export default function Profile({ route, navigation }) {
       .catch((error) => console.log("error", error));
   };
 
+  const handleChatWith = () => {
+    navigation.navigate("ChatWith");
+  };
+
+  const handleReviews = () => {
+    navigation.navigate("PeopleReview", {
+      id: userData.id,
+      name: userData.name,
+    });
+  };
+
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
@@ -340,7 +351,10 @@ export default function Profile({ route, navigation }) {
           </ProfileHeader>
           <GeneralSubtitle>Tus datos, chats y reseñas</GeneralSubtitle>
           <ProfileInfo>
-            <ProfilePlansBox>
+            <ProfilePlansBox
+              onPress={handleChatWith}
+              double={!(userData.userType !== 1)}
+            >
               <PlansBoxTitleWrapper pink>
                 <PlansBoxTitle>Mis chats</PlansBoxTitle>
               </PlansBoxTitleWrapper>
@@ -348,16 +362,18 @@ export default function Profile({ route, navigation }) {
                 <PlansBoxTitle>{userData.chats} chats</PlansBoxTitle>
               </PlansBoxSubtitleWrapper>
             </ProfilePlansBox>
-            <ProfilePlansBox>
-              <PlansBoxTitleWrapperTwo>
-                <PlansBoxTitle>Mis reseñas</PlansBoxTitle>
-              </PlansBoxTitleWrapperTwo>
-              <PlansBoxSubtitleWrapperTwo>
-                <PlansBoxTitle>
-                  {userData.reviews && userData.reviews.quantity} reseñas
-                </PlansBoxTitle>
-              </PlansBoxSubtitleWrapperTwo>
-            </ProfilePlansBox>
+            {userData.userType !== 1 && (
+              <ProfilePlansBox onPress={handleReviews}>
+                <PlansBoxTitleWrapperTwo>
+                  <PlansBoxTitle>Mis reseñas</PlansBoxTitle>
+                </PlansBoxTitleWrapperTwo>
+                <PlansBoxSubtitleWrapperTwo>
+                  <PlansBoxTitle>
+                    {userData.reviews && userData.reviews.quantity} reseñas
+                  </PlansBoxTitle>
+                </PlansBoxSubtitleWrapperTwo>
+              </ProfilePlansBox>
+            )}
           </ProfileInfo>
           {userData.userType !== 1 && (
             <ProfilePlan>

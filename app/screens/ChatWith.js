@@ -1,6 +1,12 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
+import { Alert } from "react-native";
+
+// External Imports
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearAsyncStorage } from "../common/syncStorage";
+import { checkSession, getBaseApi } from "../common/functions";
 
 // Third Party Imports
 
@@ -25,7 +31,68 @@ import {
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function ChatWith() {
+export default function ChatWith({ navigation }) {
+  const [chats, setChats] = React.useState([]);
+
+  React.useEffect(() => {
+    navigation.addListener("focus", () => {
+      checkSession(navigation);
+      getChats();
+    });
+  }, []);
+
+  const getChats = async () => {
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    fetch(getBaseApi() + "/manage/Message", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + sessionId,
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          setChats(response.data);
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          } else {
+            Alert.alert("Ooops :(", response.error, [
+              {
+                text: "Ok",
+              },
+            ]);
+          }
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const handleChat = (id, name) => {
+    navigation.navigate("Chat", {
+      id: id,
+      name,
+    });
+  };
+
+  const renderChats = () => {
+    return chats.map((item, index) => {
+      return (
+        <ChatWrapper
+          key={"chat" + index}
+          onPress={() => handleChat(item.idUserFrom, item.fullName)}
+        >
+          <ChatTitleWrapper pink={index === 0}>
+            <ChatTitle>Chatear con {item.fullName}</ChatTitle>
+          </ChatTitleWrapper>
+          <ChatSubtitleWrapper pink={index === 0}>
+            <ChatSubtitle>Último mensaje: {item.insertDate}</ChatSubtitle>
+          </ChatSubtitleWrapper>
+        </ChatWrapper>
+      );
+    });
+  };
+
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
@@ -44,23 +111,7 @@ export default function ChatWith() {
             Escríbele a las personas que te escribieron para solicitar tus
             servicios
           </GeneralSubtitle>
-          <ChatGeneral>
-            <ChatWrapper>
-              <ChatTitleWrapper pink>
-                <ChatTitle>Chatear con “Nombre de la Persona”</ChatTitle>
-              </ChatTitleWrapper>
-              <ChatSubtitleWrapper>
-                <ChatSubtitle>
-                  Último mensaje: 25/08/21 - 15:32 hrs
-                </ChatSubtitle>
-              </ChatSubtitleWrapper>
-            </ChatWrapper>
-            <ChatWrapper>
-              <ChatTitleWrapper>
-                <ChatTitle>Chatear con “Nombre de la Persona”</ChatTitle>
-              </ChatTitleWrapper>
-            </ChatWrapper>
-          </ChatGeneral>
+          <ChatGeneral>{renderChats()}</ChatGeneral>
         </GeneralWrapper>
       </Layout>
     );
