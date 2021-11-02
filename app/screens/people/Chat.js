@@ -20,6 +20,7 @@ import {
   ChatTitle,
   ChatWrapper,
   ChatRow,
+  ChatRowLeft,
   ChatTextWrapper,
   ChatText,
   ChatDate,
@@ -47,7 +48,6 @@ export default function PeopleReview({ route, navigation }) {
 
   const getChatMessages = async () => {
     let sessionId = await AsyncStorage.getItem("sessionId");
-    console.log(id);
     fetch(getBaseApi() + "/manage/Message?user=" + id, {
       method: "GET",
       headers: {
@@ -105,8 +105,17 @@ export default function PeopleReview({ route, navigation }) {
 
   const renderMessages = () => {
     return messages.map((item, index) => {
+      if (item.ufrom !== id) {
+        return (
+          <ChatRowLeft key={"message" + index}>
+            <ChatTextWrapper>
+              <ChatText>{item.message}</ChatText>
+              <ChatDate>{item.insertDate}</ChatDate>
+            </ChatTextWrapper>
+          </ChatRowLeft>
+        );
+      }
       return (
-        //al arreglar prop left usar left={ufrom !== id}
         <ChatRow key={"message" + index}>
           <ChatTextWrapper>
             <ChatText>{item.message}</ChatText>

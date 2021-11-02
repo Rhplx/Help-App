@@ -98,7 +98,7 @@ export default function CategoriesPeople({ route, navigation }) {
     return (
       <Layout>
         <Header>
-          <UserButton />
+          <UserButton navigation={navigation} />
         </Header>
         <CategoriesPeopleContainer>
           <CategoriesPeopleCard>

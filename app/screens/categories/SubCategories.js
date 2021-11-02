@@ -87,7 +87,7 @@ export default function SubCategories({ route, navigation }) {
     return (
       <Layout>
         <Header>
-          <UserButton />
+          <UserButton navigation={navigation} />
         </Header>
         <SubCategoriesContainer>
           <SubCatCard>

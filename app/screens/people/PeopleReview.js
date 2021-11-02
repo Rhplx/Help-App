@@ -108,7 +108,7 @@ export default function PeopleReview({ route, navigation }) {
     return (
       <Layout>
         <Header>
-          <UserButton />
+          <UserButton navigation={navigation} />
         </Header>
         <PeopleContainer>
           <GeneralTitle>{name}</GeneralTitle>
