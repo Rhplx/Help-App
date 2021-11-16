@@ -29,7 +29,7 @@ import {
   GeneralTitle,
 } from "../../styles/GeneralStyles";
 
-export default function ProposeService() {
+export default function ProposeService({ navigation }) {
   const proposeValidationSchema = yup.object().shape({
     profesion: yup.string().required("Profesión requerida"),
     description: yup.string().required("Descripción requerida"),
@@ -56,7 +56,9 @@ export default function ProposeService() {
           <Formik
             validationSchema={proposeValidationSchema}
             initialValues={{ profesion: "", description: "", comments: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values, actions) => {
+              actions.resetForm();
+            }}
           >
             {({
               handleChange,

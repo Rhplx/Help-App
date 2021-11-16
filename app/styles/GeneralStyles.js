@@ -58,16 +58,16 @@ export const DoubleInputWrapper = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
-export const GeneralImagePicker = styled.View`
+export const GeneralImagePicker = styled.Pressable`
   background-color: ${(props) => (props.color ? props.color : "#39b4bb")};
-  font-size: 18px;
-  padding: 4px 18px;
-  border-radius: 10px;
-  min-height: 50px;
   margin-top: 10px;
-  text-align: center;
+  border-radius: 10px;
 `;
-export const GeneralImagePickerText = styled.Button`
+export const GeneralImagePickerText = styled.Text`
+  padding: 12px 16px;
+  min-height: 50px;
+  font-size: 18px;
+  text-align: center;
   color: white;
 `;
 export const FreeAdviceText = styled.Text`

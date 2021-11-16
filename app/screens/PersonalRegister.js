@@ -15,7 +15,6 @@ import { getBaseApi, getCities } from "../common/functions";
 import { Text, Platform, View } from "react-native";
 import Layout from "./Layout";
 import Header from "../components/Header";
-import PaypalPlan from "../components/PaypalPlan";
 
 import {
   GeneralWrapper,
@@ -31,7 +30,7 @@ import {
   TermsRowText,
   TermsRowCheckbox,
   RegisterButton,
-  RegisterButtonText
+  RegisterButtonText,
 } from "../styles/GeneralStyles";
 
 // Assets and fonts
@@ -74,7 +73,7 @@ export default function PersonalRegister({ navigation }) {
       .required("WhatsApp requerido"),
     state: yup.string().required("Estado requerido"),
     city: yup.string().required("Ciudad requerida"),
-    details: yup.string().required("Descripcion requerida")
+    details: yup.string().required("Descripcion requerida"),
   });
   const whiteSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -88,7 +87,7 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -101,8 +100,8 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   });
   const greenSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -117,7 +116,7 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
     },
     inputAndroid: {
       backgroundColor: "#39B4BB",
@@ -131,21 +130,21 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   });
   const statePlaceholder = {
     label: "Estado",
-    value: ""
+    value: "",
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: ""
+    value: "",
   };
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: "",
-    color: "#ffffff"
+    color: "#ffffff",
   };
 
   React.useEffect(() => {
@@ -168,7 +167,7 @@ export default function PersonalRegister({ navigation }) {
 
   const getSubCategories = () => {
     fetch(getBaseApi() + '/manage/Catalogues?catalogues=["subservices"]', {
-      method: "GET"
+      method: "GET",
     })
       .then((res) => res.json())
       .then((response) => {
@@ -186,7 +185,7 @@ export default function PersonalRegister({ navigation }) {
       png: "image/png",
       pdf: "application/json",
       jpeg: "image/jpeg",
-      jpg: "image/jpg"
+      jpg: "image/jpg",
     };
     let extention = name.split(".")[1];
     if (allow[extention] !== undefined) {
@@ -201,7 +200,7 @@ export default function PersonalRegister({ navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 4],
-      quality: 1
+      quality: 1,
     });
     let localUri = result.uri;
     let filename = localUri.split("/").pop();
@@ -239,9 +238,9 @@ export default function PersonalRegister({ navigation }) {
       fetch(getBaseApi() + "/manage/User", {
         method: "POST",
         headers: {
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       })
         .then((res) => res.json())
         .then((response) => {
@@ -255,8 +254,8 @@ export default function PersonalRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  "content-type": "multipart/form-data"
-                }
+                  "content-type": "multipart/form-data",
+                },
               })
                 .then((res) => res.json())
                 .then((response) => {
@@ -275,8 +274,8 @@ export default function PersonalRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  "content-type": "multipart/form-data"
-                }
+                  "content-type": "multipart/form-data",
+                },
               })
                 .then((res) => res.json())
                 .then((response) => {
@@ -304,7 +303,7 @@ export default function PersonalRegister({ navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -330,7 +329,7 @@ export default function PersonalRegister({ navigation }) {
                 whatsapp: "",
                 state: "",
                 city: "",
-                details: ""
+                details: "",
               }}
               onSubmit={insertProvider}
             >
@@ -340,7 +339,7 @@ export default function PersonalRegister({ navigation }) {
                 handleSubmit,
                 values,
                 errors,
-                isValid
+                isValid,
               }) => (
                 <>
                   <GeneralInput
@@ -431,138 +430,138 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={[
                       {
                         value: "Zacatecas",
-                        label: "Zacatecas"
+                        label: "Zacatecas",
                       },
                       {
                         value: "Aguascalientes",
-                        label: "Aguascalientes"
+                        label: "Aguascalientes",
                       },
                       {
                         value: "Tamaulipas",
-                        label: "Tamaulipas"
+                        label: "Tamaulipas",
                       },
                       {
                         value: "Jalisco",
-                        label: "Jalisco"
+                        label: "Jalisco",
                       },
                       {
                         value: "Nayarit",
-                        label: "Nayarit"
+                        label: "Nayarit",
                       },
                       {
                         value: "Oaxaca",
-                        label: "Oaxaca"
+                        label: "Oaxaca",
                       },
                       {
                         value: "Sonora",
-                        label: "Sonora"
+                        label: "Sonora",
                       },
                       {
                         value: "Nuevo León",
-                        label: "Nuevo León"
+                        label: "Nuevo León",
                       },
                       {
                         value: "Chihuahua",
-                        label: "Chihuahua"
+                        label: "Chihuahua",
                       },
                       {
                         value: "Guanajuato",
-                        label: "Guanajuato"
+                        label: "Guanajuato",
                       },
                       {
                         value: "Guerrero",
-                        label: "Guerrero"
+                        label: "Guerrero",
                       },
                       {
                         value: "Hidalgo",
-                        label: "Hidalgo"
+                        label: "Hidalgo",
                       },
                       {
                         value: "San Luis Potosí",
-                        label: "San Luis Potosí"
+                        label: "San Luis Potosí",
                       },
                       {
                         value: "Sinaloa",
-                        label: "Sinaloa"
+                        label: "Sinaloa",
                       },
                       {
                         value: "Colima",
-                        label: "Colima"
+                        label: "Colima",
                       },
                       {
                         value: "Distrito Federal",
-                        label: "Distrito Federal"
+                        label: "Distrito Federal",
                       },
                       {
                         value: "Baja California Sur",
-                        label: "Baja California Sur"
+                        label: "Baja California Sur",
                       },
                       {
                         value: "Morelos",
-                        label: "Morelos"
+                        label: "Morelos",
                       },
                       {
                         value: "Quintana Roo",
-                        label: "Quintana Roo"
+                        label: "Quintana Roo",
                       },
                       {
                         value: "México",
-                        label: "México"
+                        label: "México",
                       },
                       {
                         value: "Michoacán de Ocampo",
-                        label: "Michoacán de Ocampo"
+                        label: "Michoacán de Ocampo",
                       },
                       {
                         value: "Puebla",
-                        label: "Puebla"
+                        label: "Puebla",
                       },
                       {
                         value: "Tlaxcala",
-                        label: "Tlaxcala"
+                        label: "Tlaxcala",
                       },
                       {
                         value: "Yucatán",
-                        label: "Yucatán"
+                        label: "Yucatán",
                       },
                       {
                         value: "Baja California",
-                        label: "Baja California"
+                        label: "Baja California",
                       },
                       {
                         value: "Tabasco",
-                        label: "Tabasco"
+                        label: "Tabasco",
                       },
                       {
                         value: "Durango",
-                        label: "Durango"
+                        label: "Durango",
                       },
                       {
                         value: "Coahuila de Zaragoza",
-                        label: "Coahuila de Zaragoza"
+                        label: "Coahuila de Zaragoza",
                       },
                       {
                         value: "Chiapas",
-                        label: "Chiapas"
+                        label: "Chiapas",
                       },
                       {
                         value: "Querétaro",
-                        label: "Querétaro"
+                        label: "Querétaro",
                       },
                       {
                         value: "Veracruz de Ignacio de la Llave",
-                        label: "Veracruz de Ignacio de la Llave"
+                        label: "Veracruz de Ignacio de la Llave",
                       },
                       {
                         value: "Campeche",
-                        label: "Campeche"
-                      }
+                        label: "Campeche",
+                      },
                     ]}
                   />
                   {errors.state && (
@@ -579,8 +578,8 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={getCities(values.state)}
                   />
@@ -601,8 +600,8 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subservicesCat}
                   />
@@ -615,8 +614,8 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subservicesCat}
                   />
@@ -629,24 +628,20 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subservicesCat}
                   />
-                  <GeneralImagePicker>
-                    <GeneralImagePickerText
-                      title="Carga identificación"
-                      onPress={() => pickImage("idCard")}
-                      color="gray"
-                    />
+                  <GeneralImagePicker onPress={() => pickImage("idCard")}>
+                    <GeneralImagePickerText>
+                      Carga identificación
+                    </GeneralImagePickerText>
                   </GeneralImagePicker>
-                  <GeneralImagePicker>
-                    <GeneralImagePickerText
-                      title="Carga selfie"
-                      onPress={() => pickImage("image")}
-                      color="gray"
-                    />
+                  <GeneralImagePicker onPress={() => pickImage("image")}>
+                    <GeneralImagePickerText>
+                      Carga selfie
+                    </GeneralImagePickerText>
                   </GeneralImagePicker>
                   <GeneralInput
                     onChangeText={handleChange("details")}
@@ -657,8 +652,8 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     multiline={true}
                     numberOfLines={10}

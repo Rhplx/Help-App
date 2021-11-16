@@ -15,7 +15,6 @@ import { getBaseApi, getCities } from "../common/functions";
 import { Text, Platform, View } from "react-native";
 import Layout from "./Layout";
 import Header from "../components/Header";
-import PaypalPlan from "../components/PaypalPlan";
 
 import {
   GeneralWrapper,
@@ -709,19 +708,15 @@ export default function CompanyRegister({ navigation }) {
                     }}
                     items={subservicesCat}
                   />
-                  <GeneralImagePicker>
-                    <GeneralImagePickerText
-                      title="Carga identificación"
-                      onPress={() => pickImage("idCard")}
-                      color="gray"
-                    />
+                  <GeneralImagePicker onPress={() => pickImage("idCard")}>
+                    <GeneralImagePickerText>
+                      Carga identificación
+                    </GeneralImagePickerText>
                   </GeneralImagePicker>
-                  <GeneralImagePicker>
-                    <GeneralImagePickerText
-                      title="Carga selfie"
-                      onPress={() => pickImage("image")}
-                      color="gray"
-                    />
+                  <GeneralImagePicker onPress={() => pickImage("image")}>
+                    <GeneralImagePickerText>
+                      Carga selfie
+                    </GeneralImagePickerText>
                   </GeneralImagePicker>
                   <GeneralInput
                     onChangeText={handleChange("details")}
