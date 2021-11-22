@@ -135,8 +135,12 @@ export const getCities = (state) => {
         value: "León",
       },
       {
-        label: "La Piedad-Pénjamo",
-        value: "La Piedad-Pénjamo",
+        label: "La Piedad",
+        value: "La Piedad",
+      },
+      {
+        label: "Pénjamo",
+        value: "Pénjamo",
       },
       {
         label: "San Francisco del Rincón",
@@ -148,10 +152,6 @@ export const getCities = (state) => {
       },
     ],
     Guerrero: [
-      {
-        label: "Acapulco",
-        value: "Acapulco",
-      },
       {
         label: "Chilpancingo",
         value: "Chilpancingo",
@@ -232,15 +232,11 @@ export const getCities = (state) => {
         label: "Oaxaca",
         value: "Oaxaca",
       },
-      {
-        label: "Tehuantepec-Salina Cruz",
-        value: "Tehuantepec-Salina Cruz",
-      },
     ],
     Puebla: [
       {
-        label: "Puebla-Tlaxcala",
-        value: "Puebla-Tlaxcala",
+        label: "Puebla",
+        value: "Puebla",
       },
       {
         label: "Tehuacán",
@@ -269,20 +265,20 @@ export const getCities = (state) => {
     ],
     "San Luis Potosí": [
       {
-        label: "Ciudad Valles",
-        value: "Ciudad Valles",
-      },
-      {
         label: "Rioverde",
         value: "Rioverde",
+      },
+      {
+        label: "Soledad de Graciano Sánchez",
+        value: "Soledad de Graciano Sánchez",
       },
       {
         label: "San Luis Potosí",
         value: "San Luis Potosí",
       },
       {
-        label: "Soledad",
-        value: "Soledad",
+        label: "Ciudad Fernández",
+        value: "Ciudad Fernández",
       },
     ],
     Sinaloa: [
@@ -337,8 +333,8 @@ export const getCities = (state) => {
         value: "Nuevo Laredo",
       },
       {
-        label: "Reynosa-Río Bravo",
-        value: "Reynosa-Río Bravo",
+        label: "Río Bravo",
+        value: "Río Bravo",
       },
       {
         label: "Ciudad Victoria",
@@ -355,42 +351,6 @@ export const getCities = (state) => {
       {
         label: "Veracruz",
         value: "Veracruz",
-      },
-      {
-        label: "Córdoba",
-        value: "Córdoba",
-      },
-      {
-        label: "Orizaba",
-        value: "Orizaba",
-      },
-      {
-        label: "Xalapa",
-        value: "Xalapa",
-      },
-      {
-        label: "Poza Rica",
-        value: "Poza Rica",
-      },
-      {
-        label: "Coatzacoalcos",
-        value: "Coatzacoalcos",
-      },
-      {
-        label: "Minatitlán",
-        value: "Minatitlán",
-      },
-    ],
-    Yucatán: [
-      {
-        label: "Mérida",
-        value: "Mérida",
-      },
-    ],
-    Zacatecas: [
-      {
-        label: "Zacatecas-Guadalupe",
-        value: "Zacatecas-Guadalupe",
       },
     ],
   };
