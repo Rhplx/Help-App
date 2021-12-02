@@ -36,6 +36,7 @@ export const ButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 20px;
 `;
 export const Button = styled.Pressable`
   background-color: ${(props) => (props.pink ? "#EF0E73" : "#245751")};
@@ -54,6 +55,14 @@ export const ButtonText = styled.Text`
   line-height: 18px;
   text-transform: uppercase;
   text-align: center;
+`;
+export const ButtonForgot = styled.Text`
+  font-family: "Roboto_400Regular";
+  color: white;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  margin: 20px 0;
 `;
 export const Paragraph = styled.Text`
   font-size: 14px;

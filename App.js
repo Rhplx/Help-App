@@ -18,6 +18,7 @@ import Profile from "./app/screens/people/Profile";
 import PeopleReview from "./app/screens/people/PeopleReview";
 import LeaveReview from "./app/screens/people/LeaveReview";
 import Chat from "./app/screens/people/Chat";
+import Forgot from "./app/screens/Forgot";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
-          headerShown: false,
+          headerShown: false
         }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -50,6 +51,7 @@ export default function App() {
         <Stack.Screen name="LeaveReview" component={LeaveReview} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Forgot" component={Forgot} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -20,6 +20,7 @@ export const SubCatCardImage = styled.Image`
   width: 150px;
   height: 150px;
   resize-mode: contain;
+  border-radius: 50px;
 `;
 
 export const SubCatCardContent = styled.View`
@@ -68,6 +69,7 @@ export const SubCategoriesIcon = styled.Image`
   height: 55px;
   resize-mode: contain;
   margin-right: 15px;
+  border-radius: 15px;
 `;
 export const SubCategoriesListText = styled.Text`
   font-family: "Roboto_700Bold";

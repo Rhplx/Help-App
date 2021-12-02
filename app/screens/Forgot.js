@@ -19,9 +19,7 @@ import {
   Button,
   ButtonLink,
   ButtonText,
-  ButtonForgot,
   ButtonWrapper,
-  Paragraph,
   TermsWrapper,
   TermsText
 } from "../styles/screens/LoginStyles";
@@ -108,11 +106,10 @@ export default function Login(props) {
       <Layout>
         <Container>
           <Logo source={LogoImage} />
-          <Title>¡Bienvenido!</Title>
-          <Subtitle>Identifícate para continuar</Subtitle>
+          <Subtitle>Ingresa tu correo para recuperar tu contraseña</Subtitle>
           <Formik
             validationSchema={loginValidationSchema}
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "" }}
             onSubmit={getLogin}
           >
             {({
@@ -138,38 +135,18 @@ export default function Login(props) {
                       {errors.email}
                     </Text>
                   )}
-                  <GeneralInput
-                    name="password"
-                    placeholder="Contraseña"
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
-                    value={values.password}
-                    secureTextEntry
-                  />
-                  {errors.password && (
-                    <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.password}
-                    </Text>
-                  )}
                 </FormWrapper>
                 <ButtonWrapper>
                   <Button>
-                    <ButtonLink to={{ screen: "LoginPlans" }}>
-                      <ButtonText>Registrate</ButtonText>
+                    <ButtonLink to={{ screen: "Login" }}>
+                      <ButtonText>Regresar</ButtonText>
                     </ButtonLink>
                   </Button>
                   <Button pink onPress={handleSubmit}>
-                    <ButtonText>Entrar</ButtonText>
+                    <ButtonText>Recuperar</ButtonText>
                   </Button>
                 </ButtonWrapper>
-                <ButtonLink to={{ screen: "Forgot" }}>
-                  <ButtonForgot>Olvide mi contraseña</ButtonForgot>
-                </ButtonLink>
-                <Paragraph>
-                  En Help puedes buscar y ofrecer servíos directamente con quien
-                  lo ofrece o necesita, haciendo contacto directo. Registrate
-                  para comenzar.
-                </Paragraph>
+
                 <TermsWrapper>
                   <TermsText>Aviso de Privacidad</TermsText>
                 </TermsWrapper>
