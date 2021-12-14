@@ -21,7 +21,7 @@ import {
   ButtonText,
   ButtonWrapper,
   TermsWrapper,
-  TermsText
+  TermsText,
 } from "../styles/screens/LoginStyles";
 import { GeneralInput } from "../styles/GeneralStyles";
 
@@ -37,17 +37,6 @@ export default function Login(props) {
       .string()
       .email("Ingresa un correo valido")
       .required("Correo requerido"),
-    password: yup
-      .string()
-      .min(
-        8,
-        ({ min }) => `La contraseña debe tener al menos ${min} caracteres`
-      )
-      .max(
-        16,
-        ({ max }) => `La contraseña debe tener al menos ${max} caracteres`
-      )
-      .required("Contraseña requerida")
   });
   React.useEffect(() => {
     props.navigation.addListener("focus", () => {
@@ -62,32 +51,20 @@ export default function Login(props) {
     }
   };
 
-  const getLogin = (data) => {
-    fetch(
-      getBaseApi() +
-        "/get/Login?user=" +
-        data.email +
-        "&password=" +
-        encodeURIComponent(data.password),
-      {
-        method: "GET"
-      }
-    )
+  const forgotPassword = (data) => {
+    console.log(data);
+    fetch(getBaseApi() + "/manage/Password?email=" + data.email, {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
-          Object.keys(response.data).map((item) => {
-            if (response.data[item]) {
-              AsyncStorage.setItem(item, response.data[item]);
-            }
-          });
-          props.navigation.navigate("Categories");
+          console.log(response);
+          Alert.alert("Hecho", "Hemos enviado un correo con tu contraseña");
+          props.navigation.navigate("Login");
         } else {
-          Alert.alert("Ooops :(", response.error, [
-            {
-              text: "Ok"
-            }
-          ]);
+          console.log(response);
+          Alert.alert("Ooops :(", response.error);
         }
       })
       .catch((error) => console.log("error", error));
@@ -96,7 +73,7 @@ export default function Login(props) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -110,16 +87,9 @@ export default function Login(props) {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: "" }}
-            onSubmit={getLogin}
+            onSubmit={forgotPassword}
           >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              isValid
-            }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
               <>
                 <FormWrapper>
                   <GeneralInput
@@ -138,7 +108,10 @@ export default function Login(props) {
                 </FormWrapper>
                 <ButtonWrapper>
                   <Button>
-                    <ButtonLink to={{ screen: "Login" }}>
+                    <ButtonLink
+                      to={{ screen: "Login" }}
+                      onPress={() => props.navigation.navigate("Login")}
+                    >
                       <ButtonText>Regresar</ButtonText>
                     </ButtonLink>
                   </Button>

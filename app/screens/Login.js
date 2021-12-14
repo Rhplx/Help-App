@@ -23,7 +23,7 @@ import {
   ButtonWrapper,
   Paragraph,
   TermsWrapper,
-  TermsText
+  TermsText,
 } from "../styles/screens/LoginStyles";
 import { GeneralInput } from "../styles/GeneralStyles";
 
@@ -49,7 +49,7 @@ export default function Login(props) {
         16,
         ({ max }) => `La contraseña debe tener al menos ${max} caracteres`
       )
-      .required("Contraseña requerida")
+      .required("Contraseña requerida"),
   });
   React.useEffect(() => {
     props.navigation.addListener("focus", () => {
@@ -72,7 +72,7 @@ export default function Login(props) {
         "&password=" +
         encodeURIComponent(data.password),
       {
-        method: "GET"
+        method: "GET",
       }
     )
       .then((res) => res.json())
@@ -87,8 +87,8 @@ export default function Login(props) {
         } else {
           Alert.alert("Ooops :(", response.error, [
             {
-              text: "Ok"
-            }
+              text: "Ok",
+            },
           ]);
         }
       })
@@ -98,7 +98,7 @@ export default function Login(props) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -121,7 +121,7 @@ export default function Login(props) {
               handleSubmit,
               values,
               errors,
-              isValid
+              isValid,
             }) => (
               <>
                 <FormWrapper>
@@ -162,7 +162,10 @@ export default function Login(props) {
                     <ButtonText>Entrar</ButtonText>
                   </Button>
                 </ButtonWrapper>
-                <ButtonLink to={{ screen: "Forgot" }}>
+                <ButtonLink
+                  to={{ screen: "Forgot" }}
+                  onPress={() => props.navigation.navigate("Forgot")}
+                >
                   <ButtonForgot>Olvide mi contraseña</ButtonForgot>
                 </ButtonLink>
                 <Paragraph>
