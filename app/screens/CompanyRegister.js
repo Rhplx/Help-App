@@ -95,7 +95,8 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
+      color: "black"
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -108,13 +109,14 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
+      color: "black"
     }
   });
   const greenSelectStyles = StyleSheet.create({
     inputIOS: {
       backgroundColor: "#39B4BB",
-      color: "white",
+      color: "black",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,
@@ -128,7 +130,7 @@ export default function CompanyRegister({ navigation }) {
     },
     inputAndroid: {
       backgroundColor: "#39B4BB",
-      color: "white",
+      color: "black",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,
@@ -500,7 +502,6 @@ export default function CompanyRegister({ navigation }) {
                     onValueChange={handleChange("state")}
                     placeholder={statePlaceholder}
                     useNativeAndroidPickerStyle={false}
-                    fixAndroidTouchableBug
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -649,7 +650,6 @@ export default function CompanyRegister({ navigation }) {
                     onValueChange={handleChange("city")}
                     placeholder={cityPlaceholder}
                     useNativeAndroidPickerStyle={false}
-                    fixAndroidTouchableBug
                     style={{
                       ...whiteSelectStyles,
                       iconContainer: {
@@ -672,7 +672,6 @@ export default function CompanyRegister({ navigation }) {
                     onValueChange={(value) => handleValueChange(value, 0)}
                     placeholder={servicePlaceholder}
                     useNativeAndroidPickerStyle={false}
-                    fixAndroidTouchableBug
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
