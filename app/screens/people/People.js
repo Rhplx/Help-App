@@ -36,7 +36,7 @@ import {
   PeopleButtonText,
   PeopleActions,
   PeopleButtonIcon,
-  PeopleContainer,
+  PeopleContainer
 } from "../../styles/screens/people/People";
 import { GeneralInput, GeneralTitle } from "../../styles/GeneralStyles";
 
@@ -64,8 +64,8 @@ export default function People({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Provider?provider=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId,
-      },
+        Authorization: "Bearer " + sessionId
+      }
     })
       .then((res) => res.json())
       .then((response) => {
@@ -77,8 +77,8 @@ export default function People({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -97,7 +97,7 @@ export default function People({ route, navigation }) {
   };
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido"),
+    message: yup.string().required("Mensaje requerido")
   });
 
   const insertMessage = async (values, actions) => {
@@ -107,9 +107,9 @@ export default function People({ route, navigation }) {
       method: "POST",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(values)
     })
       .then((res) => res.json())
       .then((response) => {
@@ -131,28 +131,28 @@ export default function People({ route, navigation }) {
     navigation.navigate("Chat", {
       id: id,
       name,
-      message,
+      message
     });
   };
 
   const handleSendReview = () => {
     navigation.navigate("LeaveReview", {
       id: id,
-      name,
+      name
     });
   };
 
   const handleViewReviews = () => {
     navigation.navigate("PeopleReview", {
       id: id,
-      name,
+      name
     });
   };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {

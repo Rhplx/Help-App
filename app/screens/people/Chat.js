@@ -28,7 +28,7 @@ import {
   SendInput,
   SendButton,
   SendText,
-  SendIcon,
+  SendIcon
 } from "../../styles/screens/people/Chat";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -51,8 +51,8 @@ export default function PeopleReview({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Message?user=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId,
-      },
+        Authorization: "Bearer " + sessionId
+      }
     })
       .then((res) => res.json())
       .then((response) => {
@@ -64,8 +64,8 @@ export default function PeopleReview({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -74,7 +74,7 @@ export default function PeopleReview({ route, navigation }) {
   };
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido"),
+    message: yup.string().required("Mensaje requerido")
   });
 
   const insertMessage = async (values, actions) => {
@@ -84,14 +84,15 @@ export default function PeopleReview({ route, navigation }) {
       method: "POST",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(values)
     })
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
           actions.resetForm({ message: "" });
+          getChatMessages();
         } else {
           if (response.error === "Error: Sesión Invalida") {
             clearAsyncStorage(navigation);
@@ -129,7 +130,7 @@ export default function PeopleReview({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {

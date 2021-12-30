@@ -69,7 +69,7 @@ export const SubCategoriesIcon = styled.Image`
   height: 55px;
   resize-mode: contain;
   margin-right: 15px;
-  border-radius: 15px;
+  border-radius: 25px;
 `;
 export const SubCategoriesListText = styled.Text`
   font-family: "Roboto_700Bold";

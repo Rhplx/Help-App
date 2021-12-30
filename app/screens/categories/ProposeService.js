@@ -1,7 +1,12 @@
 // Native imports
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text } from "react-native";
+import { Text, Alert } from "react-native";
+
+// External Imports
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearAsyncStorage } from "../../common/syncStorage";
+import { getBaseApi } from "../../common/functions";
 
 // Third Party Imports
 import { Formik } from "formik";
@@ -15,7 +20,7 @@ import {
   ProposeButton,
   ProposeButtonText,
   ProposeContainer,
-  ProposeContent,
+  ProposeContent
 } from "../../styles/screens/categories/ProposeService";
 import Terms from "../../components/Terms";
 
@@ -26,21 +31,48 @@ import {
   FormWrapper,
   GeneralInput,
   GeneralSubtitle,
-  GeneralTitle,
+  GeneralTitle
 } from "../../styles/GeneralStyles";
 
 export default function ProposeService({ navigation }) {
   const proposeValidationSchema = yup.object().shape({
-    profesion: yup.string().required("Profesión requerida"),
+    title: yup.string().required("Profesión requerida"),
     description: yup.string().required("Descripción requerida"),
-    comments: yup.string().required("Comentarios requerida"),
+    comments: yup.string().required("Comentarios requerida")
   });
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
+
+  const sendPropose = async (values, actions) => {
+    console.log(values);
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    fetch(getBaseApi() + "/manage/Service", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + sessionId,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          Alert.alert("Éxito", "Tu mensaje ha sido enviado");
+          actions.resetForm();
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          } else {
+            Alert.alert("Ooops :(", response.error);
+          }
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -55,10 +87,8 @@ export default function ProposeService({ navigation }) {
           <GeneralSubtitle>Si no encuentras tu área o servicio</GeneralSubtitle>
           <Formik
             validationSchema={proposeValidationSchema}
-            initialValues={{ profesion: "", description: "", comments: "" }}
-            onSubmit={(values, actions) => {
-              actions.resetForm();
-            }}
+            initialValues={{ title: "", description: "", comments: "" }}
+            onSubmit={sendPropose}
           >
             {({
               handleChange,
@@ -66,20 +96,20 @@ export default function ProposeService({ navigation }) {
               handleSubmit,
               values,
               errors,
-              isValid,
+              isValid
             }) => (
               <>
                 <FormWrapper>
                   <GeneralInput
-                    onChangeText={handleChange("profesion")}
-                    onBlur={handleBlur("profesion")}
+                    onChangeText={handleChange("title")}
+                    onBlur={handleBlur("title")}
                     placeholder="Servicio o Profesión"
-                    name="profesion"
-                    value={values.profesion}
+                    name="title"
+                    value={values.title}
                   />
-                  {errors.profesion && (
+                  {errors.title && (
                     <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.profesion}
+                      {errors.title}
                     </Text>
                   )}
                   <GeneralInput

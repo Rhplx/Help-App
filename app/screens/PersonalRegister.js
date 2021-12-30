@@ -40,7 +40,11 @@ import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 export default function PersonalRegister({ navigation }) {
   const [profileImage, setProfileImage] = React.useState(undefined);
   const [idCard, setIdCard] = React.useState(undefined);
-  const [subservicesCat, setSubservicesCat] = React.useState([]);
+  const [servicesCat, setServicesCat] = React.useState([]);
+  const [services, setServices] = React.useState([0, 0, 0]);
+  const [subserviceCat0, setSubserviceCat0] = React.useState([]);
+  const [subserviceCat1, setSubserviceCat1] = React.useState([]);
+  const [subserviceCat2, setSubserviceCat2] = React.useState([]);
   const [subservices, setSubservices] = React.useState([0, 0, 0]);
 
   const registerValidationSchema = yup.object().shape({
@@ -146,7 +150,11 @@ export default function PersonalRegister({ navigation }) {
     value: "",
     color: "#ffffff"
   };
-
+  const subServicePlaceholder = {
+    label: "Selecciona subservicio",
+    value: "",
+    color: "#ffffff"
+  };
   React.useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -161,18 +169,50 @@ export default function PersonalRegister({ navigation }) {
 
   React.useEffect(() => {
     navigation.addListener("focus", () => {
-      getSubCategories();
+      getCategories();
     });
   }, []);
 
-  const getSubCategories = () => {
-    fetch(getBaseApi() + '/manage/Catalogues?catalogues=["subservices"]', {
+  const getSubCategories = (service, picker) => {
+    fetch(
+      getBaseApi() +
+        '/manage/Catalogues?catalogues=["subservices"]&service=' +
+        service,
+      {
+        method: "GET"
+      }
+    )
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          if (response.data.subservices) {
+            switch (picker) {
+              case 0:
+                setSubserviceCat0(response.data.subservices);
+                break;
+              case 1:
+                setSubserviceCat1(response.data.subservices);
+                break;
+              case 2:
+                setSubserviceCat2(response.data.subservices);
+                break;
+            }
+          }
+        } else {
+          Alert.alert("Ooops :(", response.error);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getCategories = () => {
+    fetch(getBaseApi() + '/manage/Catalogues?catalogues=["services"]', {
       method: "GET"
     })
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
-          setSubservicesCat(response.data.subservices);
+          setServicesCat(response.data.services);
         } else {
           Alert.alert("Ooops :(", response.error);
         }
@@ -227,6 +267,13 @@ export default function PersonalRegister({ navigation }) {
     let values = subservices;
     values[index] = value;
     setSubservices(values);
+  };
+
+  const handleServiceChange = (value, index) => {
+    let values = services;
+    values[index] = value;
+    setServices(values);
+    getSubCategories(value, index);
   };
 
   const insertProvider = (data) => {
@@ -590,7 +637,7 @@ export default function PersonalRegister({ navigation }) {
                     Selecciona hasta tres servicios que deseas ofrecer
                   </GeneralSubtitle>
                   <RNPickerSelect
-                    onValueChange={(value) => handleValueChange(value, 0)}
+                    onValueChange={(value) => handleServiceChange(value, 0)}
                     placeholder={servicePlaceholder}
                     useNativeAndroidPickerStyle={false}
                     style={{
@@ -601,10 +648,55 @@ export default function PersonalRegister({ navigation }) {
                         resizeMode: "contain"
                       }
                     }}
-                    items={subservicesCat}
+                    items={servicesCat}
+                  />
+                  <RNPickerSelect
+                    onValueChange={(value) => handleValueChange(value, 0)}
+                    placeholder={subServicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
+                    fixAndroidTouchableBug
+                    style={{
+                      ...greenSelectStyles,
+                      iconContainer: {
+                        top: 5,
+                        right: 12,
+                        resizeMode: "contain"
+                      }
+                    }}
+                    items={subserviceCat0}
+                  />
+                  <RNPickerSelect
+                    onValueChange={(value) => handleServiceChange(value, 1)}
+                    placeholder={servicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
+                    fixAndroidTouchableBug
+                    style={{
+                      ...greenSelectStyles,
+                      iconContainer: {
+                        top: 5,
+                        right: 12,
+                        resizeMode: "contain"
+                      }
+                    }}
+                    items={servicesCat}
                   />
                   <RNPickerSelect
                     onValueChange={(value) => handleValueChange(value, 1)}
+                    placeholder={subServicePlaceholder}
+                    useNativeAndroidPickerStyle={false}
+                    fixAndroidTouchableBug
+                    style={{
+                      ...greenSelectStyles,
+                      iconContainer: {
+                        top: 5,
+                        right: 12,
+                        resizeMode: "contain"
+                      }
+                    }}
+                    items={subserviceCat1}
+                  />
+                  <RNPickerSelect
+                    onValueChange={(value) => handleServiceChange(value, 2)}
                     placeholder={servicePlaceholder}
                     useNativeAndroidPickerStyle={false}
                     fixAndroidTouchableBug
@@ -616,11 +708,11 @@ export default function PersonalRegister({ navigation }) {
                         resizeMode: "contain"
                       }
                     }}
-                    items={subservicesCat}
+                    items={servicesCat}
                   />
                   <RNPickerSelect
                     onValueChange={(value) => handleValueChange(value, 2)}
-                    placeholder={servicePlaceholder}
+                    placeholder={subServicePlaceholder}
                     useNativeAndroidPickerStyle={false}
                     fixAndroidTouchableBug
                     style={{
@@ -631,7 +723,7 @@ export default function PersonalRegister({ navigation }) {
                         resizeMode: "contain"
                       }
                     }}
-                    items={subservicesCat}
+                    items={subserviceCat2}
                   />
                   <GeneralImagePicker onPress={() => pickImage("idCard")}>
                     <GeneralImagePickerText>

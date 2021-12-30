@@ -55,7 +55,7 @@ export const PeopleFavoriteIcon = styled.Image`
 export const PeopleImage = styled.Image`
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 25px;
   resize-mode: contain;
 `;
 export const PeopleReviewsContainer = styled.Pressable`
