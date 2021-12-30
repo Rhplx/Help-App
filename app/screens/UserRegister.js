@@ -25,7 +25,7 @@ import {
   GeneralImagePicker,
   GeneralImagePickerText,
   RegisterButton,
-  RegisterButtonText,
+  RegisterButtonText
 } from "../styles/GeneralStyles";
 
 // Assets and fonts
@@ -59,7 +59,7 @@ export default function PersonalRegister({ navigation }) {
     whatsapp: yup
       .number()
       .typeError("Solo numeros")
-      .required("WhatsApp requerido"),
+      .required("WhatsApp requerido")
   });
   const whiteSelectStyles = StyleSheet.create({
     inputIOS: {
@@ -73,7 +73,7 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
+      textAlign: "center"
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -86,16 +86,16 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center",
-    },
+      textAlign: "center"
+    }
   });
   const statePlaceholder = {
     label: "Estado",
-    value: "",
+    value: ""
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: "",
+    value: ""
   };
 
   React.useEffect(() => {
@@ -115,7 +115,7 @@ export default function PersonalRegister({ navigation }) {
       png: "image/png",
       pdf: "application/json",
       jpeg: "image/jpeg",
-      jpg: "image/jpg",
+      jpg: "image/jpg"
     };
     let extention = name.split(".")[1];
     if (allow[extention] !== undefined) {
@@ -130,7 +130,7 @@ export default function PersonalRegister({ navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 4],
-      quality: 1,
+      quality: 1
     });
     let localUri = result.uri;
     let filename = localUri.split("/").pop();
@@ -159,9 +159,9 @@ export default function PersonalRegister({ navigation }) {
       fetch(getBaseApi() + "/manage/User", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "content-type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       })
         .then((res) => res.json())
         .then((response) => {
@@ -175,8 +175,8 @@ export default function PersonalRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  "content-type": "multipart/form-data",
-                },
+                  "content-type": "multipart/form-data"
+                }
               })
                 .then((res) => res.json())
                 .then((response) => {
@@ -195,8 +195,8 @@ export default function PersonalRegister({ navigation }) {
                 method: "PUT",
                 body: formDat,
                 headers: {
-                  "content-type": "multipart/form-data",
-                },
+                  "content-type": "multipart/form-data"
+                }
               })
                 .then((res) => res.json())
                 .then((response) => {
@@ -224,7 +224,7 @@ export default function PersonalRegister({ navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {
@@ -235,9 +235,7 @@ export default function PersonalRegister({ navigation }) {
         <Header />
         <GeneralWrapper>
           <GeneralTitle>Registro para usuarios</GeneralTitle>
-          <GeneralSubtitle>
-            Registrate para ofrecer y solicitar servicios
-          </GeneralSubtitle>
+          <GeneralSubtitle>Registrate para solicitar servicios</GeneralSubtitle>
           <FormWrapper>
             <Formik
               validationSchema={registerValidationSchema}
@@ -248,7 +246,7 @@ export default function PersonalRegister({ navigation }) {
                 confirmPassword: "",
                 whatsapp: "",
                 state: "",
-                city: "",
+                city: ""
               }}
               onSubmit={insertUser}
             >
@@ -258,7 +256,7 @@ export default function PersonalRegister({ navigation }) {
                 handleSubmit,
                 values,
                 errors,
-                isValid,
+                isValid
               }) => (
                 <>
                   <GeneralInput
@@ -337,138 +335,136 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={[
                       {
-                        value: "Zacatecas",
-                        label: "Zacatecas",
-                      },
-                      {
                         value: "Aguascalientes",
-                        label: "Aguascalientes",
-                      },
-                      {
-                        value: "Tamaulipas",
-                        label: "Tamaulipas",
-                      },
-                      {
-                        value: "Jalisco",
-                        label: "Jalisco",
-                      },
-                      {
-                        value: "Nayarit",
-                        label: "Nayarit",
-                      },
-                      {
-                        value: "Oaxaca",
-                        label: "Oaxaca",
-                      },
-                      {
-                        value: "Sonora",
-                        label: "Sonora",
-                      },
-                      {
-                        value: "Nuevo León",
-                        label: "Nuevo León",
-                      },
-                      {
-                        value: "Chihuahua",
-                        label: "Chihuahua",
-                      },
-                      {
-                        value: "Guanajuato",
-                        label: "Guanajuato",
-                      },
-                      {
-                        value: "Guerrero",
-                        label: "Guerrero",
-                      },
-                      {
-                        value: "Hidalgo",
-                        label: "Hidalgo",
-                      },
-                      {
-                        value: "San Luis Potosí",
-                        label: "San Luis Potosí",
-                      },
-                      {
-                        value: "Sinaloa",
-                        label: "Sinaloa",
-                      },
-                      {
-                        value: "Colima",
-                        label: "Colima",
-                      },
-                      {
-                        value: "Distrito Federal",
-                        label: "Distrito Federal",
+                        label: "Aguascalientes"
                       },
                       {
                         value: "Baja California Sur",
-                        label: "Baja California Sur",
-                      },
-                      {
-                        value: "Morelos",
-                        label: "Morelos",
-                      },
-                      {
-                        value: "Quintana Roo",
-                        label: "Quintana Roo",
-                      },
-                      {
-                        value: "México",
-                        label: "México",
-                      },
-                      {
-                        value: "Michoacán de Ocampo",
-                        label: "Michoacán de Ocampo",
-                      },
-                      {
-                        value: "Puebla",
-                        label: "Puebla",
-                      },
-                      {
-                        value: "Tlaxcala",
-                        label: "Tlaxcala",
-                      },
-                      {
-                        value: "Yucatán",
-                        label: "Yucatán",
+                        label: "Baja California Sur"
                       },
                       {
                         value: "Baja California",
-                        label: "Baja California",
-                      },
-                      {
-                        value: "Tabasco",
-                        label: "Tabasco",
-                      },
-                      {
-                        value: "Durango",
-                        label: "Durango",
-                      },
-                      {
-                        value: "Coahuila de Zaragoza",
-                        label: "Coahuila de Zaragoza",
-                      },
-                      {
-                        value: "Chiapas",
-                        label: "Chiapas",
-                      },
-                      {
-                        value: "Querétaro",
-                        label: "Querétaro",
-                      },
-                      {
-                        value: "Veracruz de Ignacio de la Llave",
-                        label: "Veracruz de Ignacio de la Llave",
+                        label: "Baja California"
                       },
                       {
                         value: "Campeche",
-                        label: "Campeche",
+                        label: "Campeche"
                       },
+                      {
+                        value: "Chiapas",
+                        label: "Chiapas"
+                      },
+                      {
+                        value: "Chihuahua",
+                        label: "Chihuahua"
+                      },
+                      {
+                        value: "Coahuila de Zaragoza",
+                        label: "Coahuila de Zaragoza"
+                      },
+                      {
+                        value: "Colima",
+                        label: "Colima"
+                      },
+                      {
+                        value: "Distrito Federal",
+                        label: "Distrito Federal"
+                      },
+                      {
+                        value: "Durango",
+                        label: "Durango"
+                      },
+                      {
+                        value: "Guanajuato",
+                        label: "Guanajuato"
+                      },
+                      {
+                        value: "Guerrero",
+                        label: "Guerrero"
+                      },
+                      {
+                        value: "Hidalgo",
+                        label: "Hidalgo"
+                      },
+                      {
+                        value: "Jalisco",
+                        label: "Jalisco"
+                      },
+                      {
+                        value: "México",
+                        label: "México"
+                      },
+                      {
+                        value: "Michoacán de Ocampo",
+                        label: "Michoacán de Ocampo"
+                      },
+                      {
+                        value: "Morelos",
+                        label: "Morelos"
+                      },
+                      {
+                        value: "Nayarit",
+                        label: "Nayarit"
+                      },
+                      {
+                        value: "Nuevo León",
+                        label: "Nuevo León"
+                      },
+                      {
+                        value: "Oaxaca",
+                        label: "Oaxaca"
+                      },
+                      {
+                        value: "Puebla",
+                        label: "Puebla"
+                      },
+                      {
+                        value: "Querétaro",
+                        label: "Querétaro"
+                      },
+
+                      {
+                        value: "Quintana Roo",
+                        label: "Quintana Roo"
+                      },
+                      {
+                        value: "San Luis Potosí",
+                        label: "San Luis Potosí"
+                      },
+                      {
+                        value: "Sinaloa",
+                        label: "Sinaloa"
+                      },
+
+                      {
+                        value: "Sonora",
+                        label: "Sonora"
+                      },
+                      {
+                        value: "Tabasco",
+                        label: "Tabasco"
+                      },
+                      {
+                        value: "Tamaulipas",
+                        label: "Tamaulipas"
+                      },
+                      {
+                        value: "Tlaxcala",
+                        label: "Tlaxcala"
+                      },
+                      {
+                        value: "Veracruz de Ignacio de la Llave",
+                        label: "Veracruz de Ignacio de la Llave"
+                      },
+                      {
+                        value: "Yucatán",
+                        label: "Yucatán"
+                      }
                     ]}
                   />
                   <RNPickerSelect
@@ -481,8 +477,8 @@ export default function PersonalRegister({ navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain",
-                      },
+                        resizeMode: "contain"
+                      }
                     }}
                     items={getCities(values.state)}
                   />

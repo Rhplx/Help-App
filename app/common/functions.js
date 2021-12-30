@@ -16,343 +16,343 @@ export const getCities = (state) => {
     Aguascalientes: [
       {
         label: "Aguascalientes",
-        value: "Aguascalientes",
-      },
+        value: "Aguascalientes"
+      }
     ],
     "Baja California": [
       {
         label: "Ensenada",
-        value: "Ensenada",
+        value: "Ensenada"
       },
       {
         label: "Mexicali",
-        value: "Mexicali",
+        value: "Mexicali"
       },
       {
         label: "Tijuana",
-        value: "Tijuana",
-      },
+        value: "Tijuana"
+      }
     ],
     "Baja California Sur": [
       {
         label: "La Paz",
-        value: "La Paz",
+        value: "La Paz"
       },
       {
         label: "Los Cabos",
-        value: "Los Cabos",
-      },
+        value: "Los Cabos"
+      }
     ],
     Campeche: [
       {
         label: "Campeche",
-        value: "Campeche",
+        value: "Campeche"
       },
       {
         label: "Ciudad del Carmen",
-        value: "Ciudad del Carmen",
-      },
+        value: "Ciudad del Carmen"
+      }
     ],
     "Coahuila de Zaragoza": [
       {
         label: "Saltillo",
-        value: "Saltillo",
+        value: "Saltillo"
       },
       {
         label: "Monclova-Frontera",
-        value: "Monclova-Frontera",
+        value: "Monclova-Frontera"
       },
       {
         label: "La Laguna",
-        value: "La Laguna",
+        value: "La Laguna"
       },
       {
         label: "Piedras Negras",
-        value: "Piedras Negras",
-      },
+        value: "Piedras Negras"
+      }
     ],
     Colima: [
       {
         label: "Tecomán",
-        value: "Tecomán",
+        value: "Tecomán"
       },
       {
         label: "Colima-Villa de Álvarez",
-        value: "Colima-Villa de Álvarez",
+        value: "Colima-Villa de Álvarez"
       },
       {
         label: "Manzanillo",
-        value: "Manzanillo",
-      },
+        value: "Manzanillo"
+      }
     ],
     Chiapas: [
       {
         label: "Tuxtla Gutiérrez",
-        value: "Tuxtla Gutiérrez",
+        value: "Tuxtla Gutiérrez"
       },
       {
         label: "Tapachula",
-        value: "Tapachula",
-      },
+        value: "Tapachula"
+      }
     ],
     Chihuahua: [
       {
         label: "Chihuahua",
-        value: "Chihuahua",
+        value: "Chihuahua"
       },
       {
         label: "Juárez",
-        value: "Juárez",
-      },
+        value: "Juárez"
+      }
     ],
     "Distrito Federal": [
       {
         label: "Valle de México",
-        value: "Valle de México",
-      },
+        value: "Valle de México"
+      }
     ],
     Durango: [
       {
         label: "Durango",
-        value: "Durango",
-      },
+        value: "Durango"
+      }
     ],
     Guanajuato: [
       {
         label: "Celaya",
-        value: "Celaya",
+        value: "Celaya"
       },
       {
         label: "Guanajuato",
-        value: "Guanajuato",
+        value: "Guanajuato"
       },
       {
         label: "Irapuato",
-        value: "Irapuato",
+        value: "Irapuato"
       },
       {
         label: "León",
-        value: "León",
+        value: "León"
       },
       {
         label: "La Piedad",
-        value: "La Piedad",
+        value: "La Piedad"
       },
       {
         label: "Pénjamo",
-        value: "Pénjamo",
+        value: "Pénjamo"
       },
       {
         label: "San Francisco del Rincón",
-        value: "San Francisco del Rincón",
+        value: "San Francisco del Rincón"
       },
       {
         label: "Salamanca",
-        value: "Salamanca",
-      },
+        value: "Salamanca"
+      }
     ],
     Guerrero: [
       {
         label: "Chilpancingo",
-        value: "Chilpancingo",
-      },
+        value: "Chilpancingo"
+      }
     ],
     Hidalgo: [
       {
         label: "Tula",
-        value: "Tula",
+        value: "Tula"
       },
       {
         label: "Tulancingo",
-        value: "Tulancingo",
+        value: "Tulancingo"
       },
       {
         label: "Pachuca",
-        value: "Pachuca",
-      },
+        value: "Pachuca"
+      }
     ],
     Jalisco: [
       {
         label: "Guadalajara",
-        value: "Guadalajara",
+        value: "Guadalajara"
       },
       {
         label: "Ocotlán",
-        value: "Ocotlán",
+        value: "Ocotlán"
       },
       {
         label: "Puerto Vallarta",
-        value: "Puerto Vallarta",
-      },
+        value: "Puerto Vallarta"
+      }
     ],
     México: [
       {
         label: "Toluca",
-        value: "Toluca",
-      },
+        value: "Toluca"
+      }
     ],
     "Michoacán de Ocampo": [
       {
         label: "Zamora-Jacona",
-        value: "Zamora-Jacona",
+        value: "Zamora-Jacona"
       },
       {
         label: "Morelia",
-        value: "Morelia",
+        value: "Morelia"
       },
       {
         label: "Uruapan",
-        value: "Uruapan",
-      },
+        value: "Uruapan"
+      }
     ],
     Morelos: [
       {
         label: "Cuautla",
-        value: "Cuautla",
+        value: "Cuautla"
       },
       {
         label: "Cuernavaca",
-        value: "Cuernavaca",
-      },
+        value: "Cuernavaca"
+      }
     ],
     Nayarit: [
       {
         label: "Tepic",
-        value: "Tepic",
-      },
+        value: "Tepic"
+      }
     ],
     "Nuevo León": [
       {
         label: "Monterrey",
-        value: "Monterrey",
-      },
+        value: "Monterrey"
+      }
     ],
     Oaxaca: [
       {
         label: "Oaxaca",
-        value: "Oaxaca",
-      },
+        value: "Oaxaca"
+      }
     ],
     Puebla: [
       {
         label: "Puebla",
-        value: "Puebla",
+        value: "Puebla"
       },
       {
         label: "Tehuacán",
-        value: "Tehuacán",
-      },
+        value: "Tehuacán"
+      }
     ],
     Querétaro: [
       {
         label: "Querétaro",
-        value: "Querétaro",
+        value: "Querétaro"
       },
       {
         label: "San Juan del Río",
-        value: "San Juan del Río",
-      },
+        value: "San Juan del Río"
+      }
     ],
     "Quintana Roo": [
       {
         label: "Cancún",
-        value: "Cancún",
+        value: "Cancún"
       },
       {
         label: "Chetumal",
-        value: "Chetumal",
-      },
+        value: "Chetumal"
+      }
     ],
     "San Luis Potosí": [
       {
         label: "Rioverde",
-        value: "Rioverde",
+        value: "Rioverde"
       },
       {
         label: "Soledad de Graciano Sánchez",
-        value: "Soledad de Graciano Sánchez",
+        value: "Soledad de Graciano Sánchez"
       },
       {
         label: "San Luis Potosí",
-        value: "San Luis Potosí",
+        value: "San Luis Potosí"
       },
       {
         label: "Ciudad Fernández",
-        value: "Ciudad Fernández",
-      },
+        value: "Ciudad Fernández"
+      }
     ],
     Sinaloa: [
       {
         label: "Los Mochis",
-        value: "Los Mochis",
+        value: "Los Mochis"
       },
       {
         label: "Culiacán",
-        value: "Culiacán",
+        value: "Culiacán"
       },
       {
         label: "Mazatlán",
-        value: "Mazatlán",
-      },
+        value: "Mazatlán"
+      }
     ],
     Sonora: [
       {
         label: "Ciudad Obregón",
-        value: "Ciudad Obregón",
+        value: "Ciudad Obregón"
       },
       {
         label: "Guaymas",
-        value: "Guaymas",
+        value: "Guaymas"
       },
       {
         label: "Hermosillo",
-        value: "Hermosillo",
-      },
+        value: "Hermosillo"
+      }
     ],
     Tabasco: [
       {
         label: "Cárdenas",
-        value: "Cárdenas",
+        value: "Cárdenas"
       },
       {
         label: "Villahermosa",
-        value: "Villahermosa",
-      },
+        value: "Villahermosa"
+      }
     ],
     Tamaulipas: [
       {
         label: "Tampico-Pánuco",
-        value: "Tampico-Pánuco",
+        value: "Tampico-Pánuco"
       },
       {
         label: "Matamoros",
-        value: "Matamoros",
+        value: "Matamoros"
       },
       {
         label: "Nuevo Laredo",
-        value: "Nuevo Laredo",
+        value: "Nuevo Laredo"
       },
       {
         label: "Río Bravo",
-        value: "Río Bravo",
+        value: "Río Bravo"
       },
       {
         label: "Ciudad Victoria",
-        value: "Ciudad Victoria",
-      },
+        value: "Ciudad Victoria"
+      }
     ],
     Tlaxcala: [
       {
         label: "Tlaxcala-Apizaco",
-        value: "Tlaxcala-Apizaco",
-      },
+        value: "Tlaxcala-Apizaco"
+      }
     ],
     "Veracruz de Ignacio de la Llave": [
       {
         label: "Veracruz",
-        value: "Veracruz",
-      },
-    ],
+        value: "Veracruz"
+      }
+    ]
   };
   return state ? cities[state] : [];
 };

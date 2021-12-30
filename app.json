@@ -4,10 +4,10 @@
     "slug": "help",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/chef.png",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./app/assets/chef.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -21,14 +21,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/chef.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "versionCode": 1,
       "package": "mx.helpapp"
     },
     "web": {
-      "favicon": "./app/assets/chef.png"
+      "favicon": "./assets/favicon.png"
     }
   }
 }
