@@ -78,7 +78,7 @@ export const TermsWrapper = styled.Text`
   margin-top: 25px;
   text-align: center;
 `;
-export const TermsText = styled.Text`
+export const TermsText = styled(Link)`
   font-size: 12px;
   line-height: 22px;
   font-family: "Roboto_400Regular";
