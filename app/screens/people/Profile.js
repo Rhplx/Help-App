@@ -20,7 +20,7 @@ import {
   ProfileDataButtonText,
   ProfileDataTextRow,
   ProfileDataText,
-  ProfileDataImage
+  ProfileDataImage,
 } from "../../styles/screens/people/Profile";
 import {
   PlansBoxTitleWrapper,
@@ -28,7 +28,7 @@ import {
   PlansBoxSubtitleWrapper,
   PlansBoxSubtitle,
   PlansBoxTitleWrapperTwo,
-  PlansBoxSubtitleWrapperTwo
+  PlansBoxSubtitleWrapperTwo,
 } from "../../styles/screens/LoginPlanStyles";
 import {
   PaypalGeneral,
@@ -39,7 +39,7 @@ import {
   PaypalLogoWrapper,
   PaypalAnual,
   PaypalAnualTitle,
-  PaypalCheckboxWrapper
+  PaypalCheckboxWrapper,
 } from "../../styles/components/PaypalPlanStyles";
 import {
   GeneralSubtitle,
@@ -49,7 +49,7 @@ import {
   RegisterButtonText,
   GeneralImagePicker,
   GeneralImagePickerText,
-  DoubleInputWrapper
+  DoubleInputWrapper,
 } from "../../styles/GeneralStyles";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -93,11 +93,11 @@ export default function Profile({ route, navigation }) {
     number: yup
       .number()
       .typeError("Solo numeros")
-      .required("WhatsApp requerido")
+      .required("WhatsApp requerido"),
   });
 
   const detailsValidation = yup.object().shape({
-    details: yup.string().required("Descripcion requerida")
+    details: yup.string().required("Descripcion requerida"),
   });
 
   const whiteSelectStyles = StyleSheet.create({
@@ -113,7 +113,7 @@ export default function Profile({ route, navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "black"
+      color: "black",
     },
     inputAndroid: {
       color: "black",
@@ -127,24 +127,61 @@ export default function Profile({ route, navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   });
+
+  const greenSelectStyles = StyleSheet.create({
+    inputIOS: {
+      backgroundColor: "#39B4BB",
+      color: "black",
+      fontSize: 18,
+      paddingVertical: 4,
+      paddingHorizontal: 18,
+      borderWidth: 0.5,
+      borderColor: "#39B4BB",
+      borderRadius: 10,
+      minHeight: 50,
+      marginTop: 10,
+      paddingRight: 30, // to ensure the text is never behind the icon
+      textAlign: "center",
+    },
+    inputAndroid: {
+      backgroundColor: "#39B4BB",
+      color: "black",
+      fontSize: 18,
+      paddingVertical: 4,
+      paddingHorizontal: 18,
+      borderWidth: 0.5,
+      borderColor: "#39B4BB",
+      borderRadius: 10,
+      minHeight: 50,
+      marginTop: 10,
+      paddingRight: 30, // to ensure the text is never behind the icon
+      textAlign: "center",
+    },
+  });
+
+  const subServicePlaceholder = {
+    label: "Selecciona subservicio",
+    value: "",
+    color: "#ffffff",
+  };
 
   const statePlaceholder = {
     label: "Estado",
-    value: ""
+    value: "",
   };
 
   const cityPlaceholder = {
     label: "Ciudad",
-    value: ""
+    value: "",
   };
 
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: 0,
-    color: "#ffffff"
+    color: "#ffffff",
   };
 
   React.useEffect(() => {
@@ -172,8 +209,8 @@ export default function Profile({ route, navigation }) {
     fetch(getBaseApi() + "/manage/User", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId
-      }
+        Authorization: "Bearer " + sessionId,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -190,8 +227,8 @@ export default function Profile({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -205,7 +242,7 @@ export default function Profile({ route, navigation }) {
         '/manage/Catalogues?catalogues=["subservices"]&service=' +
         service,
       {
-        method: "GET"
+        method: "GET",
       }
     )
       .then((res) => res.json())
@@ -233,7 +270,7 @@ export default function Profile({ route, navigation }) {
 
   const getCategories = () => {
     fetch(getBaseApi() + '/manage/Catalogues?catalogues=["services"]', {
-      method: "GET"
+      method: "GET",
     })
       .then((res) => res.json())
       .then((response) => {
@@ -253,9 +290,9 @@ export default function Profile({ route, navigation }) {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values),
     })
       .then((res) => res.json())
       .then((response) => {
@@ -270,8 +307,8 @@ export default function Profile({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -297,7 +334,7 @@ export default function Profile({ route, navigation }) {
       png: "image/png",
       pdf: "application/json",
       jpeg: "image/jpeg",
-      jpg: "image/jpg"
+      jpg: "image/jpg",
     };
     let extention = name.split(".")[1];
     if (allow[extention] !== undefined) {
@@ -312,7 +349,7 @@ export default function Profile({ route, navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 4],
-      quality: 1
+      quality: 1,
     });
     let localUri = result.uri;
     let filename = localUri.split("/").pop();
@@ -344,8 +381,8 @@ export default function Profile({ route, navigation }) {
       method: "PUT",
       body: formDat,
       headers: {
-        "content-type": "multipart/form-data"
-      }
+        "content-type": "multipart/form-data",
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -367,14 +404,14 @@ export default function Profile({ route, navigation }) {
   const handleReviews = () => {
     navigation.navigate("PeopleReview", {
       id: userData.id,
-      name: userData.name
+      name: userData.name,
     });
   };
 
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -492,7 +529,7 @@ export default function Profile({ route, navigation }) {
                     number: userData.phoneNumber,
                     whatsapp: userData.phoneNumber,
                     state: userData.state,
-                    city: userData.city
+                    city: userData.city,
                   }}
                   onSubmit={(values) => updateUser(values, "contact")}
                 >
@@ -501,7 +538,7 @@ export default function Profile({ route, navigation }) {
                     handleBlur,
                     handleSubmit,
                     values,
-                    errors
+                    errors,
                   }) => (
                     <>
                       <GeneralInput
@@ -555,136 +592,136 @@ export default function Profile({ route, navigation }) {
                           iconContainer: {
                             top: 5,
                             right: 12,
-                            resizeMode: "contain"
-                          }
+                            resizeMode: "contain",
+                          },
                         }}
                         items={[
                           {
                             value: "Aguascalientes",
-                            label: "Aguascalientes"
+                            label: "Aguascalientes",
                           },
                           {
                             value: "Baja California Sur",
-                            label: "Baja California Sur"
+                            label: "Baja California Sur",
                           },
                           {
                             value: "Baja California",
-                            label: "Baja California"
+                            label: "Baja California",
                           },
                           {
                             value: "Campeche",
-                            label: "Campeche"
+                            label: "Campeche",
                           },
                           {
                             value: "Chiapas",
-                            label: "Chiapas"
+                            label: "Chiapas",
                           },
                           {
                             value: "Chihuahua",
-                            label: "Chihuahua"
+                            label: "Chihuahua",
                           },
                           {
                             value: "Coahuila de Zaragoza",
-                            label: "Coahuila de Zaragoza"
+                            label: "Coahuila de Zaragoza",
                           },
                           {
                             value: "Colima",
-                            label: "Colima"
+                            label: "Colima",
                           },
                           {
                             value: "Distrito Federal",
-                            label: "Distrito Federal"
+                            label: "Distrito Federal",
                           },
                           {
                             value: "Durango",
-                            label: "Durango"
+                            label: "Durango",
                           },
                           {
                             value: "Guanajuato",
-                            label: "Guanajuato"
+                            label: "Guanajuato",
                           },
                           {
                             value: "Guerrero",
-                            label: "Guerrero"
+                            label: "Guerrero",
                           },
                           {
                             value: "Hidalgo",
-                            label: "Hidalgo"
+                            label: "Hidalgo",
                           },
                           {
                             value: "Jalisco",
-                            label: "Jalisco"
+                            label: "Jalisco",
                           },
                           {
                             value: "México",
-                            label: "México"
+                            label: "México",
                           },
                           {
                             value: "Michoacán de Ocampo",
-                            label: "Michoacán de Ocampo"
+                            label: "Michoacán de Ocampo",
                           },
                           {
                             value: "Morelos",
-                            label: "Morelos"
+                            label: "Morelos",
                           },
                           {
                             value: "Nayarit",
-                            label: "Nayarit"
+                            label: "Nayarit",
                           },
                           {
                             value: "Nuevo León",
-                            label: "Nuevo León"
+                            label: "Nuevo León",
                           },
                           {
                             value: "Oaxaca",
-                            label: "Oaxaca"
+                            label: "Oaxaca",
                           },
                           {
                             value: "Puebla",
-                            label: "Puebla"
+                            label: "Puebla",
                           },
                           {
                             value: "Querétaro",
-                            label: "Querétaro"
+                            label: "Querétaro",
                           },
 
                           {
                             value: "Quintana Roo",
-                            label: "Quintana Roo"
+                            label: "Quintana Roo",
                           },
                           {
                             value: "San Luis Potosí",
-                            label: "San Luis Potosí"
+                            label: "San Luis Potosí",
                           },
                           {
                             value: "Sinaloa",
-                            label: "Sinaloa"
+                            label: "Sinaloa",
                           },
 
                           {
                             value: "Sonora",
-                            label: "Sonora"
+                            label: "Sonora",
                           },
                           {
                             value: "Tabasco",
-                            label: "Tabasco"
+                            label: "Tabasco",
                           },
                           {
                             value: "Tamaulipas",
-                            label: "Tamaulipas"
+                            label: "Tamaulipas",
                           },
                           {
                             value: "Tlaxcala",
-                            label: "Tlaxcala"
+                            label: "Tlaxcala",
                           },
                           {
                             value: "Veracruz de Ignacio de la Llave",
-                            label: "Veracruz de Ignacio de la Llave"
+                            label: "Veracruz de Ignacio de la Llave",
                           },
                           {
                             value: "Yucatán",
-                            label: "Yucatán"
-                          }
+                            label: "Yucatán",
+                          },
                         ]}
                       />
                       <RNPickerSelect
@@ -697,8 +734,8 @@ export default function Profile({ route, navigation }) {
                           iconContainer: {
                             top: 5,
                             right: 12,
-                            resizeMode: "contain"
-                          }
+                            resizeMode: "contain",
+                          },
                         }}
                         items={getCities(values.state)}
                       />
@@ -751,8 +788,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={servicesCat}
                   />
@@ -766,8 +803,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subserviceCat0}
                   />
@@ -781,8 +818,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={servicesCat}
                   />
@@ -796,8 +833,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subserviceCat1}
                   />
@@ -811,8 +848,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={servicesCat}
                   />
@@ -826,8 +863,8 @@ export default function Profile({ route, navigation }) {
                       iconContainer: {
                         top: 5,
                         right: 12,
-                        resizeMode: "contain"
-                      }
+                        resizeMode: "contain",
+                      },
                     }}
                     items={subserviceCat2}
                   />
@@ -861,7 +898,7 @@ export default function Profile({ route, navigation }) {
                   <Formik
                     validationSchema={detailsValidation}
                     initialValues={{
-                      details: userData.details
+                      details: userData.details,
                     }}
                     onSubmit={(values) => updateUser(values, "details")}
                   >
@@ -870,7 +907,7 @@ export default function Profile({ route, navigation }) {
                       handleBlur,
                       handleSubmit,
                       values,
-                      errors
+                      errors,
                     }) => (
                       <>
                         <GeneralInput
