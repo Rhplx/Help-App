@@ -113,10 +113,9 @@ export default function Profile({ route, navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "black",
+      color: "#9D9495"
     },
     inputAndroid: {
-      color: "black",
       backgroundColor: "white",
       fontSize: 18,
       paddingVertical: 4,
@@ -128,13 +127,14 @@ export default function Profile({ route, navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
+      color: "#9D9495"
     },
   });
 
   const greenSelectStyles = StyleSheet.create({
     inputIOS: {
       backgroundColor: "#39B4BB",
-      color: "black",
+      color: "#F9F3EE",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,
@@ -148,7 +148,7 @@ export default function Profile({ route, navigation }) {
     },
     inputAndroid: {
       backgroundColor: "#39B4BB",
-      color: "black",
+      color: "#F9F3EE",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,

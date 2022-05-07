@@ -73,7 +73,8 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
+      color: "#9D9495"
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -86,7 +87,9 @@ export default function PersonalRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
+      color: "#9D9495"
+
     }
   });
   const statePlaceholder = {

@@ -100,7 +100,7 @@ export default function CompanyRegister({ navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "black"
+      color: "#9D9495"
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -114,13 +114,13 @@ export default function CompanyRegister({ navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "black"
+      color: "#9D9495"
     }
   });
   const greenSelectStyles = StyleSheet.create({
     inputIOS: {
       backgroundColor: "#39B4BB",
-      color: "black",
+      color: "#F9F3EE",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,
@@ -134,7 +134,7 @@ export default function CompanyRegister({ navigation }) {
     },
     inputAndroid: {
       backgroundColor: "#39B4BB",
-      color: "black",
+      color: "#F9F3EE",
       fontSize: 18,
       paddingVertical: 4,
       paddingHorizontal: 18,

@@ -89,12 +89,13 @@ export const CategoriesButton = styled.Pressable`
 
 export const CategoriesButtonLink = styled(Link)`
   ${button}
-`;
+  padding: 10px 8px;
+  `;
 
 export const CategoriesButtonText = styled.Text`
   width: 100%;
   color: #ffffff;
-  font-family: "Roboto_700Bold";
+  font-family: "Roboto_400Regular";
   font-size: 18px;
   line-height: 21px;
   text-align: center;
