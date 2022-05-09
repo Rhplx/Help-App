@@ -29,7 +29,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{
-          headerShown: false
+          headerShown: false,
         }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -37,12 +37,7 @@ export default function App() {
         <Stack.Screen name="CompanyRegister" component={CompanyRegister} />
         <Stack.Screen name="PersonalRegister" component={PersonalRegister} />
         <Stack.Screen name="UserRegister" component={UserRegister} />
-        <Stack.Screen name="LimitedAccount" component={LimitedAccount} />
         <Stack.Screen name="ChatWith" component={ChatWith} />
-        <Stack.Screen
-          name="RegisterConfirmation"
-          component={RegisterConfirmation}
-        />
         <Stack.Screen name="Categories" component={Categories} />
         <Stack.Screen name="SubCategories" component={SubCategories} />
         <Stack.Screen name="ProposeService" component={ProposeService} />

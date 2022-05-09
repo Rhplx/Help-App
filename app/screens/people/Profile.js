@@ -113,7 +113,7 @@ export default function Profile({ route, navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "#9D9495"
+      color: "#9D9495",
     },
     inputAndroid: {
       backgroundColor: "white",
@@ -127,7 +127,7 @@ export default function Profile({ route, navigation }) {
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
       textAlign: "center",
-      color: "#9D9495"
+      color: "#9D9495",
     },
   });
 
@@ -954,12 +954,10 @@ export default function Profile({ route, navigation }) {
               </ProfileDataTextRow>
             ) : (
               <>
-                <GeneralImagePicker color="transparent">
-                  <GeneralImagePickerText
-                    title="Carga identificación"
-                    onPress={() => pickImage("idCard")}
-                    color="#39b4bb"
-                  />
+                <GeneralImagePicker onPress={() => pickImage("idCard")}>
+                  <GeneralImagePickerText color="#39b4bb">
+                    Carga identificación
+                  </GeneralImagePickerText>
                 </GeneralImagePicker>
                 <DoubleInputWrapper>
                   <View style={{ width: "48%" }}>
