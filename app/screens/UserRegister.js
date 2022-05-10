@@ -94,11 +94,13 @@ export default function PersonalRegister({ navigation }) {
   });
   const statePlaceholder = {
     label: "Estado",
-    value: ""
+    value: "",
+    color: "83233C"
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: ""
+    value: "",
+    color: "83233C"
   };
 
   React.useEffect(() => {

@@ -55,7 +55,7 @@ export const CategoriesCardImage = styled.Image`
   height: 80px;
   margin-bottom: 10px;
   resize-mode: contain;
-  border-radius: 30px;
+  border-radius: 10px;
 `;
 export const CategoriesCardText = styled.Text`
   max-width: 100px;

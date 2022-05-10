@@ -16,8 +16,8 @@ export const ProfileHeader = styled.View`
 `;
 
 export const ProfileHeaderImage = styled.Image`
-  flex: 1;
-  width: 50%;
+  margin-right: 20px;
+  width: 140px;
   height: 140px;
   resize-mode: contain;
   border-radius: 100px;

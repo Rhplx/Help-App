@@ -16,11 +16,11 @@ export const SubCatCard = styled.View`
 `;
 
 export const SubCatCardImage = styled.Image`
-  flex: 1;
+  margin-right: 20px;
   width: 150px;
   height: 150px;
   resize-mode: contain;
-  border-radius: 50px;
+  border-radius: 10px;
 `;
 
 export const SubCatCardContent = styled.View`
@@ -69,7 +69,7 @@ export const SubCategoriesIcon = styled.Image`
   height: 55px;
   resize-mode: contain;
   margin-right: 15px;
-  border-radius: 25px;
+  border-radius: 10px;
 `;
 export const SubCategoriesListText = styled.Text`
   font-family: "Roboto_700Bold";
