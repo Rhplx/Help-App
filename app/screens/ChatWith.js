@@ -31,8 +31,9 @@ import {
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 
-export default function ChatWith({ navigation }) {
+export default function ChatWith({ route, navigation }) {
   const [chats, setChats] = React.useState([]);
+  const { userId } = route.params;
 
   React.useEffect(() => {
     navigation.addListener("focus", () => {
@@ -80,7 +81,12 @@ export default function ChatWith({ navigation }) {
       return (
         <ChatWrapper
           key={"chat" + index}
-          onPress={() => handleChat(item.idUserFrom, item.fullName)}
+          onPress={() =>
+            handleChat(
+              item.idUserFrom != userId ? item.idUserFrom : item.idUserTo,
+              item.fullName
+            )
+          }
         >
           <ChatTitleWrapper pink={index === 0}>
             <ChatTitle>Chatear con {item.fullName}</ChatTitle>

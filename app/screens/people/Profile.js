@@ -398,7 +398,9 @@ export default function Profile({ route, navigation }) {
   };
 
   const handleChatWith = () => {
-    navigation.navigate("ChatWith");
+    navigation.navigate("ChatWith", {
+      userId: userData.id,
+    });
   };
 
   const handleReviews = () => {

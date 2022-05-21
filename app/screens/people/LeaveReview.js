@@ -67,6 +67,7 @@ export default function PeopleReview({ route, navigation }) {
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
+          navigation.goBack();
           Alert.alert("Éxito", "Tu reseña ha sido publicada");
           actions.resetForm({ message: "" });
           setStars("");
