@@ -164,7 +164,7 @@ export default function Login(props) {
                 </ButtonWrapper>
                 <ButtonLink
                   to={{ screen: "Forgot" }}
-                  onPress={() => props.navigation.navigate("Forgot")}
+                  // onPress={() => props.navigation.navigate("Forgot")}
                 >
                   <ButtonForgot>Olvide mi contraseña</ButtonForgot>
                 </ButtonLink>

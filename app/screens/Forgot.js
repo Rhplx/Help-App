@@ -31,7 +31,7 @@ import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { getBaseApi } from "../common/functions";
 
-export default function Login(props) {
+export default function Forgot(props) {
   const loginValidationSchema = yup.object().shape({
     email: yup
       .string()
@@ -47,7 +47,7 @@ export default function Login(props) {
   const checkSession = async () => {
     let sessionId = await AsyncStorage.getItem("sessionId");
     if (sessionId) {
-      props.navigation.navigate("Categories");
+      // props.navigation.navigate("Categories");
     }
   };
 
@@ -110,7 +110,7 @@ export default function Login(props) {
                   <Button>
                     <ButtonLink
                       to={{ screen: "Login" }}
-                      onPress={() => props.navigation.navigate("Login")}
+                      // onPress={() => props.navigation.navigate("Login")}
                     >
                       <ButtonText>Regresar</ButtonText>
                     </ButtonLink>
@@ -119,7 +119,6 @@ export default function Login(props) {
                     <ButtonText>Recuperar</ButtonText>
                   </Button>
                 </ButtonWrapper>
-
                 <TermsWrapper>
                   <TermsText>Aviso de Privacidad</TermsText>
                 </TermsWrapper>
