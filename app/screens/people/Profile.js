@@ -165,23 +165,26 @@ export default function Profile({ route, navigation }) {
   const subServicePlaceholder = {
     label: "Selecciona subservicio",
     value: "",
-    color: "#ffffff",
+    color: "83233C"
+
   };
 
   const statePlaceholder = {
     label: "Estado",
     value: "",
+    color: "83233C"
   };
 
   const cityPlaceholder = {
     label: "Ciudad",
     value: "",
+    color: "83233C"
   };
 
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: 0,
-    color: "#ffffff",
+    color: "83233C"
   };
 
   React.useEffect(() => {

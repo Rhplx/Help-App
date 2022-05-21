@@ -144,26 +144,28 @@ export default function CompanyRegister({ navigation }) {
       minHeight: 50,
       marginTop: 10,
       paddingRight: 30, // to ensure the text is never behind the icon
-      textAlign: "center"
+      textAlign: "center",
     }
   });
   const statePlaceholder = {
     label: "Estado",
-    value: ""
+    value: "",
+    color: "83233C",
   };
   const cityPlaceholder = {
     label: "Ciudad",
-    value: ""
+    value: "",
+    color: "83233C",
   };
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: "",
-    color: "#ffffff"
+    color: "83233C",
   };
   const subServicePlaceholder = {
     label: "Selecciona subservicio",
     value: "",
-    color: "#ffffff"
+    color: "83233C",
   };
   React.useEffect(() => {
     (async () => {
@@ -717,6 +719,7 @@ export default function CompanyRegister({ navigation }) {
                     onValueChange={(value) => handleServiceChange(value, 0)}
                     placeholder={servicePlaceholder}
                     useNativeAndroidPickerStyle={false}
+                    placeholderTextColor="red"
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
@@ -747,6 +750,7 @@ export default function CompanyRegister({ navigation }) {
                     placeholder={servicePlaceholder}
                     useNativeAndroidPickerStyle={false}
                     fixAndroidTouchableBug
+                    placeholderTextColor="red"
                     style={{
                       ...greenSelectStyles,
                       iconContainer: {
