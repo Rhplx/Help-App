@@ -38,18 +38,6 @@ export default function Forgot(props) {
       .email("Ingresa un correo valido")
       .required("Correo requerido"),
   });
-  React.useEffect(() => {
-    props.navigation.addListener("focus", () => {
-      checkSession();
-    });
-  }, []);
-
-  const checkSession = async () => {
-    let sessionId = await AsyncStorage.getItem("sessionId");
-    if (sessionId) {
-      // props.navigation.navigate("Categories");
-    }
-  };
 
   const forgotPassword = (data) => {
     console.log(data);
@@ -107,20 +95,17 @@ export default function Forgot(props) {
                   )}
                 </FormWrapper>
                 <ButtonWrapper>
-                  <Button>
-                    <ButtonLink
-                      to={{ screen: "Login" }}
-                      // onPress={() => props.navigation.navigate("Login")}
-                    >
-                      <ButtonText>Regresar</ButtonText>
-                    </ButtonLink>
+                  <Button onPress={() => props.navigation.navigate("Login")}>
+                    <ButtonText>Regresar</ButtonText>
                   </Button>
                   <Button pink onPress={handleSubmit}>
                     <ButtonText>Recuperar</ButtonText>
                   </Button>
                 </ButtonWrapper>
                 <TermsWrapper>
-                  <TermsText>Aviso de Privacidad</TermsText>
+                  <TermsText to={{ screen: "Privacity" }}>
+                    Aviso de Privacidad
+                  </TermsText>
                 </TermsWrapper>
               </>
             )}
