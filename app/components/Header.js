@@ -6,7 +6,7 @@ import {
   HeaderLogo,
   HeaderSpace,
   BackButton,
-  BackImage,
+  BackImage
 } from "../styles/components/HeaderStyles";
 
 import Logo from "../assets/logo.png";
@@ -34,8 +34,8 @@ export default function Header({ children, signout }) {
         source={Logo}
         style={[
           {
-            transform: [{ translateX: -60 }],
-          },
+            transform: [{ translateX: -60 }, { translateY: -13 }]
+          }
         ]}
       />
       {children ? children : <HeaderSpace />}

@@ -1,6 +1,6 @@
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Text, Alert } from "react-native";
+import { Text, Alert, KeyboardAvoidingView } from "react-native";
 
 // External Imports
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -15,6 +15,8 @@ import * as yup from "yup";
 import Layout from "../Layout";
 import Header from "../../components/Header";
 import MessageButton from "../../components/MessageButton";
+import UserButton from "../../components/UserButton";
+
 import {
   PeopleSubtitle,
   PeopleHeader,
@@ -161,13 +163,13 @@ export default function People({ route, navigation }) {
     return (
       <Layout>
         <Header>
-          <MessageButton />
+          {/* <MessageButton /> */}
+          <UserButton navigation={navigation} />
         </Header>
         <PeopleContainer>
           <GeneralTitle>{name}</GeneralTitle>
           <PeopleSubtitle>
-            Envíale un mensaje para solicitar sus servicios, o enviale un
-            mensaje o enviarle un mensajes mediante WhatsApp
+            Envíale un mensaje para solicitar sus servicios o aclarar tus dudas
           </PeopleSubtitle>
           <PeopleHeader>
             <PeopleImageContainer>
@@ -222,9 +224,11 @@ export default function People({ route, navigation }) {
                     value={values.message}
                   />
                   {errors.message && (
-                    <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.message}
-                    </Text>
+                    <KeyboardAvoidingView>
+                      <Text style={{ fontSize: 10, color: "red" }}>
+                        {errors.message}
+                      </Text>
+                    </KeyboardAvoidingView>
                   )}
                   <PeopleActions>
                     <PeopleButton icon onPress={handleMaximize(values.message)}>

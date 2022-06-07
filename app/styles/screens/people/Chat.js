@@ -32,14 +32,14 @@ export const ChatText = styled.Text`
   font-size: 14px;
   line-height: 18px;
   text-align: left;
-  background-color: white;
+  background-color: ${(props) => (props.mine ? "#EFEFEF" : "white")};
   border-radius: 15px;
   overflow: hidden;
   padding: 20px;
 `;
 export const ChatDate = styled.Text`
   font-size: 10px;
-  color: #767676;
+  color: white;
   text-align: right;
   margin: 5px 0;
 `;

@@ -64,6 +64,7 @@ export const CatPeopleListCardImage = styled.Image`
   max-width: 90px;
   height: 90px;
   resize-mode: contain;
+  border-radius: 8px;
 `;
 
 export const CatPeopleListCardContent = styled.View`

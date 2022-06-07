@@ -110,7 +110,7 @@ export const PeopleService = styled.Text`
   background-color: #ef0e73;
   color: #ffffff;
   font-family: "Roboto_700Bold";
-  font-size: 18px;
+  font-size: 16px;
   line-height: 21px;
   text-transform: uppercase;
   border-top-left-radius: 10px;
@@ -173,14 +173,14 @@ export const PeopleReviewRow = styled.View`
   margin: 20px 0 0;
 `;
 export const PeopleReviewStars = styled.View`
-  width: 28%;
+  width: 30%;
   background-color: #4eaba1;
   padding: 5px;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 `;
 export const PeopleReviewName = styled.View`
-  width: 70%;
+  width: 68%;
   background-color: #4eaba1;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;

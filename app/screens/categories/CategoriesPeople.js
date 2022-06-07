@@ -24,17 +24,17 @@ import {
   CatPeopleListCardImage,
   CatPeopleListCardContent,
   CatPeopleListCardText,
-  CatPeopleListCardButton,
+  CatPeopleListCardButton
 } from "../../styles/screens/categories/CategoriesPeople";
 
 // Assets and fonts
 import {
   useFonts,
   HindMadurai_700Bold,
-  HindMadurai_600SemiBold,
+  HindMadurai_600SemiBold
 } from "@expo-google-fonts/hind-madurai";
 import { Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import People1Icon from "../../assets/people1.png";
+import People1Icon from "../../assets/people.png";
 
 export default function CategoriesPeople({ route, navigation }) {
   const [providers, setProviders] = React.useState([]);
@@ -44,7 +44,7 @@ export default function CategoriesPeople({ route, navigation }) {
     HindMadurai_700Bold,
     HindMadurai_600SemiBold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   React.useEffect(() => {
@@ -63,8 +63,8 @@ export default function CategoriesPeople({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Provider?service=" + id + "&city=" + city, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId,
-      },
+        Authorization: "Bearer " + sessionId
+      }
     })
       .then((res) => res.json())
       .then((response) => {
@@ -76,8 +76,8 @@ export default function CategoriesPeople({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -88,7 +88,7 @@ export default function CategoriesPeople({ route, navigation }) {
   const handleGoToPeople = (item) => {
     navigation.navigate("People", {
       id: item.id,
-      name: item.name,
+      name: item.name
     });
   };
 
