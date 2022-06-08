@@ -88,10 +88,10 @@ export default function ChatWith({ route, navigation }) {
             )
           }
         >
-          <ChatTitleWrapper pink={index === 0}>
+          <ChatTitleWrapper pink={!item.watched}>
             <ChatTitle>Chatear con {item.fullName}</ChatTitle>
           </ChatTitleWrapper>
-          <ChatSubtitleWrapper pink={index === 0}>
+          <ChatSubtitleWrapper pink={!item.watched}>
             <ChatSubtitle>Último mensaje: {item.insertDate}</ChatSubtitle>
           </ChatSubtitleWrapper>
         </ChatWrapper>

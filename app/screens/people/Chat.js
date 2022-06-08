@@ -5,7 +5,7 @@ import { Alert } from "react-native";
 // External Imports
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { clearAsyncStorage } from "../../common/syncStorage";
-import { checkSession, getBaseApi } from "../../common/functions";
+import { checkSession, getBaseApi, changeDay } from "../../common/functions";
 
 // Third Party Imports
 import { Formik } from "formik";
@@ -28,7 +28,7 @@ import {
   SendInput,
   SendButton,
   SendText,
-  SendIcon
+  SendIcon,
 } from "../../styles/screens/people/Chat";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -44,6 +44,7 @@ export default function PeopleReview({ route, navigation }) {
     navigation.addListener("focus", () => {
       checkSession(navigation);
       getChatMessages();
+      viewMessages();
     });
   }, []);
 
@@ -52,21 +53,59 @@ export default function PeopleReview({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Message?user=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId
-      }
+        Authorization: "Bearer " + sessionId,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
-          setMessages(response.data.messages);
+          let messages = response.data.messages.map((item) => {
+            item.insertDate =
+              changeDay(item.insertDate.substring(0, 3)) +
+              item.insertDate.substring(3, 100);
+            return item;
+          });
+          setMessages(messages);
         } else {
           if (response.error === "Error: Sesión Invalida") {
             clearAsyncStorage(navigation);
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok"
-              }
+                text: "Ok",
+              },
+            ]);
+          }
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const viewMessages = async () => {
+    let sessionId = await AsyncStorage.getItem("sessionId");
+    let values = {
+      chat: id,
+    };
+    fetch(getBaseApi() + "/manage/Message", {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + sessionId,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          console.log("success");
+        } else {
+          if (response.error === "Error: Sesión Invalida") {
+            clearAsyncStorage(navigation);
+          } else {
+            Alert.alert("Ooops :(", response.error, [
+              {
+                text: "Ok",
+              },
             ]);
           }
         }
@@ -75,7 +114,7 @@ export default function PeopleReview({ route, navigation }) {
   };
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido")
+    message: yup.string().required("Mensaje requerido"),
   });
 
   const insertMessage = async (values, actions) => {
@@ -86,9 +125,9 @@ export default function PeopleReview({ route, navigation }) {
       method: "POST",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values),
     })
       .then((res) => res.json())
       .then((response) => {
@@ -133,7 +172,7 @@ export default function PeopleReview({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {

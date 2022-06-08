@@ -47,11 +47,9 @@ export default function Forgot(props) {
       .then((res) => res.json())
       .then((response) => {
         if (response.result) {
-          console.log(response);
           Alert.alert("Hecho", "Hemos enviado un correo con tu contraseña");
           props.navigation.navigate("Login");
         } else {
-          console.log(response);
           Alert.alert("Ooops :(", response.error);
         }
       })

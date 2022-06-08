@@ -73,12 +73,14 @@ export default function Profile({ route, navigation }) {
   const [serviceEdit, setServiceEdit] = React.useState(false);
   const [detailsEdit, setDetailsEdit] = React.useState(false);
   const [idCardEdit, setIdCardEdit] = React.useState(false);
+  const [profileEdit, setProfileEdit] = React.useState(false);
   const [servicesCat, setServicesCat] = React.useState([]);
   const [services, setServices] = React.useState([0, 0, 0]);
   const [subserviceCat0, setSubserviceCat0] = React.useState([]);
   const [subserviceCat1, setSubserviceCat1] = React.useState([]);
   const [subserviceCat2, setSubserviceCat2] = React.useState([]);
   const [subservices, setSubservices] = React.useState([0, 0, 0]);
+  const [profileImage, setProfileImage] = React.useState(undefined);
   const [idCard, setIdCard] = React.useState(undefined);
 
   const ContactValidation = yup.object().shape({
@@ -165,26 +167,25 @@ export default function Profile({ route, navigation }) {
   const subServicePlaceholder = {
     label: "Selecciona subservicio",
     value: "",
-    color: "83233C"
-
+    color: "83233C",
   };
 
   const statePlaceholder = {
     label: "Estado",
     value: "",
-    color: "83233C"
+    color: "83233C",
   };
 
   const cityPlaceholder = {
     label: "Ciudad",
     value: "",
-    color: "83233C"
+    color: "83233C",
   };
 
   const servicePlaceholder = {
     label: "Selecciona servicio",
     value: 0,
-    color: "83233C"
+    color: "83233C",
   };
 
   React.useEffect(() => {
@@ -392,6 +393,31 @@ export default function Profile({ route, navigation }) {
         if (response.result) {
           Alert.alert("Genial!", "Tu archivo ha sido reemplazado con éxito");
           setIdCardEdit(false);
+          getProfileDetails();
+        } else {
+          Alert.alert("Ooops :(", response.error);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const updateProfileImage = () => {
+    let formDat = new FormData();
+    formDat.append("action", "image");
+    formDat.append("user", userData.id);
+    formDat.append("file", profileImage);
+    fetch(getBaseApi() + "/manage/User", {
+      method: "PUT",
+      body: formDat,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.result) {
+          Alert.alert("Genial!", "Tu archivo ha sido reemplazado con éxito");
+          setProfileEdit(false);
           getProfileDetails();
         } else {
           Alert.alert("Ooops :(", response.error);
@@ -975,6 +1001,50 @@ export default function Profile({ route, navigation }) {
                   </View>
                   <View style={{ width: "48%" }}>
                     <RegisterButton onPress={() => updateIdCard()}>
+                      <RegisterButtonText>Guardar</RegisterButtonText>
+                    </RegisterButton>
+                  </View>
+                </DoubleInputWrapper>
+              </>
+            )}
+          </ProfileData>
+          <ProfileData>
+            <ProfileDataHeader>
+              <ProfileDataTitle>Imagen de Perfil</ProfileDataTitle>
+              {!profileEdit && (
+                <ProfileDataButton onPress={() => setProfileEdit(true)}>
+                  <ProfileDataButtonText>Editar</ProfileDataButtonText>
+                </ProfileDataButton>
+              )}
+            </ProfileDataHeader>
+            {!profileEdit ? (
+              <ProfileDataTextRow>
+                <ProfileDataImage
+                  source={
+                    userData.profileImage
+                      ? { uri: userData.profileImage }
+                      : DefaultCard
+                  }
+                />
+              </ProfileDataTextRow>
+            ) : (
+              <>
+                <GeneralImagePicker onPress={() => pickImage("image")}>
+                  <GeneralImagePickerText color="#39b4bb">
+                    Carga Imagen de Perfil
+                  </GeneralImagePickerText>
+                </GeneralImagePicker>
+                <DoubleInputWrapper>
+                  <View style={{ width: "48%" }}>
+                    <RegisterButton
+                      color="gray"
+                      onPress={() => setProfileEdit(false)}
+                    >
+                      <RegisterButtonText>Cancelar</RegisterButtonText>
+                    </RegisterButton>
+                  </View>
+                  <View style={{ width: "48%" }}>
+                    <RegisterButton onPress={() => updateProfileImage()}>
                       <RegisterButtonText>Guardar</RegisterButtonText>
                     </RegisterButton>
                   </View>

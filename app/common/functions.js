@@ -379,3 +379,34 @@ export function dateFormat(type, dateOb, boot = {}) {
   }
   return r;
 }
+
+export function changeDay(englishDay) {
+  let spanishDay = "";
+  switch (englishDay) {
+    case "Sat":
+      spanishDay = "Sab";
+      break;
+    case "Sun":
+      spanishDay = "Dom";
+      break;
+    case "Mon":
+      spanishDay = "Lun";
+      break;
+    case "Tue":
+      spanishDay = "Mar";
+      break;
+    case "Wed":
+      spanishDay = "Mie";
+      break;
+    case "Thu":
+      spanishDay = "Jue";
+      break;
+    case "Fri":
+      spanishDay = "Vie";
+      break;
+    default:
+      spanishDay = "Lun";
+      break;
+  }
+  return spanishDay;
+}
