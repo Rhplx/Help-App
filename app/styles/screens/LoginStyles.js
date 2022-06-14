@@ -17,7 +17,7 @@ export const Logo = styled.Image`
 export const Title = styled.Text`
   color: #ef0e73;
   font-family: "HindMadurai_700Bold";
-  font-size: 46px;
+  font-size: 44px;
   line-height: 64px;
   text-align: center;
 `;

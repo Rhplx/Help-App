@@ -10,6 +10,7 @@ import { checkSession, getBaseApi } from "../../common/functions";
 // Third Party Imports
 import { Formik } from "formik";
 import * as yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Styled Components & Components
 import Layout from "../Layout";
@@ -162,87 +163,99 @@ export default function People({ route, navigation }) {
   } else {
     return (
       <Layout>
-        <Header>
-          {/* <MessageButton /> */}
-          <UserButton navigation={navigation} />
-        </Header>
-        <PeopleContainer>
-          <GeneralTitle>{name}</GeneralTitle>
-          <PeopleSubtitle>
-            Envíale un mensaje para solicitar sus servicios o aclarar tus dudas
-          </PeopleSubtitle>
-          <PeopleHeader>
-            <PeopleImageContainer>
-              <PeopleImageContent>
-                <PeopleFavorite onPress={handleSendReview}>
-                  <PeopleFavoriteIcon source={FavoriteIcon} />
-                </PeopleFavorite>
-                <PeopleImage
-                  source={
-                    provider.profileImage
-                      ? { uri: provider.profileImage }
-                      : PeopleIMG
-                  }
-                />
-                {provider.reviews && (
-                  <PeopleReviewsContainer onPress={handleViewReviews}>
-                    <PeopleReviews>
-                      <PeopleReviewsText>
-                        {provider.reviews.quantity} Reseña
-                        {provider.reviews.quantity > 1 && "s"}
-                      </PeopleReviewsText>
-                    </PeopleReviews>
-                    <PeopleReviewsStars>{renderStars()}</PeopleReviewsStars>
-                  </PeopleReviewsContainer>
-                )}
-              </PeopleImageContent>
-            </PeopleImageContainer>
-            <PeopleServices
-              data={provider.services}
-              keyExtractor={(item, index) => `${item.name}-${index}`}
-              renderItem={({ item }) => (
-                <PeopleService>{item.name}</PeopleService>
-              )}
-            />
-          </PeopleHeader>
-          <PeopleDescription>{provider.details}</PeopleDescription>
-          <PeopleContent>
-            <Formik
-              validationSchema={peopleMessageValidationSchema}
-              initialValues={{ message: "" }}
-              onSubmit={insertMessage}
-            >
-              {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-                <>
-                  <GeneralInput
-                    multiline
-                    numberOfLines={4}
-                    onChangeText={handleChange("message")}
-                    onBlur={handleBlur("message")}
-                    placeholder="Escribe un mensaje"
-                    name="message"
-                    value={values.message}
+        <KeyboardAwareScrollView>
+          <Header>
+            {/* <MessageButton /> */}
+            <UserButton navigation={navigation} />
+          </Header>
+          <PeopleContainer>
+            <GeneralTitle>{name}</GeneralTitle>
+            <PeopleSubtitle>
+              Envíale un mensaje para solicitar sus servicios o aclarar tus
+              dudas
+            </PeopleSubtitle>
+            <PeopleHeader>
+              <PeopleImageContainer>
+                <PeopleImageContent>
+                  <PeopleFavorite onPress={handleSendReview}>
+                    <PeopleFavoriteIcon source={FavoriteIcon} />
+                  </PeopleFavorite>
+                  <PeopleImage
+                    source={
+                      provider.profileImage
+                        ? { uri: provider.profileImage }
+                        : PeopleIMG
+                    }
                   />
-                  {errors.message && (
-                    <KeyboardAvoidingView>
-                      <Text style={{ fontSize: 10, color: "red" }}>
-                        {errors.message}
-                      </Text>
-                    </KeyboardAvoidingView>
+                  {provider.reviews && (
+                    <PeopleReviewsContainer onPress={handleViewReviews}>
+                      <PeopleReviews>
+                        <PeopleReviewsText>
+                          {provider.reviews.quantity} Reseña
+                          {provider.reviews.quantity > 1 && "s"}
+                        </PeopleReviewsText>
+                      </PeopleReviews>
+                      <PeopleReviewsStars>{renderStars()}</PeopleReviewsStars>
+                    </PeopleReviewsContainer>
                   )}
-                  <PeopleActions>
-                    <PeopleButton icon onPress={handleMaximize(values.message)}>
-                      <PeopleButtonIcon source={MaximizeIcon} />
-                    </PeopleButton>
-                    <PeopleButton onPress={handleSubmit}>
-                      <PeopleButtonText>Enviar mensaje</PeopleButtonText>
-                    </PeopleButton>
-                  </PeopleActions>
-                </>
-              )}
-            </Formik>
-          </PeopleContent>
-        </PeopleContainer>
+                </PeopleImageContent>
+              </PeopleImageContainer>
+              <PeopleServices
+                data={provider.services}
+                keyExtractor={(item, index) => `${item.name}-${index}`}
+                renderItem={({ item }) => (
+                  <PeopleService>{item.name}</PeopleService>
+                )}
+              />
+            </PeopleHeader>
+            <PeopleDescription>{provider.details}</PeopleDescription>
+            <PeopleContent>
+              <Formik
+                validationSchema={peopleMessageValidationSchema}
+                initialValues={{ message: "" }}
+                onSubmit={insertMessage}
+              >
+                {({
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  values,
+                  errors
+                }) => (
+                  <>
+                    <GeneralInput
+                      multiline
+                      numberOfLines={4}
+                      onChangeText={handleChange("message")}
+                      onBlur={handleBlur("message")}
+                      placeholder="Escribe un mensaje"
+                      name="message"
+                      value={values.message}
+                    />
+                    {errors.message && (
+                      <KeyboardAvoidingView>
+                        <Text style={{ fontSize: 10, color: "red" }}>
+                          {errors.message}
+                        </Text>
+                      </KeyboardAvoidingView>
+                    )}
+                    <PeopleActions>
+                      <PeopleButton
+                        icon
+                        onPress={handleMaximize(values.message)}
+                      >
+                        <PeopleButtonIcon source={MaximizeIcon} />
+                      </PeopleButton>
+                      <PeopleButton onPress={handleSubmit}>
+                        <PeopleButtonText>Enviar mensaje</PeopleButtonText>
+                      </PeopleButton>
+                    </PeopleActions>
+                  </>
+                )}
+              </Formik>
+            </PeopleContent>
+          </PeopleContainer>
+        </KeyboardAwareScrollView>
       </Layout>
     );
   }

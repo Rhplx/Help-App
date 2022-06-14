@@ -55,7 +55,7 @@ export const CategoriesCardImage = styled.Image`
   height: 80px;
   margin-bottom: 10px;
   resize-mode: contain;
-  border-radius: 10px;
+  border-radius: 14px;
 `;
 export const CategoriesCardText = styled.Text`
   max-width: 100px;
@@ -90,7 +90,7 @@ export const CategoriesButton = styled.Pressable`
 export const CategoriesButtonLink = styled(Link)`
   ${button}
   padding: 10px 8px;
-  `;
+`;
 
 export const CategoriesButtonText = styled.Text`
   width: 100%;

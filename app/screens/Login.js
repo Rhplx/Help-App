@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // Third Party Imports
 import { Formik } from "formik";
 import * as yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Styled Components
 import { Text, Alert } from "react-native";
@@ -107,80 +108,83 @@ export default function Login(props) {
     return (
       <Layout>
         <Container>
-          <Logo source={LogoImage} />
-          <Title>¡Bienvenido!</Title>
-          <Subtitle>Identifícate para continuar</Subtitle>
-          <Formik
-            validationSchema={loginValidationSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={getLogin}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              isValid
-            }) => (
-              <>
-                <FormWrapper>
-                  <GeneralInput
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
-                    placeholder="Correo"
-                    name="email"
-                    value={values.email}
-                    keyboardType="email-address"
-                  />
-                  {errors.email && (
-                    <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.email}
-                    </Text>
-                  )}
-                  <GeneralInput
-                    name="password"
-                    placeholder="Contraseña"
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
-                    value={values.password}
-                    secureTextEntry
-                  />
-                  {errors.password && (
-                    <Text style={{ fontSize: 10, color: "red" }}>
-                      {errors.password}
-                    </Text>
-                  )}
-                </FormWrapper>
-                <ButtonWrapper>
-                  <Button>
-                    <ButtonLink to={{ screen: "LoginPlans" }}>
-                      <ButtonText>Registrate</ButtonText>
-                    </ButtonLink>
-                  </Button>
-                  <Button pink onPress={handleSubmit}>
-                    <ButtonText>Entrar</ButtonText>
-                  </Button>
-                </ButtonWrapper>
-                <ButtonLink
-                  to={{ screen: "Forgot" }}
-                  // onPress={() => props.navigation.navigate("Forgot")}
-                >
-                  <ButtonForgot>Olvide mi contraseña</ButtonForgot>
-                </ButtonLink>
-                <Paragraph>
-                  En Help puedes buscar y ofrecer servicios directamente con
-                  quien lo ofrece o necesita, haciendo contacto directo.
-                  Registrate para comenzar.
-                </Paragraph>
-                <TermsWrapper>
-                  <TermsText to={{ screen: "Privacity" }}>
-                    Aviso de Privacidad
-                  </TermsText>
-                </TermsWrapper>
-              </>
-            )}
-          </Formik>
+          <KeyboardAwareScrollView>
+            <Logo source={LogoImage} />
+            <Title>¡Bienvenido!</Title>
+            <Subtitle>Identifícate para continuar</Subtitle>
+
+            <Formik
+              validationSchema={loginValidationSchema}
+              initialValues={{ email: "", password: "" }}
+              onSubmit={getLogin}
+            >
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                isValid
+              }) => (
+                <>
+                  <FormWrapper>
+                    <GeneralInput
+                      onChangeText={handleChange("email")}
+                      onBlur={handleBlur("email")}
+                      placeholder="Correo"
+                      name="email"
+                      value={values.email}
+                      keyboardType="email-address"
+                    />
+                    {errors.email && (
+                      <Text style={{ fontSize: 10, color: "red" }}>
+                        {errors.email}
+                      </Text>
+                    )}
+                    <GeneralInput
+                      name="password"
+                      placeholder="Contraseña"
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                      value={values.password}
+                      secureTextEntry
+                    />
+                    {errors.password && (
+                      <Text style={{ fontSize: 10, color: "red" }}>
+                        {errors.password}
+                      </Text>
+                    )}
+                  </FormWrapper>
+                  <ButtonWrapper>
+                    <Button>
+                      <ButtonLink to={{ screen: "LoginPlans" }}>
+                        <ButtonText>Registrate</ButtonText>
+                      </ButtonLink>
+                    </Button>
+                    <Button pink onPress={handleSubmit}>
+                      <ButtonText>Entrar</ButtonText>
+                    </Button>
+                  </ButtonWrapper>
+                  <ButtonLink
+                    to={{ screen: "Forgot" }}
+                    // onPress={() => props.navigation.navigate("Forgot")}
+                  >
+                    <ButtonForgot>Olvide mi contraseña</ButtonForgot>
+                  </ButtonLink>
+                  <Paragraph>
+                    En Help puedes buscar y ofrecer servicios directamente con
+                    quien lo ofrece o necesita, haciendo contacto directo.
+                    Registrate para comenzar.
+                  </Paragraph>
+                  <TermsWrapper>
+                    <TermsText to={{ screen: "Privacity" }}>
+                      Aviso de Privacidad
+                    </TermsText>
+                  </TermsWrapper>
+                </>
+              )}
+            </Formik>
+          </KeyboardAwareScrollView>
         </Container>
       </Layout>
     );
