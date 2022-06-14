@@ -2,7 +2,7 @@
   "expo": {
     "name": "help",
     "slug": "help",
-    "version": "3.0.2",
+    "version": "3.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -30,7 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "versionCode": 5,
+      "versionCode": 6,
       "package": "mx.helpapp"
     },
     "web": {

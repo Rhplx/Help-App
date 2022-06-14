@@ -10,6 +10,7 @@ import { checkSession, getBaseApi, changeDay } from "../../common/functions";
 // Third Party Imports
 import { Formik } from "formik";
 import * as yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Styled Components & Components
 import Layout from "../Layout";
@@ -28,7 +29,7 @@ import {
   SendInput,
   SendButton,
   SendText,
-  SendIcon,
+  SendIcon
 } from "../../styles/screens/people/Chat";
 // Assets and fonts
 import { useFonts, HindMadurai_700Bold } from "@expo-google-fonts/hind-madurai";
@@ -53,8 +54,8 @@ export default function PeopleReview({ route, navigation }) {
     fetch(getBaseApi() + "/manage/Message?user=" + id, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + sessionId,
-      },
+        Authorization: "Bearer " + sessionId
+      }
     })
       .then((res) => res.json())
       .then((response) => {
@@ -72,8 +73,8 @@ export default function PeopleReview({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -84,15 +85,15 @@ export default function PeopleReview({ route, navigation }) {
   const viewMessages = async () => {
     let sessionId = await AsyncStorage.getItem("sessionId");
     let values = {
-      chat: id,
+      chat: id
     };
     fetch(getBaseApi() + "/manage/Message", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-type": "application/json",
+        "Content-type": "application/json"
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(values)
     })
       .then((res) => res.json())
       .then((response) => {
@@ -104,8 +105,8 @@ export default function PeopleReview({ route, navigation }) {
           } else {
             Alert.alert("Ooops :(", response.error, [
               {
-                text: "Ok",
-              },
+                text: "Ok"
+              }
             ]);
           }
         }
@@ -114,7 +115,7 @@ export default function PeopleReview({ route, navigation }) {
   };
 
   const peopleMessageValidationSchema = yup.object().shape({
-    message: yup.string().required("Mensaje requerido"),
+    message: yup.string().required("Mensaje requerido")
   });
 
   const insertMessage = async (values, actions) => {
@@ -125,9 +126,9 @@ export default function PeopleReview({ route, navigation }) {
       method: "POST",
       headers: {
         Authorization: "Bearer " + sessionId,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(values)
     })
       .then((res) => res.json())
       .then((response) => {
@@ -172,7 +173,7 @@ export default function PeopleReview({ route, navigation }) {
   let [fontsLoaded] = useFonts({
     HindMadurai_700Bold,
     Roboto_400Regular,
-    Roboto_700Bold,
+    Roboto_700Bold
   });
 
   if (!fontsLoaded) {
@@ -180,34 +181,36 @@ export default function PeopleReview({ route, navigation }) {
   } else {
     return (
       <Layout>
-        <Header>
-          <UserButton navigation={navigation} />
-        </Header>
-        <ChatContainer>
-          <ChatTitle>Enviar un mensaje a {name}</ChatTitle>
-          <ChatWrapper>{renderMessages()}</ChatWrapper>
-        </ChatContainer>
-        <Formik
-          validationSchema={peopleMessageValidationSchema}
-          initialValues={{ message: message }}
-          onSubmit={insertMessage}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <SendWrapper>
-              <SendInput
-                onChangeText={handleChange("message")}
-                onBlur={handleBlur("message")}
-                placeholder="Escribe tu mensaje"
-                multilinea
-                value={values.message}
-              />
-              <SendButton onPress={sent ? handleSubmit : console.log}>
-                <SendText>Enviar</SendText>
-                <SendIcon source={SendImage} />
-              </SendButton>
-            </SendWrapper>
-          )}
-        </Formik>
+        <KeyboardAwareScrollView>
+          <Header>
+            <UserButton navigation={navigation} />
+          </Header>
+          <ChatContainer>
+            <ChatTitle>Enviar un mensaje a {name}</ChatTitle>
+            <ChatWrapper>{renderMessages()}</ChatWrapper>
+          </ChatContainer>
+          <Formik
+            validationSchema={peopleMessageValidationSchema}
+            initialValues={{ message: message }}
+            onSubmit={insertMessage}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <SendWrapper>
+                <SendInput
+                  onChangeText={handleChange("message")}
+                  onBlur={handleBlur("message")}
+                  placeholder="Escribe tu mensaje"
+                  multilinea
+                  value={values.message}
+                />
+                <SendButton onPress={sent ? handleSubmit : console.log}>
+                  <SendText>Enviar</SendText>
+                  <SendIcon source={SendImage} />
+                </SendButton>
+              </SendWrapper>
+            )}
+          </Formik>
+        </KeyboardAwareScrollView>
       </Layout>
     );
   }
