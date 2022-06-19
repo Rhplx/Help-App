@@ -20,36 +20,37 @@ import LeaveReview from "./app/screens/people/LeaveReview";
 import Chat from "./app/screens/people/Chat";
 import Forgot from "./app/screens/Forgot";
 import Privacity from "./app/screens/Privacity";
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="LoginPlans" component={LoginPlan} />
-        <Stack.Screen name="CompanyRegister" component={CompanyRegister} />
-        <Stack.Screen name="PersonalRegister" component={PersonalRegister} />
-        <Stack.Screen name="UserRegister" component={UserRegister} />
-        <Stack.Screen name="ChatWith" component={ChatWith} />
-        <Stack.Screen name="Categories" component={Categories} />
-        <Stack.Screen name="SubCategories" component={SubCategories} />
-        <Stack.Screen name="ProposeService" component={ProposeService} />
-        <Stack.Screen name="CategoriesPeople" component={CategoriesPeople} />
-        <Stack.Screen name="People" component={People} />
-        <Stack.Screen name="PeopleReview" component={PeopleReview} />
-        <Stack.Screen name="LeaveReview" component={LeaveReview} />
-        <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Forgot" component={Forgot} />
-        <Stack.Screen name="Privacity" component={Privacity} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="LoginPlans" component={LoginPlan} />
+          <Stack.Screen name="CompanyRegister" component={CompanyRegister} />
+          <Stack.Screen name="PersonalRegister" component={PersonalRegister} />
+          <Stack.Screen name="UserRegister" component={UserRegister} />
+          <Stack.Screen name="ChatWith" component={ChatWith} />
+          <Stack.Screen name="Categories" component={Categories} />
+          <Stack.Screen name="SubCategories" component={SubCategories} />
+          <Stack.Screen name="ProposeService" component={ProposeService} />
+          <Stack.Screen name="CategoriesPeople" component={CategoriesPeople} />
+          <Stack.Screen name="People" component={People} />
+          <Stack.Screen name="PeopleReview" component={PeopleReview} />
+          <Stack.Screen name="LeaveReview" component={LeaveReview} />
+          <Stack.Screen name="Chat" component={Chat} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Forgot" component={Forgot} />
+          <Stack.Screen name="Privacity" component={Privacity} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }

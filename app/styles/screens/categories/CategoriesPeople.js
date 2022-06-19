@@ -16,10 +16,12 @@ export const CategoriesPeopleCard = styled.View`
 `;
 
 export const CategoriesPeopleCardImage = styled.Image`
-  flex: 1;
+  /* flex: 1; */
   width: 150px;
   height: 150px;
   resize-mode: contain;
+  margin: 0 20px;
+  border-radius: 26px;
 `;
 
 export const CategoriesPeopleCardContent = styled.View`

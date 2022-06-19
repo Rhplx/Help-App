@@ -163,12 +163,12 @@ export default function People({ route, navigation }) {
   } else {
     return (
       <Layout>
-        <KeyboardAwareScrollView>
-          <Header>
-            {/* <MessageButton /> */}
-            <UserButton navigation={navigation} />
-          </Header>
-          <PeopleContainer>
+        <Header>
+          {/* <MessageButton /> */}
+          <UserButton navigation={navigation} />
+        </Header>
+        <PeopleContainer>
+          <KeyboardAwareScrollView>
             <GeneralTitle>{name}</GeneralTitle>
             <PeopleSubtitle>
               Envíale un mensaje para solicitar sus servicios o aclarar tus
@@ -254,8 +254,8 @@ export default function People({ route, navigation }) {
                 )}
               </Formik>
             </PeopleContent>
-          </PeopleContainer>
-        </KeyboardAwareScrollView>
+          </KeyboardAwareScrollView>
+        </PeopleContainer>
       </Layout>
     );
   }

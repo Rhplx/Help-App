@@ -2,7 +2,7 @@
   "expo": {
     "name": "help",
     "slug": "help",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

@@ -7,7 +7,6 @@ export const LayoutContainer = styled.ImageBackground`
 
 export const SafeArea = styled.SafeAreaView`
   flex: 1;
-  padding-top: ${({ platform, paddingSize }) => platform === "android" ?
-    `${paddingSize}px` : "0"
-  };
+  padding-top: ${({ platform, paddingSize }) =>
+    platform === "android" ? `${paddingSize}px` : "0"};
 `;
